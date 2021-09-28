@@ -2,10 +2,10 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<div class="card m-2">
-	<div class="card-header">
-		로그인 폼
-	</div>
+<div class="d-flex justify-content-center">
+<div class="col-4">
+	<h3>로그인</h3>
+	<hr class="">
 	<div class="card-body">
 		<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
 			<div class="alert alert-danger mb-2" role="alert">
@@ -19,17 +19,21 @@
 		</c:if>
 		<form method="post" action="${pageContext.request.contextPath}/login">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<div class="form-group">
-			    <label for="mid">Member ID</label>
+			<div class="form-group mb-4">
+			    <label for="mid" class="fs-6 mb-2">아이디</label>
 			    <input type="text" class="form-control" id="mid" name="mid">
 			</div>
-			<div class="form-group">
-				<label for="mpassword">Member Password</label>
+			<div class="form-group mb-2">
+				<label for="mpassword" class="fs-6 mb-2">비밀번호</label>
 				<input type="password" class="form-control" id="mpassword" name="mpassword">
 			</div>
-			<button type="submit" class="btn btn-info btn-sm mt-2">로그인</button>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn btn-dark mt-4 col-4">로그인</button>
+			</div>
+		
 		</form>	
 	</div>
+</div>
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
