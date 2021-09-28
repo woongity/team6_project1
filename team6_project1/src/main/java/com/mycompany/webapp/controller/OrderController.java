@@ -11,9 +11,27 @@ public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@RequestMapping("/shoppingbag")
-	public String content() {
+	public String shoppingbag() {
 		logger.info("Run order/shoppingbag");
 		return "order/shoppingbag";
+	}
+	
+	@RequestMapping("/orderPage")
+	public String orderPage() {
+		logger.info("Run order/orderPage");
+		return "order/orderPage";
+	}
+	
+	@RequestMapping("/orderComplete")
+	public String orderComplete() {
+		logger.info("Run order/orderComplete");
+		return "order/orderComplete";
+	}
+	
+	@RequestMapping("/orderHistory")
+	public String orderHistory() {
+		logger.info("Run order/orderHistory");
+		return "order/orderHistory";
 	}
 	
 

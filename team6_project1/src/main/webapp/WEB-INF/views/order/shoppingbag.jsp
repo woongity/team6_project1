@@ -4,36 +4,97 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-	<h1>SHOPPING BAG</h1>
-<table class="table">
-  <thead>
+<h3>쇼핑백</h3>
+<table class="table table-striped">
+  <thead class="text-center">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th class="col-2">전체</th>
+      <th class="col-6">상품정보</th>
+      <th class="col-2">수량</th>
+      <th class="col-2">판매가</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row" class="d-flex">
+      	<div class="form-check mx-2">
+		  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  <label class="form-check-label" for="flexCheckDefault">
+		  </label>
+		</div>
+      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
+      </th>
+      <td>
+      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
+      	<h6>미니멀 오버핏 폴리 셔츠 화이트</h6>    	
+      	<h6>&nbsp;</h6>
+      	<h6>&nbsp;</h6>
+      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
+      </td>
+      <td>
+    	<div class="d-flex justify-content-center" style="margin-top: 30%;">
+	    	<div class="me-1 btn btn-sm">-</div>
+	    	<div class="me-1 fs-5">1</div>	
+	    	<div class="me-1 btn btn-sm">+</div>	
+	   	</div>
+      </td>
+      <td class="text-center align-middle">\ 36,000</td>
+    </tr>
+
+    <tr>
+      <th scope="row" class="d-flex">
+      	<div class="form-check mx-2">
+		  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		  <label class="form-check-label" for="flexCheckDefault">
+		  </label>
+		</div>
+      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_4.jpg" class="card-img-top" style="width: 8rem;" alt="">
+      </th>
+      <td>
+      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
+      	<h6>미니멀 오버핏 폴리 셔츠 블루</h6>    	
+      	<h6>&nbsp;</h6>
+      	<h6>&nbsp;</h6>
+      	<h6 class="text-muted">Color: 🟦Blue / Size: XL(105)</h6>
+      </td>
+      <td>
+    	<div class="d-flex justify-content-center" style="margin-top: 30%;">
+	    	<div class="me-1 btn btn-sm">-</div>
+	    	<div class="me-1 fs-5">1</div>	
+	    	<div class="me-1 btn btn-sm">+</div>	
+	   	</div>
+      </td>
+      <td class="text-center align-middle">\ 35,200</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+      <td colspan="2"></td>
+      <td colspan="2">
+      <div>
+      	<div class="d-flex justify-content-between mt-2">
+	      	<h5>총</h5>
+	      	<h5><span class="fw-bold ms-2" style="color: darkKhaki">2</span> 개 상품</h5>
+      	</div>
+      	<div class="d-flex justify-content-between mt-2">
+	      	<h6>상품 합계</h6>
+	      	<h6>\ 71,200</h6>	      	
+      	</div>
+      	<div class="d-flex justify-content-between mb-2">
+	      	<h6>배송비</h6>
+	      	<h6>\ 0</h6>	      	
+      	</div>
+      	<div class="d-flex justify-content-between">
+	      	<h5>합계</h5>
+	      	<h5 class="fw-bold" style="color: darkKhaki">\ 71,200</h5>	      	
+      	</div>
+ 	  </div>
+      </td>
     </tr>
   </tbody>
 </table>
+<div class="d-flex justify-content-center mt-3">
+	<a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark btn-lg col-3">주문하기</a>
+</div>
+
 </div>
 </div>
 

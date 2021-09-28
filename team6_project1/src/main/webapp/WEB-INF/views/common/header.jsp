@@ -52,25 +52,26 @@
 	<!-- 네비게이션 바 -->
 	<div class="d-flex justify-content-center" style="margin: 5vh;">
 	<nav class="d-flex justify-content-between align-items-center py-3 mb-5 col-8">
-		<div class="ms-5">	
+		<div class="">	
 			<a class="fs-3 text-decoration-none text-dark" href="${pageContext.request.contextPath}/">| THE | HANDSOME |</a>
 		</div>
-		<div class="me-5">
+		<div class="">
 			<ul class="list-inline m-0 fs-4">
 				<li class="d-flex justify-content-between">
 				<sec:authorize access="isAnonymous()">
 					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark">Login</a>
-					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">👜</a>			
+					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">👜</a>		
 				</sec:authorize>
 				</li>
 				
 				<li class="d-flex justify-content-between">
 				<sec:authorize access="isAuthenticated()">
+					<a href="${pageContext.request.contextPath}/order/orderHistory" class="text-decoration-none text-dark me-3">MyPage</a>
 					<form method="post" action="${pageContext.request.contextPath}/logout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<a href="${pageContext.request.contextPath}/logout" class="text-decoration-none text-dark">Logout</a>
 					</form>
-					<a href="${pageContext.request.contextPath}/order/shoppingbag" class="text-decoration-none text-dark ms-3">👜(0)</a>
+					<a href="${pageContext.request.contextPath}/order/shoppingbag" class="text-decoration-none text-dark ms-3">👜(2)</a>
 				</sec:authorize>			
 				</li>
 			</ul>

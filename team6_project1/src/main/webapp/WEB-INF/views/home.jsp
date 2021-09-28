@@ -18,7 +18,7 @@
 	  <a id="getModalBtn2"><img src="${pageContext.request.contextPath}/resources/images/male_shirt_2.jpg" class="card-img-top" alt=""></a>
 	  <div class="card-body">
 	    <h5 class="card-title">AVAN</h5>
-	    <p class="card-text">미니멀 오버핏 폴리 셔츠 화이트</p>
+	    <p class="card-text">미니멀 오버핏 폴리 셔츠 블랙</p>
    	    <p class="card-text">\ 25,200</p>
    	    <p class="fw-bold" style="color: darkKhaki;">BEST</p>
 	  </div>
@@ -28,7 +28,7 @@
 	  <a id="getModalBtn3"><img src="${pageContext.request.contextPath}/resources/images/male_shirt_3.jpg" class="card-img-top" alt=""></a>
 	  <div class="card-body">
 	    <h5 class="card-title">AVAN</h5>
-	    <p class="card-text">미니멀 오버핏 폴리 셔츠 화이트</p>
+	    <p class="card-text">미니멀 오버핏 폴리 셔츠 베이지</p>
 	    <p class="card-text">\ 26,000</p>
    	    <p><span class="fw-bold" style="color: darkKhaki;">NEW</span> | <span class="fw-bold" style="color: indianRed;">SALE</span></p>
 	  </div>
@@ -38,7 +38,7 @@
 	  <a id="getModalBtn4"><img src="${pageContext.request.contextPath}/resources/images/male_shirt_4.jpg" class="card-img-top" alt=""></a>
 	  <div class="card-body">
 	    <h5 class="card-title">AVAN</h5>
-	    <p class="card-text">미니멀 오버핏 폴리 셔츠 화이트</p>
+	    <p class="card-text">미니멀 오버핏 폴리 셔츠 블루</p>
 	    <p class="card-text">\ 35,200</p>
    	    <p class="fw-bold" style="color: indianRed;">SALE</p>
 	  </div>
