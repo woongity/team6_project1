@@ -32,8 +32,8 @@
 		if (showPage1.style.display == "none") {
 			showPage1.style.display = "block";
 			showPage2.style.display = "none";
-			changeSize1.style.fontSize = "calc(1.3rem + .6vw)";
-			changeSize2.style.fontSize = "calc(0.325rem + .9vw)";
+			changeSize1.style.fontSize = "calc(0.8rem + .6vw)";
+			changeSize2.style.fontSize = "calc(0.325rem + .6vw)";
 		}
 	}
 
@@ -46,8 +46,8 @@
 		if (showPage1.style.display == "block") {
 			showPage1.style.display = "none";
 			showPage2.style.display = "block";
-			changeSize1.style.fontSize = "calc(0.325rem + .9vw)";
-			changeSize2.style.fontSize = "calc(1.3rem + .6vw)";
+			changeSize1.style.fontSize = "calc(0.325rem + .6vw)";
+			changeSize2.style.fontSize = "calc(0.8rem + .6vw)";
 		}
 	}
 </script>
@@ -57,7 +57,7 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-<h3>쇼핑 내역</h3>
+<h5>쇼핑 내역</h5>
 <!-- page1 -->
 <table class="table table-striped" id="page1" style="display: block;">
   <thead class="text-center">
@@ -129,7 +129,7 @@
       </td>
     </tr>
 
-    <tr>
+    <%-- <tr>
       <th class="text-center align-middle">
       	<h6>210928P10234057</h6>
       	<h6>(2021.09.28)</h6>
@@ -156,7 +156,7 @@
       	<h6>입금완료</h6>
       	<h6>(2021.09.28)</h6>
       </td>
-    </tr>
+    </tr> --%>
 
   </tbody>
 </table>
@@ -174,7 +174,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+ <%--    <tr>
       <th class="text-center align-middle">
       	<h6>210731P10135229</h6>
       	<h6>(2021.07.31)</h6>
@@ -201,12 +201,12 @@
       	<h6>입금완료</h6>
       	<h6>(2021.07.31)</h6>
       </td>
-    </tr>
+    </tr> --%>
 
     <tr>
       <th class="text-center align-middle">
-      	<h6>210731P10412368</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>210131P10412368</h6>
+      	<h6>(2021.01.31)</h6>
       </th>
       <td>
       	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_2.jpg" class="card-img-top" style="width: 8rem;" alt="">
@@ -228,14 +228,14 @@
       <td class="text-center align-middle">\ 35,900</td>
       <td class="text-center align-middle">
       	<h6>입금완료</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>(2021.01.31)</h6>
       </td>
     </tr>
 
     <tr>
       <th class="text-center align-middle">
-      	<h6>210731P10136490</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>210131P10136490</h6>
+      	<h6>(2021.01.31)</h6>
       </th>
       <td>
       	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_3.jpg" class="card-img-top" style="width: 8rem;" alt="">
@@ -258,7 +258,7 @@
       <td class="text-center align-middle">\ 45,200</td>
       <td class="text-center align-middle">
       	<h6>입금완료</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>(2021.01.31)</h6>
       </td>
     </tr>
 
@@ -266,8 +266,8 @@
 </table>
 
 <div class="d-flex justify-content-center mt-5">
-	<h3 class="mx-3 paginator" id="changeSize1" onclick="page1()" style="font-size: calc(1.3rem + .6vw);">1페이지</h3>
-	<h3 class="paginator"  onclick="page2()" id="changeSize2" style="font-size: calc(0.325rem + .9vw);">2페이지</h3>
+	<h3 class="mx-3 paginator" id="changeSize1" onclick="page1()" style="font-size: calc(0.8rem + .6vw);">1페이지</h3>
+	<h3 class="paginator"  onclick="page2()" id="changeSize2" style="font-size: calc(0.325rem + .6vw);">2페이지</h3>
 </div>
 
 </div>

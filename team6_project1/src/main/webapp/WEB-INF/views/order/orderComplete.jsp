@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-<h3>주문완료</h3>
+<h5>주문완료</h5>
 <hr>
 <!-- 주문번호 -->
 <div class="d-flex mt-3">
@@ -100,7 +100,7 @@
   </tbody>
 </table>
 
-		<h4 class="mt-5">결제 수단</h4>
+		<h5 class="mt-5">결제 수단</h5>
 		<hr>
 		<!-- 결제수단 -->
 		<div class="d-flex mt-3">
@@ -122,7 +122,7 @@
 		</div>
 		<hr class="mb-5">
 		
-		<h4 class="my-4">주문자 정보</h4>
+		<h5 class="my-4">주문자 정보</h5>
 		<hr>
 		<!-- 주문자 이름 -->
 		<div class="d-flex">
@@ -153,7 +153,7 @@
 		</div>
 		<hr class="mb-5">
 		
-				<h4 class="my-4">배송지 정보</h4>
+		<h5 class="my-4">배송지 정보</h5>
 		<hr>
 		<!-- 배송지 주소 -->
 		<div class="d-flex">
@@ -185,8 +185,8 @@
 		<hr class="mb-5">
 		
 <div class="d-flex justify-content-center mt-4">
-	<a href="${pageContext.request.contextPath}/" class="btn btn-outline-dark btn-lg col-3 me-3">쇼핑 계속하기</a>
-	<a href="${pageContext.request.contextPath}/order/orderHistory" class="btn btn-dark btn-lg col-3">쇼핑 내역보기</a>
+	<a href="${pageContext.request.contextPath}/" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>
+	<a href="${pageContext.request.contextPath}/order/orderHistory" class="btn btn-dark col-3">쇼핑 내역보기</a>
 </div>
 
 </div>

@@ -11,7 +11,9 @@
 	<title>Spring Framework</title>
   <style>
   	#navSticky {
-		position: fixed;
+		position: sticky;
+		top: 10px;
+
 	}
   </style>
 </head>
@@ -19,7 +21,7 @@
 
 <div class="d-flex justify-content-center">
 	<div class="col-8">
-	<h3>주문 페이지</h3>
+	<h5>주문 페이지</h5>
 		<!-- 주문 정보 -->
 		<div class="d-flex">
 		<div class="col-8">
@@ -45,7 +47,7 @@
 		      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
 		      </td>
 		      <td>
-		    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
+		    	<div class="d-flex justify-content-center" style="margin-top: 60%;">
 			    	<div class="me-1 fs-5">1</div>
 			   	</div>
 		      </td>
@@ -64,7 +66,7 @@
 		      	<h6 class="text-muted">Color: 🟦Blue / Size: XL(105)</h6>
 		      </td>
 		      <td>
-		    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
+		    	<div class="d-flex justify-content-center" style="margin-top: 60%;">
 			    	<div class="me-1 fs-5">1</div>	
 			   	</div>
 		      </td>
@@ -74,7 +76,7 @@
 		  </tbody>
 		</table>
 
-		<h4 class="my-4">주문자 정보</h4>
+		<h5 class="my-4">주문자 정보</h5>
 		<hr>
 		<!-- 주문자 이름 -->
 		<div class="d-flex">
@@ -105,7 +107,7 @@
 		</div>
 		<hr class="mb-5">
 		
-		<h4 class="my-4">배송지 정보</h4>
+		<h5 class="my-4">배송지 정보</h5>
 		<hr>
 		<!-- 배송지 주소 -->
 		<div class="d-flex">
@@ -159,7 +161,7 @@
 		</div>
 		<hr class="mb-5">
 		
-		<h4 class="my-4">결제 정보</h4>
+		<h5 class="my-4">결제 정보</h5>
 		<hr>
 		<!-- 결제수단 선택 -->
 		<div class="d-flex">
@@ -239,11 +241,7 @@
 						판매조건을 확인하였으며, 구매진행에 동의합니다.
 						(전자상거래법 제8조 2항)
 					</h6>
-					<h6 class="mb-3">
-						기존 마이너스 한섬 마일리지를 보유하고 있는 고객은
-						한섬마일리지가 차감되어 적립되는 것에 동의합니다.
-						적립 예정 한섬마일리지가 상이할 수 있습니다.					
-					</h6>
+
 
 					<h6 class="mb-3">
 						* 통합 멤버십으로 가입하시면 H.Point 적립 및 사용이 가능합니다.
@@ -252,7 +250,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<a href="${pageContext.request.contextPath}/order/orderComplete" class="btn btn-dark btn-lg col-10">결제하기</a>
+				<a href="${pageContext.request.contextPath}/order/orderComplete" class="btn btn-dark col-10">결제하기</a>
 			</div>
 			
 		</div>
