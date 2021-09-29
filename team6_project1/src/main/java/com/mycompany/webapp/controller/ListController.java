@@ -44,7 +44,6 @@ public class ListController {
 		for(Product product:list) {
 			// product의 pid, pname, pstock, pcolor, psize
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("pid", product.getPid());
 			jsonObject.put("pname", product.getPstock());
 			jsonObject.put("pstock", product.getPcolor());
 			jsonObject.put("pid", product.getPsize());
@@ -56,12 +55,7 @@ public class ListController {
 	
 	@PostMapping("/put")
 	public String putIntoCart(String pid, String color, String size, int quantity,int price) {
-		CartbagDto cartbagDto = new CartbagDto();
-		// 유저가 한명임으로 mid = 1이라고 넣는다.
-		cartbagDto.setMid("1");
-		cartbagDto.setPid(pid);
-		cartbagDto.setPquantity(quantity);
-		cartService.insertItem(cartbagDto);
+		
 		return "redirect:/listView";
 	}
 }
