@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.dao.CartbagDao">
+	<select id="selectByMid" resultType="cartbag" parameterType="String">
+		select * from cartitem where mid = #{mid} 
+	</select>
+	<delete id="deleteByMidnPid" parameterType="String">
+		DELETE FROM cartitem WHERE mid="1" and pid=#{pid}
+	</delete>
+	<update id="update" parameterType="cartbag">
+		UPDATE cartitem SET pquantity=#{pquantity} where mid=#{mid} and pid=#{pid}
+	</update>
+	<insert id="insertItem" parameterType="cartbag">
+		INSERT INTO cartitem (mid,pid,pquantity)
+		values (#{mid},#{pid},#{pquantity})
+	</insert>
+</mapper>
