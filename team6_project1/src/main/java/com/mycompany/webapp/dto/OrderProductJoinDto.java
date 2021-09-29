@@ -13,6 +13,8 @@ public class OrderProductJoinDto {
 	private String pthumbnail;
 	private int oprice;
 	private String otime;
+	private String psize;
+	
 	@Override
 	public String toString() {
 		return "OrderProductJoinDto [mid=" + mid + ", oid=" + oid + ", oquantity=" + oquantity + ", pthumbnail="

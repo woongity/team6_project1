@@ -12,9 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.CartbagDto;
-import com.mycompany.webapp.dto.OrderDto;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.service.CartbagService;
 import com.mycompany.webapp.service.ListviewService;
@@ -32,8 +32,26 @@ public class ListController {
 		for(Product product:list) {
 			logger.info(product.toString());
 		}
-		model.addAttribute("productJsonArray",list);
-		return "listView";
+		model.addAttribute("producArray",list);
+		return "/home";
+	}
+
+	@RequestMapping(value="/modalJson")
+	@ResponseBody
+	public String getSameProducts(String pname) {
+		List<Product> list = listviewService.selectByPname(pname);
+		JSONArray jsonArray = new JSONArray();
+		for(Product product:list) {
+			// product의 pid, pname, pstock, pcolor, psize
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("pid", product.getPid());
+			jsonObject.put("pname", product.getPstock());
+			jsonObject.put("pstock", product.getPcolor());
+			jsonObject.put("pid", product.getPsize());
+			
+			jsonArray.put(jsonObject);
+		}
+		return jsonArray.toString();
 	}
 	
 	@PostMapping("/put")

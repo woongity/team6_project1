@@ -28,4 +28,7 @@ public class ListviewService {
 	public void updateStock(Product product) {
 		productDao.updateStock(product);
 	}
+	public List<Product> selectByPname(String pname){
+		return productDao.selectByPname(pname);
+	}
 }

@@ -248,7 +248,13 @@
 	</div>
 	
 </div>
-
+<c:forEach var="item" items="${productArray}">
+	<img src="${pageContext.request.contextPath}/resources/handsome_img/${item.pthumbnail}"/>
+	<p>${item.pid}</p>
+	<p>${item.pbrand}</p>
+	<p>${item.pname}</p>
+	<p>${item.pprice}</p>
+</c:forEach>
 <script>
 	$('#getModalBtn1').click(function(e){
 	e.preventDefault();

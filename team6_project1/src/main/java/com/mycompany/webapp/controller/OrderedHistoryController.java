@@ -26,6 +26,6 @@ public class OrderedHistoryController {
 			logger.info(dto.toString());
 		}
 		model.addAttribute("orderedHistory", list);
-		return "";
+		return "order/orderHistory";
 	}
 }

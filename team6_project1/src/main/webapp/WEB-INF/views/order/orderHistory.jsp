@@ -28,7 +28,6 @@
 		const changeSize2 = document.getElementById("changeSize2")
 		
 		console.log("page1()")
-		
 		if (showPage1.style.display == "none") {
 			showPage1.style.display = "block";
 			showPage2.style.display = "none";
@@ -54,6 +53,11 @@
 
 </head>
 <body>
+
+	<c:forEach var="item" items="${orderedHistory}">
+		<p>${item.pthumbnail}</p>
+		<img src="${pageContext.request.contextPath}/resources/handsome_img/${item.pthumbnail}"/>
+	</c:forEach>
 
 <div class="d-flex justify-content-center">
 <div class="col-8">

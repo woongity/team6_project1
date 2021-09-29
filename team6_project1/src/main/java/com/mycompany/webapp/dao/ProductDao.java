@@ -11,4 +11,5 @@ public interface ProductDao {
 	public Product selectByPno(String pid);
 	public List<Product> selectAll();
 	public void updateStock(Product product);
+	public List<Product> selectByPname(String pname);
 }

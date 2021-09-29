@@ -4,9 +4,15 @@
 	<select id="selectByPno" parameterType="String" resultType="product">
 		select * from product where pid=#{pid}
 	</select>
+	
 	<select id="selectAll" resultType="product">
 		select * from product
 	</select>
+	
+	<select id="selectByPname" resultType="product">
+		select * from product where pname=#{pname}
+	</select>
+	
 	<update id="updateStock" parameterType="product">
 		update product set pquantity=#{pquantity} where pid=#{pid}
 	</update>
