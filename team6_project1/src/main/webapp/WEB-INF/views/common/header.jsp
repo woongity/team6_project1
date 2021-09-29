@@ -76,7 +76,7 @@
 					<form method="post" action="${pageContext.request.contextPath}/logout" class="d-flex">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<a href="${pageContext.request.contextPath}/logout" class="text-decoration-none text-dark">Logout</a>
-						<a href="${pageContext.request.contextPath}/order/orderPage" class="text-decoration-none text-dark ms-3">
+						<a href="${pageContext.request.contextPath}/order/shoppingbag" class="text-decoration-none text-dark ms-3">
 							<img src="${pageContext.request.contextPath}/resources/images/shopping-bag.svg" style="width: 24px;" alt="">
 						</a>
 						<div style="margin-top: 4px;">(2)</div>

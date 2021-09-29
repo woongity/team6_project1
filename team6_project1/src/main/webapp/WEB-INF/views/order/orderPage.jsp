@@ -229,7 +229,7 @@
 			
 			<div class="border-0 p-3 my-3">
 				<div class="form-check mb-3">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="checkAgreement()">
 				  <label class="form-check-label fw-bold" for="flexCheckDefault">
 				    구매자 동의
 				  </label>
@@ -249,16 +249,42 @@
 		 	    </div>
 			</div>
 			
+			<!-- 활성화 -->
 			<div class="d-flex justify-content-center">
-				<a href="${pageContext.request.contextPath}/order/orderComplete" class="btn btn-dark col-10">결제하기</a>
+				<a href="${pageContext.request.contextPath}/order/orderComplete" class="btn btn-dark col-10" id="ableButton" style="display: none;">결제하기</a>
 			</div>
+			<!-- 비활성화 -->
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-dark col-10" id="disableButton" style="display: block;" disabled>결제하기</button>
+			</div>
+			
+				
 			
 		</div>
 		</div>
 		</div>
 		</div>
-	</div>
+
 </div>
+
+<script>
+	
+	/* 약관동의여부 체크 */
+	function checkAgreement() {
+		const isChecked = document.getElementById("flexCheckDefault").checked;
+		const able = document.getElementById("ableButton");
+		const disable = document.getElementById("disableButton");
+		
+		if (isChecked == true) {
+			able.style.display = "block";
+			disable.style.display = "none";
+		} else if (isChecked == false) {
+			able.style.display = "none";
+			disable.style.display = "block";
+		}
+	}
+
+</script>
 
 	
 </body>

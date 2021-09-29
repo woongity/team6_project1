@@ -26,7 +26,7 @@
 	    <h5 class="card-title">AVAN</h5>
 	    <p class="card-text">미니멀 오버핏 폴리 셔츠 블랙</p>
    	    <p class="card-text">\ 25,200</p>
-   	    <p class="fw-bold" style="color: darkKhaki;">BEST</p>
+   	    <p class="fw-bold" style="color: #c3c4c7;">품절</p>
 	  </div>
 	</div>
 	<!-- image 3 -->
@@ -36,7 +36,7 @@
 	    <h5 class="card-title">AVAN</h5>
 	    <p class="card-text">미니멀 오버핏 폴리 셔츠 베이지</p>
 	    <p class="card-text">\ 26,000</p>
-   	    <p><span class="fw-bold" style="color: darkKhaki;">NEW</span> | <span class="fw-bold" style="color: indianRed;">SALE</span></p>
+   	    <p class="fw-bold" style="color: darkKhaki;">BEST</p>
 	  </div>
 	</div>
 	<!-- image 4 -->

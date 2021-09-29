@@ -92,7 +92,7 @@
   </tbody>
 </table>
 <div class="d-flex justify-content-center mt-3">
-	<a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark btn-lg col-3">주문하기</a>
+	<a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
 </div>
 
 </div>
