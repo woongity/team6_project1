@@ -4,23 +4,19 @@ import java.util.Date;
 
 import lombok.Data;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
-
 public class OrderDto {
-    @NonNull
-	int oid;
-    @NonNull
-	String mid;
-    @NonNull
-	String pid;
-    @NonNull
-	int oquantity;
-    @NonNull
-	int oprice;
-    String datetime;
-    @NonNull
-	char opaymentmethod;
+    private int oid;
+    private String mid;
+    private String pid;
+    private int oquantity;
+    private int oprice;
+    private String datetime;
+    private char opaymentmethod;
+	@Override
+	public String toString() {
+		return "OrderDto [oid=" + oid + ", mid=" + mid + ", pid=" + pid + ", oquantity=" + oquantity + ", oprice="
+				+ oprice + ", datetime=" + datetime + ", opaymentmethod=" + opaymentmethod + "]";
+	}
 }

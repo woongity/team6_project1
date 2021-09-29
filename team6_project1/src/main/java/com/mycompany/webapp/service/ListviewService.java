@@ -18,7 +18,7 @@ public class ListviewService {
 	@Resource 
 	private ProductDao productDao;
 	
-	public List<Product> selectByPno(String pno){
+	public Product selectByPno(String pno){
 		return productDao.selectByPno(pno);
 	}
 	
