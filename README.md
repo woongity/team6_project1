@@ -10,6 +10,6 @@
 <img src="https://user-images.githubusercontent.com/26537043/135388225-7f54f7d6-7fef-4db3-b309-afb85541a7d8.png" width="800" height="600"/>
 
 ## 기술 스택
- - Oracle DB , MyBatis
+ - Oracle DB , MyBatis, redis
  - Html, CSS, Javascript, JSP
  - Spring / Spring security
