@@ -36,4 +36,6 @@
 </div>
 </div>
 
+<h3>&nbsp;</h3>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

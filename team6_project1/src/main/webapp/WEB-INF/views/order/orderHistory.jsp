@@ -61,7 +61,17 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-<h5>쇼핑 내역</h5>
+<h5>마이 페이지</h5>
+
+<!-- 마이페이지 버튼 -->
+<div class="my-3 d-flex justify-content-center">
+	<div class="btn btn-outline-dark col-2 me-1">쇼핑 내역</div>
+	<div class="btn btn-dark col-2 me-1">내 정보</div>
+	<div class="btn btn-dark col-2">쿠폰함</div>
+</div>
+
+<!-- 쇼핑내역 -->
+<div id="orderHistory" style="display: block;">
 <!-- page1 -->
 <table class="table table-striped" id="page1" style="display: block;">
   <thead class="text-center">
@@ -133,7 +143,7 @@
       </td>
     </tr>
 
-    <%-- <tr>
+    <tr>
       <th class="text-center align-middle">
       	<h6>210928P10234057</h6>
       	<h6>(2021.09.28)</h6>
@@ -160,7 +170,7 @@
       	<h6>입금완료</h6>
       	<h6>(2021.09.28)</h6>
       </td>
-    </tr> --%>
+    </tr>
 
   </tbody>
 </table>
@@ -178,10 +188,10 @@
     </tr>
   </thead>
   <tbody>
- <%--    <tr>
+     <tr>
       <th class="text-center align-middle">
-      	<h6>210731P10135229</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>211131P10135229</h6>
+      	<h6>(2021.11.31)</h6>
       </th>
       <td>
       	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
@@ -203,14 +213,14 @@
       <td class="text-center align-middle">\ 56,000</td>
       <td class="text-center align-middle">
       	<h6>입금완료</h6>
-      	<h6>(2021.07.31)</h6>
+      	<h6>(2021.11.31)</h6>
       </td>
-    </tr> --%>
+    </tr>
 
     <tr>
       <th class="text-center align-middle">
-      	<h6>210131P10412368</h6>
-      	<h6>(2021.01.31)</h6>
+      	<h6>211131P10412368</h6>
+      	<h6>(2021.11.31)</h6>
       </th>
       <td>
       	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_2.jpg" class="card-img-top" style="width: 8rem;" alt="">
@@ -231,15 +241,15 @@
       </td>
       <td class="text-center align-middle">\ 35,900</td>
       <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.01.31)</h6>
+      	<h6>배송완료</h6>
+      	<h6>(2021.11.31)</h6>
       </td>
     </tr>
 
     <tr>
       <th class="text-center align-middle">
-      	<h6>210131P10136490</h6>
-      	<h6>(2021.01.31)</h6>
+      	<h6>211131P10136490</h6>
+      	<h6>(2021.11.31)</h6>
       </th>
       <td>
       	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_3.jpg" class="card-img-top" style="width: 8rem;" alt="">
@@ -261,18 +271,20 @@
       </td>
       <td class="text-center align-middle">\ 45,200</td>
       <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.01.31)</h6>
+      	<h6>배송완료</h6>
+      	<h6>(2021.11.31)</h6>
       </td>
     </tr>
 
   </tbody>
 </table>
 
-<div class="d-flex justify-content-center mt-5">
+<div class="d-flex justify-content-center mt-4">
 	<h3 class="mx-3 paginator" id="changeSize1" onclick="page1()" style="font-size: calc(0.8rem + .6vw);">1페이지</h3>
 	<h3 class="paginator"  onclick="page2()" id="changeSize2" style="font-size: calc(0.325rem + .6vw);">2페이지</h3>
 </div>
+</div>
+
 
 </div>
 </div>

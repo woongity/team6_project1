@@ -47,10 +47,20 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 403 에러 처리 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/403.jsp</location>
+	</error-page>
 	<!-- 404 에러 처리 -->
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+	<!-- 500 에러 처리 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
 	</error-page>
 	
 	<!-- Security Filter 등록 -->
