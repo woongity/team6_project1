@@ -1,15 +1,11 @@
 package com.mycompany.webapp.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import com.mycompany.webapp.dto.OrderDto;
-import com.mycompany.webapp.dto.OrderProductJoinDto;
+import com.mycompany.webapp.dto.Order;
 
 @Mapper
 public interface OrderDao {
-	List<OrderDto> selectByMid(String mid);
-	void insertOrder(OrderDto orderDto); 
-	List<OrderProductJoinDto> selectOrderJoinProductByMid(String mid);
+	List<Order> selectByMid(String mid);
+	List<String> selectOidByMid(String mid);
 }

@@ -3,8 +3,8 @@
   
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.mycompany.webapp.dto.CartbagDto" alias="cartbag"/>
-		<typeAlias type="com.mycompany.webapp.dto.OrderDto" alias="order"/>
+		<typeAlias type="com.mycompany.webapp.dto.Cartitem" alias="cartitem"/>
+		<typeAlias type="com.mycompany.webapp.dto.Order" alias="order"/>
 		<typeAlias type="com.mycompany.webapp.dto.Product" alias="product"/>
 	</typeAliases>	
 </configuration>
