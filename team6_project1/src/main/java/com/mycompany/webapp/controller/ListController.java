@@ -33,7 +33,7 @@ public class ListController {
 		for(Product product:list) {
 			logger.info(product.toString());
 		}
-		model.addAttribute("producArray",list);
+		model.addAttribute("productArray",list);
 		return "/home";
 	}
 	
