@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CartbagDto {
+public class Cartitem {
 	private String mid;
 	private String pcode;
 	private String pcolor;

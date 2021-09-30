@@ -4,19 +4,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mycompany.webapp.dto.CartbagDto;
+import com.mycompany.webapp.dto.Cartitem;
 import com.mycompany.webapp.dto.Product;
-import com.mycompany.webapp.service.CartbagService;
+import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 
 @Controller
@@ -24,7 +24,8 @@ public class ListController {
 	private static final Logger logger = LoggerFactory.getLogger(ListController.class);
 	
 	@Resource ListviewService listviewService;
-	@Resource CartbagService cartService;
+	@Resource CartitemService cartService;
+	
 	@RequestMapping("/listView")
 	public String content(Model model) {
 		logger.info("시작");
@@ -35,27 +36,14 @@ public class ListController {
 		model.addAttribute("producArray",list);
 		return "/home";
 	}
-
-	@RequestMapping(value="/modalJson")
-	@ResponseBody
-	public String getSameProducts(String pname) {
-		List<Product> list = listviewService.selectByPname(pname);
-		JSONArray jsonArray = new JSONArray();
-		for(Product product:list) {
-			// product의 pid, pname, pstock, pcolor, psize
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("pname", product.getPstock());
-			jsonObject.put("pstock", product.getPcolor());
-			jsonObject.put("pid", product.getPsize());
-			
-			jsonArray.put(jsonObject);
-		}
-		return jsonArray.toString();
-	}
 	
 	@PostMapping("/put")
-	public String putIntoCart(String pid, String color, String size, int quantity,int price) {
-		
+	public String putIntoCart(String pcode, String color, String size, int quantity,int price) {
+		logger.info("실행");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
+		Cartitem cartbagDto = new Cartitem(mid, pcode, color, size, quantity);
+		cartService.insertItem(cartbagDto);
 		return "redirect:/listView";
 	}
 }

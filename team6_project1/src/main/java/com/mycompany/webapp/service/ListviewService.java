@@ -18,8 +18,8 @@ public class ListviewService {
 	@Resource 
 	private ProductDao productDao;
 	
-	public Product selectByPno(String pno){
-		return productDao.selectByPno(pno);
+	public List<Product> selectByPcode(String pno){
+		return productDao.selectByPcode(pno);
 	}
 	
 	public List<Product> selectAll(){
@@ -27,8 +27,5 @@ public class ListviewService {
 	}
 	public void updateStock(Product product) {
 		productDao.updateStock(product);
-	}
-	public List<Product> selectByPname(String pname){
-		return productDao.selectByPname(pname);
 	}
 }
