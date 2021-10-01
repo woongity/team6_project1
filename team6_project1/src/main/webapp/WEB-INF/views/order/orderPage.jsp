@@ -21,7 +21,7 @@
 
 <div class="d-flex justify-content-center">
 	<div class="col-8">
-	<h5>주문 페이지</h5>
+	<h3>주문하기</h3>
 		<!-- 주문 정보 -->
 		<div class="d-flex">
 		<div class="col-8">

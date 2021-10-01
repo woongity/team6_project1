@@ -36,7 +36,7 @@ public class OrderedHistoryController {
  				oiJoinList.add(product);
  			}
  		}
-		model.addAttribute("oderedList", oiJoinList);
+		model.addAttribute("orderedList", oiJoinList);
  		return "order/orderHistory";
 	}
 }

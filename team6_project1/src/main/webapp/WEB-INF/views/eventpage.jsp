@@ -13,10 +13,6 @@
 </head>
 <body>
 
-	<c:forEach var="item" items="${orderedHistory}">
-		<p>${item.pthumbnail}</p>
-		<img src="${pageContext.request.contextPath}/resources/handsome_img/${item.pthumbnail}"/>
-	</c:forEach>
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
