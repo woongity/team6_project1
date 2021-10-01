@@ -18,7 +18,9 @@
 	
 
 </style>
-
+<c:forEach var="item" items="${productArray}" begin="0" end="30">
+	<p> ${item.pstock}</p>
+</c:forEach>
 <div class="d-flex justify-content-center">
 	<div class="col-8">
 	<div class="row">

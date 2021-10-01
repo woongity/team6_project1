@@ -28,15 +28,15 @@
     	$.ajax({
        		url:"joinEvent"
    		}).done((data) => {
-   			if(data.result==="success"){
-   				console.log(data.result);	
+   			if(data.result=="success"){
+   				console.log(data.result);
    			}else{
    				alert("발급에 실패하였습니다.");
    				window.location.reload();
    			}
     	});
  	}
-</script>
+	</script>
 </body>
 </html>
 
