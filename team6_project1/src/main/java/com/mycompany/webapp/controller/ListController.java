@@ -45,8 +45,15 @@ public class ListController {
 		logger.info("실행");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
-		Cartitem cartbagDto = new Cartitem(mid, pcode, color, size, quantity);
-		cartService.insertItem(cartbagDto);
+		Cartitem cartitemDto = new Cartitem(mid, pcode, color, size, quantity);
+		Cartitem dbCartitem = cartService.selectItem(cartitemDto);
+		// 카드에 동일한 코드를 가진 제품이 있다면 
+		if(dbCartitem!=null) {
+			cartitemDto.setPquantity(quantity+dbCartitem.getPquantity());
+			cartService.updateItem(cartitemDto);
+		}else {
+			cartService.insertItem(cartitemDto);
+		}
 		return "redirect:/listView";
 	}
 }
