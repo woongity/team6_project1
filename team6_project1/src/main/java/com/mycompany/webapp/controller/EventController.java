@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Coupon;
+import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CouponReleaseRedisService;
 
 @Controller
@@ -51,6 +52,9 @@ public class EventController {
 				if (EventController.count > 3) {
 					return 0;
 				} else {
+					if(principal==null) {
+						throw new NotAuthenticatedUserException();
+					}
 					// 현재 로그인 한 계정 아이디
 					String mid = principal.getName();
 					// 쿠폰 코드
