@@ -13,4 +13,12 @@
         on o.oid = ord.oid
         where ord.mid = #{mid}
 	</select>
+  <select id="selectOrderitemJoinProductByOid" parameterType="String" resultType="com.mycompany.webapp.dto.OrderitemJoinProduct">
+		select p.pname, o.pquantity, p.pimage1, p.pbrand, p.pcolor, p.psize, p.pcode, o.oid ,o.pquantity*p.pprice as oprice
+		from 
+			orderitem o
+		inner join
+			product p
+		on o.pcode = p.pcode and o.pcolor =p.pcolor and o.psize=p.psize
+	</select>
 </mapper>

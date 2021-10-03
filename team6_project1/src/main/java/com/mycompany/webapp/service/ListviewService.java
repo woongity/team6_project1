@@ -18,13 +18,17 @@ import com.mycompany.webapp.dto.Product;
 
 @Service
 public class ListviewService {
-	private static final Logger logger = LoggerFactory.getLogger(ListController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ListviewService.class);
 	@Resource 
 	private ProductDao productDao;
 	
-	public List<Product> selectByPcode(String pno){
-		return productDao.selectByPcode(pno);
+	public Product selectOne(String pcode,String pcolor, String psize){
+		return productDao.selectOne(pcode,pcolor,psize);
 	}
+	
+	public List<Product> selectByPcode(String pcode) {
+		return productDao.selectByPcode(pcode);
+  }
 	
 	public HashMap<String, ListProduct> selectAll(){
 		HashMap<String,ListProduct> hashMap = new HashMap<String, ListProduct>();
