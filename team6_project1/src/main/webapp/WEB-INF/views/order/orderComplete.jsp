@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-<h5>주문완료</h5>
+<h3>주문완료</h3>
 <hr>
 <!-- 주문번호 -->
 <div class="d-flex mt-3">

@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="d-flex justify-content-center">
 		<div class="col-8">
 			<h5>이벤트</h5>

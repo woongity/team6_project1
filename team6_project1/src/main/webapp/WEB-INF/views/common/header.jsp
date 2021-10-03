@@ -5,6 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +49,11 @@
 	  transform: scale(0.1);
 	  opacity: 0.5;
   	}
+
+  	.form-check-input:checked {
+	    background-color: black;
+	    border-color: black;
+	}
   	
   </style>
 </head>
@@ -57,7 +64,7 @@
 	<div class="d-flex justify-content-center" style="margin: 5vh;">
 	<nav class="d-flex justify-content-between align-items-center py-3 mb-4 col-8">
 		<div class="">	
-			<a class="fs-5 text-decoration-none text-dark" href="${pageContext.request.contextPath}/">| THE | HANDSOME |</a>
+			<a class="fs-4 text-decoration-none text-dark" href="${pageContext.request.contextPath}/">| THE | HANDSOME |</a>
 		</div>
 		<div class="">
 			<ul class="list-inline m-0 fs-5">
