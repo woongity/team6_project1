@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mycompany.webapp.dto.CartbagDto;
+//import com.mycompany.webapp.dto.CartbagDto;
 import com.mycompany.webapp.dto.Product;
-import com.mycompany.webapp.service.CartbagService;
+import com.mycompany.webapp.service.CartService;
 import com.mycompany.webapp.service.ListviewService;
 
 @Controller
@@ -24,7 +24,7 @@ public class ListController {
 	private static final Logger logger = LoggerFactory.getLogger(ListController.class);
 	
 	@Resource ListviewService listviewService;
-	@Resource CartbagService cartService;
+	@Resource CartService cartService;
 	@RequestMapping("/listView")
 	public String content(Model model) {
 		logger.info("시작");

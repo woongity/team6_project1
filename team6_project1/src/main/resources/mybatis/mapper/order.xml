@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.OrderDao">
-	
 	<select id="selectByMid" parameterType="String" resultType="order">
-		select * from orderitem where mid=#{mid}
+		select * from orderinfo where mid=#{mid}
+	</select>
+	<select id="selectOidByMid" parameterType="String" resultType="String">
+		select oid from orderinfo where mid=#{mid}
+	</select>
+	<select id="selectByOid" parameterType="String" resultType="orderitem">
+		select * from orderitem where oid=#{oid}
 	</select> 
-	<insert id="insertOrder" parameterType="order">
-		insert into orderitem(oid,mid,pid,oquantity, oprice, otime, opaymentmethod) 
-		values(#{oid},#{mid},#{pid},#{oquantity},#{oprice},to_char(sysdate,'yyyymmdd hh24:mi:ss'),#{opaymentmethod})
-	</insert>
-	<select id="selectOrderJoinProductByMid" parameterType="String" resultType="com.mycompany.webapp.dto.OrderProductJoinDto">
-		select o.mid, o.oid, o.oquantity, p.pprice * o.oquantity oprice,p.pthumbnail, p.pname,o.otime
-		from 
-			orderitem o
-		inner join 
-			product p
-		on
-			o.pid = p.pid
-		where
-			o.mid = #{mid}
+	<select id="selectOneByOid" parameterType="String" resultType="order">
+		select * from orderinfo where oid=#{oid}
 	</select> 
+	<update id="update" parameterType="order">
+		update orderinfo set ostatus=#{ostatus} where oid=#{oid}
+	</update>
 </mapper>
