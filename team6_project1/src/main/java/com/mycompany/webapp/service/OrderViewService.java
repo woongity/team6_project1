@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.OrderDao;
 import com.mycompany.webapp.dao.OrderitemDao;
 import com.mycompany.webapp.dto.Order;
-import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 
 
 @Service
@@ -24,8 +24,8 @@ public class OrderViewService {
 	public List<Order> selectByMid(String mid){
 		return orderDao.selectByMid(mid);
 	}
-	public List<OrderitemJoinProduct> selectOrderitemJoinProductByOid(String oid){
-		return orderitemDao.selectOrderitemJoinProductByOid(oid);
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
+		return orderitemDao.selectOrderitemJoinProductByMid(mid);
 	}
 	public List<String> selectOidByMid(String mid){
 		return orderDao.selectOidByMid(mid);

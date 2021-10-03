@@ -12,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mycompany.webapp.dto.Order;
-import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.OrderViewService;
 
@@ -33,16 +32,22 @@ public class OrderedHistoryController {
 		}
 		String mid = principal.getName();
 		
-		List<String> oidList = orderviewService.selectOidByMid(mid);
- 		List<OrderitemJoinProduct> oiJoinList = new ArrayList<OrderitemJoinProduct>();
- 		for(String oid:oidList) {
- 			List<OrderitemJoinProduct> list  = orderviewService.selectOrderitemJoinProductByOid(oid);
- 			for(OrderitemJoinProduct product:list) {
- 				logger.info(product.toString());
- 				oiJoinList.add(product);
- 			}
- 		}
-		model.addAttribute("orderedList", oiJoinList);
- 		return "order/orderHistory";
+//		List<String> oidList = orderviewService.selectOidByMid(mid);
+// 		List<OrderitemJoinProductJoinOrder> oiJoinList = new ArrayList<OrderitemJoinProductJoinOrder>();
+// 		for(String oid:oidList) {
+// 			List<OrderitemJoinProductJoinOrder> list  = orderviewService.selectOrderitemJoinProductJoinOrderByOid(oid);
+// 			for(OrderitemJoinProductJoinOrder product:list) {
+// 				logger.info(product.toString());
+// 				oiJoinList.add(product);
+// 			}
+// 		}
+		List<OrderitemJoinProductJoinOrder> list  = orderviewService.selectOrderitemJoinProductJoinOrderByOid(mid);
+		for(OrderitemJoinProductJoinOrder product:list) {
+				logger.info(product.toString());
+				
+			}
+//		model.addAttribute("orderedList", oiJoinList);
+ 		model.addAttribute("orderedList", list);
+		return "order/orderHistory";
 	}
 }
