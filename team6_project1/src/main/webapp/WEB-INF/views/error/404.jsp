@@ -26,8 +26,8 @@
 								onmouseout="mouseOut()"></a>
 		    </div>
 		    <div class="mb-3 text-center">
-				<h2>Sorry for inconvenience</h2>
-				<h2>Please try again :)</h2>
+				<h2>There is no content</h2>
+				<h2>Please go back :)</h2>
 		    </div>
 			
 	    </div>

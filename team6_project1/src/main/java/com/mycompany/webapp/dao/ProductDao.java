@@ -13,5 +13,4 @@ public interface ProductDao {
 	public List<Product> selectByPcode(String pcode);
 	public List<Product> selectAll();
 	public void updateStock(Product product);
-	public List<Product> selectByPname(String pname);
 }

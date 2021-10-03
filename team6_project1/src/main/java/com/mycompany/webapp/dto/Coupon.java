@@ -13,6 +13,6 @@ public class Coupon {
 	private String ccontent;
 	private String creleasedate;
 	private String cexpiredate;
-	private int cstatus;
 	private String ecode;
+	private char cstatus;
 }

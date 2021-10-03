@@ -13,39 +13,41 @@ import com.mycompany.webapp.dao.OrderitemDao;
 import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
+
 
 
 @Service
 public class OrderViewService {
 	@Resource 
-	private OrderDao orderdao;
+
+	private OrderDao orderDao;
 	@Resource
 	private OrderitemDao orderitemDao;
 	private static final Logger logger = LoggerFactory.getLogger(OrderViewService.class);	
-//	
-//	public List<OrderDto> selectByMid(String mid){
-//		return orderdao.selectByMid(mid);
-//	}
-//	
+
 	public List<Order> selectByMid(String mid){
-		return orderdao.selectByMid(mid);
+		return orderDao.selectByMid(mid);
 	}
 	public List<OrderitemJoinProduct> selectOrderitemJoinProductByOid(String oid){
 		return orderitemDao.selectOrderitemJoinProductByOid(oid);
 	}
 	public List<String> selectOidByMid(String mid){
-		return orderdao.selectOidByMid(mid);
+		return orderDao.selectOidByMid(mid);
 	}
 	
 	public List<Orderitem> selectByOid(String oid){
-		return orderdao.selectByOid(oid);
+		return orderDao.selectByOid(oid);
 	}
 	
 	public Order selectOneByOid(String oid){
-		return orderdao.selectOneByOid(oid);
+		return orderDao.selectOneByOid(oid);
 	}
 	
 	public void update(Order order) {
-		orderdao.update(order);
+		orderDao.update(order);
+
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
+		return orderitemDao.selectOrderitemJoinProductByMid(mid);
 	}
 }
