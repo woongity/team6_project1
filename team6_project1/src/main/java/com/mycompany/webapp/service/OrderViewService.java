@@ -46,6 +46,7 @@ public class OrderViewService {
 	
 	public void update(Order order) {
 		orderDao.update(order);
+	}
 
 	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
 		return orderitemDao.selectOrderitemJoinProductByMid(mid);
