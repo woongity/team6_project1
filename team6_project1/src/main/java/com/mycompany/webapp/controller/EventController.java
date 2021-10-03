@@ -31,7 +31,10 @@ public class EventController {
 	@Resource 
 	private CouponReleaseRedisService couponReleaseService;
 	@RequestMapping("/eventpage")
-	public String content() {
+	public String content(Principal principal) {
+		if(principal==null) {
+			throw new NotAuthenticatedUserException();
+		}
 		logger.info("Run /eventpage");
 		return "eventpage";
 	}
@@ -39,7 +42,7 @@ public class EventController {
 	@RequestMapping(value = "/joinEvent", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String joinEvent(Principal principal) throws Exception {
-		// 시간 측정 코드(x)
+		
 		Callable<Integer> task = new Callable<Integer>() {
 			@Override
 			public Integer call() throws Exception {
@@ -52,9 +55,7 @@ public class EventController {
 				if (EventController.count > 3) {
 					return 0;
 				} else {
-					if(principal==null) {
-						throw new NotAuthenticatedUserException();
-					}
+					
 					// 현재 로그인 한 계정 아이디
 					String mid = principal.getName();
 					// 쿠폰 코드
@@ -73,28 +74,31 @@ public class EventController {
 					if(couponReleaseService.insertCoupon(coupon)) {
 						logger.info("저장에 성공하였습니다");
 						// redis에 저장함 mid - coupon code 형태로
-						logger.info(couponReleaseService.getCouponCode(mid,cName));
 						// 저장 성공
+						logger.info(couponReleaseService.getCouponCode(mid,cName));
 					}else {
-						logger.info("저장에 실패하였습니다");
 						// 저장 실패
+						logger.info("저장에 실패하였습니다");
 					}
 					return 1;
 				}
 			}
 		};
-
+		// 시간 체크용 코드
+		long start = System.currentTimeMillis();
 		Future<Integer> future = executorService.submit(task);
-
 		// 이벤트 처리가 완료될 때까지 대기
 		int result = future.get();
-
+		// 시간 체크용 코드
+		long end = System.currentTimeMillis();
+		
 		JSONObject jsonObject = new JSONObject();
 		if (result == 1) {
 			jsonObject.put("result", "success");
 		} else {
 			jsonObject.put("result", "fail");
 		}
+		logger.info((end-start)+"밀리초가 소요되었습니다");
 		return jsonObject.toString();
 	}
 }
