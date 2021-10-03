@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" />
+
+<!-- jedis jedisConnectionFactory 설정 -->
+<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <property name="usePool" value="true" />                 
+    <property name="hostName" value="127.0.0.1" />    
+    <property name="port" value="6379" />                   
+    <property name="poolConfig" ref="jedisPoolConfig" />    
+</bean>
+<!-- redis 템플릿 설정 -->
+<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+   
+    <!-- 위에서 생성한 jedisConnectionFactory 를 꽂아줌 -->
+    <property name="connectionFactory" ref="jedisConnectionFactory" />
+
+    <!-- 키는 string, value 는 Object 로 설정 -->
+    <!-- keySerializer, hashKeySerializer 는 StringRedisSerializer 로 잡고 -->
+    <!-- valueSerializer, hashValueSerializer 는 GenericJackson2JsonRedisSerializer -->
+    <!-- 로 잡은후 생성자로 Object 객체를 넣어주었다. -->
+
+
+    <property name="keySerializer">
+        <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+    </property>
+    <property name="valueSerializer">
+        <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
+            <constructor-arg value="java.lang.Object" />
+        </bean>
+    </property>
+    <property name="hashKeySerializer">
+        <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+    </property>
+    <property name="hashValueSerializer">
+        <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
+            <constructor-arg value="java.lang.Object"/>
+        </bean>
+    </property>
+</bean>
+</beans>
