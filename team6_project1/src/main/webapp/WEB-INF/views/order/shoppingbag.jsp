@@ -92,8 +92,33 @@
   </tbody>
 </table>
 <div class="d-flex justify-content-center mt-3">
-	<a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
+	<%-- <a href="${pageContext.request.contextPath}/order/orderPage">
+		<div class="btn btn-dark col-3" onclick="insert()">주문하기</div>
+	</a> --%>
+	<button class="btn btn-dark col-3" onclick="insert()">주문하기</button>
 </div>
+
+<script>
+	function insert() {
+
+	  let orderProduct = [
+		  {"pimage1":"http://newmedia.thehandsome.com/CM/2B/SS/CM2B0KTO404W_OW_W01.jpg/dims/resize/684x1032/","pname":"오픈 칼라 니트 스웨터","pcolor":"OW","psize":"85","pquantity":1,"pprice":10000},
+		  {"pimage1":"http://newmedia.thehandsome.com/CM/2B/SS/CM2B0KTO405W_BK_W01.jpg/dims/resize/684x1032/","pname":"캐시미어 니트 탑","pcolor":"BK","psize":"85","pquantity":2,"pprice":20000}
+		  ];
+
+	   $.ajax({
+	     url: "orderInfo",
+	     method: "post",
+	     traditional: true,
+	     data: {
+	    	 orderProduct: JSON.stringify(orderProduct)
+	     },
+	     datatype:"json"
+	   }).done(()=> {
+		   window.location.href="${pageContext.request.contextPath}/order/orderPage";
+	   });
+}
+</script>
 
 </div>
 </div>

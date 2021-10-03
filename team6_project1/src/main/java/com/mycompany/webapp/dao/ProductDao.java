@@ -1,15 +1,10 @@
 package com.mycompany.webapp.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import com.mycompany.webapp.dto.Product;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ProductDao {
-	public Product selectByPno(String pid);
-	public List<Product> selectAll();
-	public void updateStock(Product product);
-	public List<Product> selectByPname(String pname);
+	public int selectPquantity(@Param("pcode") String pcode, @Param("pcolor") String pcolor, @Param("psize") String psize);
+	public void updatePstock(@Param("pcode") String pcode, @Param("pcolor") String pcolor, @Param("psize") String psize, @Param("pquantity") int pquantity);
 }
