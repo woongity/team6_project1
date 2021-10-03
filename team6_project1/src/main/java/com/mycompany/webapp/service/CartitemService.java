@@ -16,18 +16,30 @@ public class CartitemService {
 	private static final Logger logger = LoggerFactory.getLogger(CartitemService.class);
 	
 	@Resource
-	private CartitemDao cartbagdao;
+	private CartitemDao cartitemDao;
 	
 	public void insertItem(Cartitem cartitem) {
 		logger.info("insert item");
-		cartbagdao.insertItem(cartitem);
+		cartitemDao.insertItem(cartitem);
 	}
 	public void updateItem(Cartitem cartitem) {
 		logger.info("실행");
-		cartbagdao.updateItem(cartitem);
+		cartitemDao.updateItem(cartitem);
 	}
 	
 	public Cartitem selectItem(Cartitem cartitem) {
-		return cartbagdao.selectItem(cartitem);
+		return cartitemDao.selectItem(cartitem);
 	}
+	
+	public void deleteItem(String mid, String pcode, String pcolor, String psize) {
+		cartitemDao.deleteItem(mid, pcode,pcolor,psize);
+	}
+	
+	public List<Cartitem> selectAllByMid(String mid){
+		return cartitemDao.selectAllByMid(mid);
+	}
+	public Cartitem selecOne(String mid,String pcode, String pcolor, String psize){
+		return cartitemDao.selectOne(mid,pcode,pcolor,psize);
+	}
+
 }

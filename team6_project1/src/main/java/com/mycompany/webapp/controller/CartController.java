@@ -21,7 +21,7 @@ import com.mycompany.webapp.dto.Cartitem;
 import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.dto.Product;
-import com.mycompany.webapp.service.CartService;
+import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 
 @Controller
@@ -30,7 +30,7 @@ public class CartController {
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@Resource
-	CartService cartService;
+	CartitemService cartService;
 	@Resource
 	ListviewService productService;
 	
@@ -99,8 +99,8 @@ public class CartController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		
-		cartService.deleteitem(mid, pcode, origin_pcolor, origin_psize);
-		cartService.insertitem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
+		cartService.deleteItem(mid, pcode, origin_pcolor, origin_psize);
+		cartService.insertItem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
 		
 		return "redirect:/cart/list";
 	}
@@ -112,7 +112,7 @@ public class CartController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		
-		cartService.deleteitem(mid, pcode, pcolor, psize);
+		cartService.deleteItem(mid, pcode, pcolor, psize);
 		
 		return "redirect:/cart/list";
 	}

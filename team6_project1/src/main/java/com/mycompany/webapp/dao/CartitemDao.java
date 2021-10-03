@@ -14,8 +14,7 @@ import com.mycompany.webapp.dto.Cartitem;
 public interface CartitemDao {
 	List<Cartitem> selectAllByMid(String mid);
 	Cartitem selectOne(@Param("mid") String mid,@Param("pcode")  String pcode,@Param("pcolor")  String pcolor,@Param("psize")  String psize);
-	void deleteitem(@Param("mid") String mid,@Param("pcode") String pcode,@Param("pcolor") String pcolor,@Param("psize") String psize);
-	void insertitem(Cartitem cartitem);
+	void deleteItem(@Param("mid") String mid,@Param("pcode") String pcode,@Param("pcolor") String pcolor,@Param("psize") String psize);
 	void insertItem(Cartitem cartitem);
 	void updateItem(Cartitem cartitem);
 	Cartitem selectItem(Cartitem cartitem);
