@@ -1,13 +1,11 @@
 package com.mycompany.webapp.dao;
 
-import javax.annotation.Resource;
+import java.util.List;
 
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
-public class CouponDao {
+import com.mycompany.webapp.dto.Coupon;
 
-
+public interface CouponDao {
+	List<Coupon> selectByMid(String mid);
 }

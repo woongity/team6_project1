@@ -11,16 +11,21 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.OrderDao;
 import com.mycompany.webapp.dao.OrderitemDao;
 import com.mycompany.webapp.dto.Order;
+import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
+
 
 
 @Service
 public class OrderViewService {
 	@Resource 
+
 	private OrderDao orderDao;
 	@Resource
 	private OrderitemDao orderitemDao;
 	private static final Logger logger = LoggerFactory.getLogger(OrderViewService.class);	
+
 	public List<Order> selectByMid(String mid){
 		return orderDao.selectByMid(mid);
 	}
@@ -29,5 +34,20 @@ public class OrderViewService {
 	}
 	public List<String> selectOidByMid(String mid){
 		return orderDao.selectOidByMid(mid);
+	}
+	
+	public List<Orderitem> selectByOid(String oid){
+		return orderDao.selectByOid(oid);
+	}
+	
+	public Order selectOneByOid(String oid){
+		return orderDao.selectOneByOid(oid);
+	}
+	
+	public void update(Order order) {
+		orderDao.update(order);
+
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
+		return orderitemDao.selectOrderitemJoinProductByMid(mid);
 	}
 }

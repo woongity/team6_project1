@@ -18,8 +18,16 @@ public class CartitemService {
 	@Resource
 	private CartitemDao cartbagdao;
 	
-	public void insertItem(Cartitem cartbag) {
+	public void insertItem(Cartitem cartitem) {
 		logger.info("insert item");
-		cartbagdao.insertItem(cartbag);
+		cartbagdao.insertItem(cartitem);
+	}
+	public void updateItem(Cartitem cartitem) {
+		logger.info("실행");
+		cartbagdao.updateItem(cartitem);
+	}
+	
+	public Cartitem selectItem(Cartitem cartitem) {
+		return cartbagdao.selectItem(cartitem);
 	}
 }
