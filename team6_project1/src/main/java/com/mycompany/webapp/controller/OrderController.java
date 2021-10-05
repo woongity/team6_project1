@@ -1,6 +1,7 @@
 package com.mycompany.webapp.controller;
 
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,15 +10,12 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import java.security.Principal;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,20 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.Member;
 import com.mycompany.webapp.dto.Order;
-import com.mycompany.webapp.dto.OrderViewInfo;
-import com.mycompany.webapp.dto.Orderitem;
-import com.mycompany.webapp.service.CartitemService;
-import com.mycompany.webapp.service.MemberService;
-import com.mycompany.webapp.service.OrderService;
-import com.mycompany.webapp.service.OrderitemService;
-import com.mycompany.webapp.service.ProductService;
-
-import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
+import com.mycompany.webapp.service.MemberService;
 import com.mycompany.webapp.service.OrderViewService;
+import com.mycompany.webapp.service.OrderitemService;
 
 @Controller
 @RequestMapping("/order")
@@ -49,16 +41,13 @@ public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Resource
-
 	private MemberService memberService;
 	@Resource 
-	private OrderService orderService;
+	private OrderViewService orderService;
 	@Resource
 	private OrderitemService orderitemService;
 	@Resource 
 	private CartitemService cartitemService;
-	@Resource
-	private ProductService productService;
 	@Resource
 	ListviewService productService;
 
@@ -104,11 +93,11 @@ public class OrderController {
 
 			//주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
 			//1. 주문자 정보 : mname, mtel, memail
-			List<Member> orderMember = memberService.selectByMid(mid);
+			Member orderMember = memberService.selectByMid(mid);
 			model.addAttribute("orderMember", orderMember);
 			
 			//2. 배송지 정보 : maddress, mname, mtel
-			List<Member> deliveryMember = memberService.selectByMid(mid);
+			Member deliveryMember = memberService.selectByMid(mid);
 			model.addAttribute("deliveryMember", deliveryMember);
 		}
 			
@@ -126,22 +115,26 @@ public class OrderController {
 								String otel,
 								String oaddress,
 								String ocomment,
-								String opaymentmethod) {
+								String opaymentmethod,
+								Model model) {
 		logger.info("Run order/orderComplete");
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		long oidTime = System.currentTimeMillis();
 		String oid = mid + oidTime;
+		logger.info("1");
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		Date date = new Date();
 		date.setTime(oidTime);
 		String otime = simpleDateFormat.format(date);
+		logger.info("2");
 				
 		//사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
 		Order order = new Order(oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, '1');
 		orderService.insertOrder(order);
+		logger.info("3");
 		
 		//주문상품 데이터(Orderitem Table)를 DB에 저장
 		for(int i=0; i<pcode.size(); i++) {
@@ -154,16 +147,12 @@ public class OrderController {
 			productService.updatePstock(pcode.get(i), pcolor.get(i), psize.get(i), quantity);
 
 			//주문 완료 상품의 장바구니(Cartitem) 데이터 삭제
-			cartitemService.deleteCartitem(mid, pcode.get(i), pcolor.get(i), psize.get(i));
+			cartitemService.deleteItem(mid, pcode.get(i), pcolor.get(i), psize.get(i));
 		}
-		
-	//기존 ordercomplete
-	@GetMapping("/info")
-	public String info(String oid,Principal principal, Model model) {
-		logger.info("Run order/info");
+		logger.info("4");
 		
 		List<Orderitem> orders = orderService.selectByOid(oid);
-		Order order = orderService.selectOneByOid(oid);
+		logger.info("5");
 		
 		ArrayList<OrderitemJoinProduct> ordereditems = new ArrayList<OrderitemJoinProduct>();
 		int totalprice = 0;		//총 주문 비용
@@ -177,14 +166,14 @@ public class OrderController {
 			totalnumber += orderitem.getPquantity();
 			totalprice += product.getPprice() * orderitem.getPquantity();
 		}
+		logger.info("6");
 		
 		model.addAttribute("order", order);
 		model.addAttribute("ordereditems", ordereditems);
 		model.addAttribute("totalnumber", totalnumber);
 		model.addAttribute("totalprice", totalprice);
-
+		
 		return "order/orderComplete";
-//		return "order/info";
 	}
 	
 	@PostMapping("delete")

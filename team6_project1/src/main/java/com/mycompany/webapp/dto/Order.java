@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Order {
-	private int oid;
+	private String oid;
     private String otime;
 	private String mid;
 	private String oname;

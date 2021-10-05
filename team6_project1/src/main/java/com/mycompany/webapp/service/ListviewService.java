@@ -1,6 +1,5 @@
 package com.mycompany.webapp.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.webapp.controller.ListController;
 import com.mycompany.webapp.dao.ProductDao;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.dto.Product;
@@ -58,7 +56,12 @@ public class ListviewService {
 		}
 		return hashMap;
 	}
-	public void updateStock(Product product) {
-		productDao.updateStock(product);
+	
+	public int selectPquantity(String pcode, String pcolor, String psize) {
+		return productDao.selectPquantity(pcode, pcolor, psize);
+	}
+	
+	public void updatePstock(String pcode, String pcolor, String psize, int pquantity) {
+		productDao.updatePstock(pcode, pcolor, psize, pquantity);
 	}
 }
