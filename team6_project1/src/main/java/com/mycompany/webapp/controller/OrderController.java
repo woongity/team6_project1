@@ -131,7 +131,7 @@ public class OrderController {
 		String otime = simpleDateFormat.format(date);
 				
 		//사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
-		Order order = new Order(oid, mid, otime, oname, otel, oaddress, ocomment, opaymentmethod, '1');
+		Order order = new Order(oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, '1');
 		orderService.insertOrder(order);
 		
 		//주문상품 데이터(Orderitem Table)를 DB에 저장
