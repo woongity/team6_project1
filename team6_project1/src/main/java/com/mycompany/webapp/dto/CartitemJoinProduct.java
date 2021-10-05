@@ -22,6 +22,8 @@ public class CartitemJoinProduct {
 	private String pname;
 	@NonNull
 	private String pimage1;
+	private String pimage2;
+	private String pimage3;
 	private String pcolorimage;
 	@NonNull
 	private int pprice;
@@ -31,7 +33,9 @@ public class CartitemJoinProduct {
 	@Override
 	public String toString() {
 		return "CartitemJoinProduct [mid=" + mid + ", pcode=" + pcode + ", pcolor=" + pcolor + ", psize=" + psize
-				+ ", pquantity=" + pquantity + ", pname=" + pname + ", pimage1=" + pimage1 + ", pcolorimage="
-				+ pcolorimage + ", pprice=" + pprice + ", pbrand=" + pbrand + ", pstock=" + pstock + "]";
+				+ ", pquantity=" + pquantity + ", pname=" + pname + ", pimage1=" + pimage1 + ", pimage2=" + pimage2
+				+ ", pimage3=" + pimage3 + ", pcolorimage=" + pcolorimage + ", pprice=" + pprice + ", pbrand=" + pbrand
+				+ ", pstock=" + pstock + "]";
 	}
+
 }
