@@ -10,4 +10,23 @@
 		and psize=#{psize}
 	</delete>
 	
+	<select id="selectCartitemJoinProductByPcodePcolorPsize" resultType="com.mycompany.webapp.dto.CartitemJoinProduct">
+		select c.pcode, p.pimage1, p.pbrand, p.pname, c.pcolor, c.psize, p.pprice, c.pquantity
+		from cartitem c, product p
+		where c.pcode = p.pcode and c.pcolor = p.pcolor and c.psize = p.psize
+		and c.mid = #{mid}
+		and c.pcode in
+		<foreach collection="pcode" item="pcode" index="index"  open="(" separator="," close=")">
+            #{pcode}
+        </foreach>
+		and c.pcolor in
+		<foreach collection="pcolor" item="pcolor" index="index"  open="(" separator="," close=")">
+            #{pcolor}
+        </foreach>
+		and c.psize in
+		<foreach collection="psize" item="psize" index="index"  open="(" separator="," close=")">
+            #{psize}
+        </foreach>
+	</select>
+	
 </mapper>

@@ -2,26 +2,25 @@ package com.mycompany.webapp.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.Member;
 import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.OrderViewInfo;
@@ -54,65 +53,71 @@ public class OrderController {
 		return "order/shoppingbag";
 	}
 	
-	@PostMapping("/orderInfo")
-	@ResponseBody
-	public String orderPage(Model model, String orderProduct, HttpServletResponse response) throws Exception {
+	//장바구니에서 선택한 상품 주문하기
+	@RequestMapping("/orderPage")
+	public String orderPage(@RequestParam(value="orderPcode", required=true) ArrayList<String> orderPcode, 
+							@RequestParam(value="orderPpcolor", required=true) ArrayList<String> orderPpcolor, 
+							@RequestParam(value="orderPsize", required=true) ArrayList<String> orderPsize,
+							Model model,
+							HttpServletResponse response) throws Exception {
 		logger.info("Run order/orderPage");
 		
+		logger.info(orderPcode.toString());
+		logger.info(orderPpcolor.toString());
+		logger.info(orderPsize.toString());
+
+		//JSP로 넘어가는지 테스트용
+//		ArrayList<String> pcode = new ArrayList<String>();
+//		pcode.add("CM2B0NPC568W");
+//		pcode.add("CM2B1KTO409W");
+//		ArrayList<String> pcolor = new ArrayList<String>();
+//		pcolor.add("IV");
+//		pcolor.add("DN");
+//		ArrayList<String> psize = new ArrayList<String>();
+//		psize.add("67");
+//		psize.add("85");
+		
 		//주문 상품이 없는 상태로 결제하기를 누를 경우 예외처리
-		if(orderProduct == null) {
+		if(orderPcode.size() == 0) {
 			response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('주문 상품을 선택해주세요.'); history.go(-1);</script>");
             out.flush();
-		}
-		logger.info(orderProduct);
-		
-		//장바구니에서 선택한 상품 데이터를 상품 주문 페이지로 전달
-		model.addAttribute("orderProducts", orderProduct);
-		logger.info("1");
-		
-		//최종 결제 금액 및 수량
-		int totalQuantity = 0;
-		int totalPrice = 0;
-		logger.info("2");
-		
-		//JSON 파싱 과정
-		JSONArray jsonArray = new JSONArray(orderProduct);
-		logger.info("3");
-		
-		for(int i=0; i<jsonArray.length(); i++) {
-			JSONObject obj = jsonArray.getJSONObject(i);
-			totalQuantity += obj.getInt("pquantity");
-			totalPrice += obj.getInt("pprice");
-		}
+            
+		} else {
+			//mid 정보 가져오기
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String mid = authentication.getName();
 
-		model.addAttribute("totalQuantity", totalQuantity);
-		model.addAttribute("totalPrice", totalPrice);
-		
-		//주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String mid = authentication.getName();
-		
-		//1. 주문자 정보 : mname, mtel, memail
-		List<Member> orderMember = memberService.selectByMid(mid);
-		model.addAttribute("orderMember", orderMember);
-		
-		//2. 배송지 정보 : maddress, mname, mtel
-		List<Member> deliveryMember = memberService.selectByMid(mid);
-		model.addAttribute("deliveryMember", deliveryMember);
-		
+			//장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
+			List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPpcolor, orderPsize);
+			model.addAttribute("orderProducts", cartitemJoinProduct);
+
+			//주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
+			//1. 주문자 정보 : mname, mtel, memail
+			List<Member> orderMember = memberService.selectByMid(mid);
+			model.addAttribute("orderMember", orderMember);
+			
+			//2. 배송지 정보 : maddress, mname, mtel
+			List<Member> deliveryMember = memberService.selectByMid(mid);
+			model.addAttribute("deliveryMember", deliveryMember);
+		}
+			
 		return "order/orderPage";
 	}
 	
-	@GetMapping("/orderPage")
-	public String orderPage() {
-		return "order/orderPage";
-	}
-	
-	@RequestMapping(value="/orderComplete", method= {RequestMethod.POST})
+	//주문페이지에서 주문완료하기
+	@RequestMapping(value="/orderComplete", method={RequestMethod.POST})
 	@ResponseBody
-	public String orderComplete(OrderViewInfo orderViewInfo, String orderProduct) {
+	public String orderComplete(@RequestParam(value="pcode", required=true) ArrayList<String> pcode, 
+								@RequestParam(value="pcolor", required=true) ArrayList<String> pcolor, 
+								@RequestParam(value="psize", required=true) ArrayList<String> psize,
+								@RequestParam(value="pquantity", required=true) ArrayList<Integer> pquantity,
+								String oname,
+								String otel,
+								String oaddress,
+								String ocomment,
+								String opaymentmethod) {
 		logger.info("Run order/orderComplete");
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -126,24 +131,21 @@ public class OrderController {
 		String otime = simpleDateFormat.format(date);
 				
 		//사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
-		Order dbOrder = new Order(oid, mid, otime, orderViewInfo.getOname(), orderViewInfo.getOtel(), orderViewInfo.getOaddress(), orderViewInfo.getOcomment(), orderViewInfo.getOpaymentmethod(), '1');
-		orderService.insertOrder(dbOrder);
+		Order order = new Order(oid, mid, otime, oname, otel, oaddress, ocomment, opaymentmethod, '1');
+		orderService.insertOrder(order);
 		
 		//주문상품 데이터(Orderitem Table)를 DB에 저장
-		JSONArray jsonArray = new JSONArray(orderProduct);
-
-		for(int i=0; i<jsonArray.length(); i++) {
-			JSONObject obj = jsonArray.getJSONObject(i);
-			Orderitem orderitem = new Orderitem(oid, obj.getString("pcode"), obj.getString("pcolor"), obj.getString("psize"), obj.getInt("pquantity"));
+		for(int i=0; i<pcode.size(); i++) {
+			Orderitem orderitem = new Orderitem(oid, pcode.get(i), pcolor.get(i), psize.get(i), pquantity.get(i));
 			orderitemService.insertOrderitem(orderitem);
 			
 			//주문 완료 상품의 상품(Product) 재고 수정
-			int pstock = productService.selectPquantity(obj.getString("pcode"), obj.getString("pcolor"), obj.getString("psize"));
-			int pquantity = pstock - obj.getInt("pquantity");
-			productService.updatePstock(obj.getString("pcode"), obj.getString("pcolor"), obj.getString("psize"), pquantity);
+			int pstock = productService.selectPquantity(pcode.get(i), pcolor.get(i), psize.get(i));
+			int quantity = pstock - pquantity.get(i);
+			productService.updatePstock(pcode.get(i), pcolor.get(i), psize.get(i), quantity);
 
 			//주문 완료 상품의 장바구니(Cartitem) 데이터 삭제
-			cartitemService.deleteCartitem(mid, obj.getString("pcode"), obj.getString("pcolor"), obj.getString("psize"));
+			cartitemService.deleteCartitem(mid, pcode.get(i), pcolor.get(i), psize.get(i));
 		}
 		
 		return "order/orderComplete";

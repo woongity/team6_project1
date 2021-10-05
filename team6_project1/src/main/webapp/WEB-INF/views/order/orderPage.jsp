@@ -13,7 +13,6 @@
   	#navSticky {
 		position: sticky;
 		top: 10px;
-
 	}
   </style>
 </head>
@@ -22,14 +21,10 @@
 <div class="d-flex justify-content-center">
 	<div class="col-8">
 	<h5>주문 페이지</h5>
+	
+	<!-- 서버에서 넘긴 데이터 확인 테스트 -->
 	<c:forEach var="product" items="${orderProducts}">
     	<p>${product}</p>
-	</c:forEach>
-	<c:forEach var="totalQuantity" items="${totalQuantity}">
-    	<p>${totalQuantity}</p>
-	</c:forEach>
-	<c:forEach var="totalPrice" items="${totalPrice}">
-    	<p>${totalPrice}</p>
 	</c:forEach>
 	<c:forEach var="orderMember" items="${orderMember}">
     	<p>${orderMember}</p>
@@ -37,6 +32,7 @@
 	<c:forEach var="deliveryMember" items="${deliveryMember}">
     	<p>${deliveryMember}</p>
 	</c:forEach>
+	
 		<!-- 주문 정보 -->
 		<div class="d-flex">
 		<div class="col-8">
