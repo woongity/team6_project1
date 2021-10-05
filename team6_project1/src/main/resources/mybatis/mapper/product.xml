@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.dao.ProductDao">
+
+	<select id="selectPquantity" parameterType="String" resultType="int">
+		select pstock
+		from product
+		where pcode=#{pcode}
+		and pcolor=#{pcolor}
+		and psize=#{psize}
+	</select>
+	
+	<update id="updatePstock">
+		update product set pstock=#{pquantity} 
+		where pcode=#{pcode} 
+		and pcolor=#{pcolor}
+		and psize=#{psize}
+	</update>
+
+	<select id="selectOne" parameterType="String" resultType="product">
+		select * from product where pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
+	</select>
+	<select id="selectByPcode" parameterType="String" resultType="product">
+		select * from product where pcode=#{pcode}
+	</select>
+	
+	<select id="selectAll" resultType="product">
+		select * from product
+	</select>
+
+</mapper>

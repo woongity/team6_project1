@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.dao.OrderDao">
+	
+	<insert id="insertOrder" parameterType="order">
+		insert into orderinfo (oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, ostatus)
+		values (#{oid}, #{otime}, #{mid}, #{oname}, #{otel}, #{oaddress}, #{ocomment}, #{opaymentmethod}, #{ostatus})
+	</insert>
+
+	<select id="selectByMid" parameterType="String" resultType="order">
+		select * from orderinfo where mid=#{mid}
+	</select>
+	
+	<select id="selectOidByMid" parameterType="String" resultType="String">
+		select oid from orderinfo where mid=#{mid}
+	</select>
+	
+	<select id="selectByOid" parameterType="String" resultType="orderitem">
+		select * from orderitem where oid=#{oid}
+	</select> 
+	
+	<select id="selectOneByOid" parameterType="String" resultType="order">
+		select * from orderinfo where oid=#{oid}
+	</select> 
+	
+	<update id="update" parameterType="order">
+		update orderinfo set ostatus=#{ostatus} where oid=#{oid}
+	</update>
+	
+</mapper>
