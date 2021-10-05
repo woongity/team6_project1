@@ -19,11 +19,4 @@ public class CartitemJoinAllProduct {
    private int pprice;
    private String pbrand;
    private int pstock;
-   
-   @Override
-   public String toString() {
-      return "CartitemJoinProduct [mid=" + mid + ", pcode=" + pcode + ", pcolor=" + pcolor + ", psize=" + psize
-            + ", pquantity=" + pquantity + ", pname=" + pname + ", pimage1=" + pimage1 + ", pcolorimage="
-            + pcolorimage + ", pprice=" + pprice + ", pbrand=" + pbrand + ", pstock=" + pstock + "]";
-   }
 }
