@@ -63,10 +63,6 @@ public class OrderController {
 		//mid 정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
-		//로그인 하지 않은 사용자 예외처리
-		if(mid == "anonymousUser") {
-			throw new NotAuthenticatedUserException();
-		}
 
 		//장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
 		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPcolor, orderPsize);
@@ -95,23 +91,17 @@ public class OrderController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
-		if(mid == "anonymousUser") {
-			throw new NotAuthenticatedUserException();
-		}
 		long oidTime = System.currentTimeMillis();
 		String oid = mid + oidTime;
-		logger.info("1");
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		Date date = new Date();
 		date.setTime(oidTime);
 		String otime = simpleDateFormat.format(date);
-		logger.info("2");
 				
 		//사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
 		Order order = new Order(oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, '1');
 		orderService.insertOrder(order);
-		logger.info("3");
 		
 		//주문상품 데이터(Orderitem Table)를 DB에 저장
 		for(int i=0; i<pcode.size(); i++) {
@@ -126,10 +116,8 @@ public class OrderController {
 			//주문 완료 상품의 장바구니(Cartitem) 데이터 삭제
 			cartitemService.deleteItem(mid, pcode.get(i), pcolor.get(i), psize.get(i));
 		}
-		logger.info("4");
 		
 		List<Orderitem> orders = orderService.selectByOid(oid);
-		logger.info("5");
 		
 		ArrayList<OrderitemJoinProduct> ordereditems = new ArrayList<OrderitemJoinProduct>();
 		int totalprice = 0;		//총 주문 비용
@@ -143,7 +131,6 @@ public class OrderController {
 			totalnumber += orderitem.getPquantity();
 			totalprice += product.getPprice() * orderitem.getPquantity();
 		}
-		logger.info("6");
 		Member orderMember = memberService.selectByMid(mid);
 		model.addAttribute("orderMember", orderMember);
 		
