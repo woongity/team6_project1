@@ -22,7 +22,7 @@
 				<h5>WE 21FW Coupon Event</h5>
 				
 				<div class="mt-5">
-					<a href="/home"><div class="btn btn-outline-dark col-2 mt-5">SHOP NOW</div></a>
+					<a href="/listView"><div class="btn btn-outline-dark col-2 mt-5">SHOP NOW</div></a>
 					<a href="/eventpage"><div class="btn btn-dark col-2 mt-5">EVENT</div></a>
 				</div>
 			</div>

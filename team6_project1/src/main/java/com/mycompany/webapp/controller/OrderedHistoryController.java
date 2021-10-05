@@ -59,7 +59,7 @@ public class OrderedHistoryController {
 		Member member = memberService.selectByMid(mid);
 		model.addAttribute("member", member);
 		
-		List<Coupon> couponlist = couponService.selectByMid(principal.getName());
+		List<Coupon> couponlist = couponService.selectByMid(mid);
 		model.addAttribute("couponlist", couponlist);
 		
  		return "order/orderHistory";

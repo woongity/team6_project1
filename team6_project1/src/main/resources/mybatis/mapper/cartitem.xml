@@ -8,7 +8,7 @@
 	<select id="selectOne" parameterType="String" resultType="cartitem">
 		select * from cartitem where mid=#{mid} and pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</select> 
-	<delete id="deleteitem" parameterType="String">
+	<delete id="deleteItem" parameterType="String">
 		delete from cartitem where mid=#{mid} and pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</delete>
 	<insert id="insertitem" parameterType="cartitem">

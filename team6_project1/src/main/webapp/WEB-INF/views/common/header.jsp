@@ -79,7 +79,7 @@
 				
 				<li class="d-flex justify-content-between">
 				<sec:authorize access="isAuthenticated()">
-					<a href="${pageContext.request.contextPath}/order/orderHistory" class="text-decoration-none text-dark me-3">MyPage</a>
+					<a href="${pageContext.request.contextPath}/orderedHistory" class="text-decoration-none text-dark me-3">MyPage</a>
 					<form method="post" action="${pageContext.request.contextPath}/logout" class="d-flex">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<a href="${pageContext.request.contextPath}/logout" class="text-decoration-none text-dark">Logout</a>

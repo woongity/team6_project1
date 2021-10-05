@@ -33,7 +33,7 @@ public class ListController {
 		HashMap<String,ListProduct> hashmap = listviewService.selectAll();
 		List<ListProduct> list =new ArrayList<ListProduct>();
 		for(String key:hashmap.keySet()) {
-			logger.info(hashmap.get(key).toString());
+			// logger.info(hashmap.get(key).toString());
 			list.add(hashmap.get(key));
 		}
 		model.addAttribute("productArray",list);

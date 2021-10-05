@@ -76,24 +76,17 @@
                       <div class="carousel-inner">
 
                         <!-- Carousel image 1 -->
-
                         <div class="carousel-item active">
                           <c:forEach var="i" items="${item.pimage1TreeSet}" begin="0" end="${fn:length(item.pimage1TreeSet) - 1}" varStatus="c1i">
-
                             <c:if test="${c1i.index == 0}">
                               <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: block;">
                             </c:if>
                             <c:if test="${c1i.index > 0}">
                               <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: none;">
                             </c:if>
-
-                            <!-- Modal 이미지 변경 -->
-                            <script>
-						   			
-						   		</script>
-
                           </c:forEach>
                         </div>
+                        
                         <!-- Carousel image 2 -->
                         <div class="carousel-item">
                           <c:forEach var="i" items="${item.pimage2TreeSet}" begin="0" end="${fn:length(item.pimage2TreeSet) - 1}" varStatus="c2i">
@@ -105,6 +98,7 @@
                             </c:if>
                           </c:forEach>
                         </div>
+                        
                         <!-- Carousel image 3 -->
                         <div class="carousel-item">
                           <c:forEach var="i" items="${item.pimage3TreeSet}" begin="0" end="${fn:length(item.pimage3TreeSet) - 1}" varStatus="c3i">
@@ -217,7 +211,8 @@
                           </c:forEach>
                         </div>
                       </div>
-                      <input type="text" id="param3" name="quantity" class="form-control" value="1" style="display: none;"> <input type="text" id="param3" name="price" class="form-control" value="${item.pprice}" style="display: none;">
+                        <input type="text" id="param3" name="quantity" class="form-control" value="1" style="display: none;">
+                        <input type="text" id="param3" name="price" class="form-control" value="${item.pprice}" style="display: none;">
                       <div class="d-flex justify-content-between">
                         <h6 style="margin-top: 8px;">Quantity</h6>
                         <div class="d-flex">

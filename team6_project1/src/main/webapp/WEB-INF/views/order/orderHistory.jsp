@@ -120,8 +120,13 @@
 <div class="col-8">
 
 <c:forEach var="item" items="${orderedList}">
-
 	<p>${item}</p>
+</c:forEach>
+
+<p>${member}</p>
+
+<c:forEach var="coupon" items="${couponlist}">
+  <p>${coupon}</p>
 </c:forEach>
 <h3>마이 페이지</h3>
 
@@ -148,93 +153,39 @@
     </tr>
   </thead>
   <tbody>
+    <c:forEach var="item" items="${orderedList}">
     <tr>
       <th class="text-center align-middle">
-      	<h6>211231P10845117</h6>
-      	<h6>(2021.12.31)</h6>
+      	<h6>${item.oid}</h6>
+      	<h6>${item.otime}</h6>
       </th>
       <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
+      	<img src="${item.pimage1}" class="card-img-top" style="width: 6rem;" alt="">
       </td>
       <td>
       <div>
-      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
-      	<h6>미니멀 오버핏 폴리 셔츠 화이트</h6>    	
+      	<h6 class="fw-bold">${item.pbrand}</h6>
+      	<h6>${item.pname}</h6>    	
       	<h6>&nbsp;</h6>
       	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
+      	<h6 class="text-muted">Color: ${item.pcolor} / Size: ${item.psize}</h6>
    	  </div>
       </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 36,000</td>
       <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.12.31)</h6>
+	    	<h5 class="me-1 fs-5">${item.pquantity}</h5>	
+      </td>
+      <td class="text-center align-middle">\ ${item.oprice}</td>
+      <td class="text-center align-middle">
+        <c:if test="${item.ostatus == 1}">
+          <h6>배송완료</h6>
+        </c:if>
+        <c:if test="${item.ostatus == 0}">
+          <h6>입금완료</h6>
+        </c:if>      	
+      	<h6>(${item.otime})</h6>
       </td>
     </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>211231P10845117</h6>
-      	<h6>(2021.12.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_4.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
-      	<h6>미니멀 오버핏 폴리 셔츠 블루</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: 🟦Blue / Size: XL(105)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 35,200</td>
-      <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.12.31)</h6>
-      </td>
-    </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>210928P10234057</h6>
-      	<h6>(2021.09.28)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_2.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
-      	<h6>미니멀 오버핏 폴리 셔츠 블랙</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ⬛Black / Size: L(100)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 35,200</td>
-      <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.09.28)</h6>
-      </td>
-    </tr>
-
+    </c:forEach>
   </tbody>
 </table>
 

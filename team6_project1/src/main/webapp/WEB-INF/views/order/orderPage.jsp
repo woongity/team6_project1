@@ -251,7 +251,7 @@
 			
 			<!-- 활성화 -->
 			<div class="d-flex justify-content-center">
-				<a href="${pageContext.request.contextPath}/order/orderComplete" class="btn btn-dark col-10" id="ableButton" style="display: none;">결제하기</a>
+				<a href="${pageContext.request.contextPath}/info" class="btn btn-dark col-10" id="ableButton" style="display: none;">결제하기</a>
 			</div>
 			<!-- 비활성화 -->
 			<div class="d-flex justify-content-center">
