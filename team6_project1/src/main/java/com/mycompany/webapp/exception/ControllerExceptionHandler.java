@@ -23,6 +23,6 @@ public class ControllerExceptionHandler {
 	public String handleNotAuthenticatedUserException(NotAuthenticatedUserException e) {
 		logger.info("로그인 되지 않은 유저");
 		e.printStackTrace();
-		return "/member/loginForm";
+		return "redirect:/member/loginForm";
 	}
 }
