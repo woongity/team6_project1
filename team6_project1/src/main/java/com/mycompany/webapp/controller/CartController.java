@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Cartitem;
+import com.mycompany.webapp.dto.CartitemJoinAllProduct;
 import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.dto.Product;
@@ -44,7 +45,7 @@ public class CartController {
 		
 		List<Cartitem> cartitems = cartService.selectAllByMid(principal.getName());
 		
-		List<CartitemJoinProduct> items = new ArrayList<CartitemJoinProduct>();
+		List<CartitemJoinAllProduct> items = new ArrayList<CartitemJoinAllProduct>();
 		
 		HashMap<String,ListProduct> productMap = new HashMap<>();
 		
@@ -53,7 +54,7 @@ public class CartController {
 //			============== 카트에 띄우기 위해 필요한 정보(CartitemJoinProduct Dto 참고
 			
 			Product product = productService.selectOne(citem.getPcode(), citem.getPcolor(), citem.getPsize());
-			items.add(new CartitemJoinProduct(citem.getMid(),citem.getPcode(),citem.getPcolor(),citem.getPsize(),
+			items.add(new CartitemJoinAllProduct(citem.getMid(),citem.getPcode(),citem.getPcolor(),citem.getPsize(),
 											  citem.getPquantity(), product.getPname(), product.getPimage1(), product.getPimage2(), product.getPimage3(),product.getPcolorimage(),
 											  product.getPprice(), product.getPbrand(), product.getPstock()));
 			

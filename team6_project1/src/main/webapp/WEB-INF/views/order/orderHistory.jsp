@@ -183,6 +183,10 @@
           <h6>주문취소</h6>
         </c:if>      	
       	<h6>(${item.otime})</h6>
+        <form action="order/delete" method="post">
+          <input type="text" id="oid" name="oid" class="form-control" value="${item.oid}" style="display: block;">
+          <input class="btn btn-sm" value="[ 주문취소 ]" type="submit">
+        </form>
       </td>
     </tr>
     </c:forEach>

@@ -42,5 +42,8 @@
 	<select id="selectItem" parameterType="cartitem" resultType="cartitem">
 		select * from cartitem where pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</select>
+	<select id="selectCount" parameterType="String" resultType="int">
+      select count(*) from cartitem where mid=#{mid}
+   	</select>
 	
 </mapper>

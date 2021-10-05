@@ -15,7 +15,6 @@
 
 <div class="d-flex justify-content-center">
 <div class="col-8">
-
 <h3>쇼핑백</h3>
 <table class="table table-striped">
   <thead class="text-center">
@@ -411,7 +410,7 @@
 <div class="d-flex justify-content-center mt-5">
   <a href="${pageContext.request.contextPath}/listView" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
   <a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
-  <form action="order/orderPage" method="post">
+  <form action="${pageContext.request.contextPath}/order/orderPage" method="post">
     <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
       ${rstatus.index}
       <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: block;">

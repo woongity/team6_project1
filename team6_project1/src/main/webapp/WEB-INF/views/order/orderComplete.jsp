@@ -2,6 +2,13 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<c:forEach var="oi" items="${ordereditems}">
+  ${oi}
+</c:forEach>
+${orderMember}
+${order}
+${totalnumber}
+${totalprice}
 <div class="d-flex justify-content-center">
 <div class="col-8">
 <h3>주문완료</h3>

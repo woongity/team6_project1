@@ -76,7 +76,7 @@
 					</a>		
 				</sec:authorize>
 				</li>
-				
+				<%-- <a href="${pageContext.request.contextPath}/order/count" class="btn btn-dark">asdf</a> --%>
 				<li class="d-flex justify-content-between">
 				<sec:authorize access="isAuthenticated()">
 					<a href="${pageContext.request.contextPath}/orderedHistory" class="text-decoration-none text-dark me-3">MyPage</a>

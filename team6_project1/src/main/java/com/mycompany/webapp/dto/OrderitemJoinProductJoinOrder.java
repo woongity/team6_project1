@@ -8,6 +8,7 @@ public class OrderitemJoinProductJoinOrder {
 	int pquantity;
 	String pimage1;
 	String pbrand;
+	String pcolorimage;
 	String pcolor;
 	String psize;
 	String pcode;
@@ -15,10 +16,4 @@ public class OrderitemJoinProductJoinOrder {
 	int oprice;
 	String ostatus;
 	String otime;
-	@Override
-	public String toString() {
-		return "OrderitemJoinProduct [pname=" + pname + ", pquantity=" + pquantity + ", pimage1=" + pimage1
-				+ ", pbrand=" + pbrand + ", pcolor=" + pcolor + ", psize=" + psize + ", pcode=" + pcode + ", oid=" + oid
-				+ ", oprice=" + oprice + ", ostatus=" + ostatus + ", otime=" + otime + "]";
-	}	
 }

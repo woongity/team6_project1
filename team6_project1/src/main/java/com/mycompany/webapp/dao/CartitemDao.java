@@ -23,4 +23,5 @@ public interface CartitemDao {
 	void insertItem(Cartitem cartitem);
 	void updateItem(Cartitem cartitem);
 	Cartitem selectItem(Cartitem cartitem);
+	int selectCount(String mid);
 }
