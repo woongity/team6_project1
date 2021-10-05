@@ -177,10 +177,10 @@
       <td class="text-center align-middle">\ ${item.oprice}</td>
       <td class="text-center align-middle">
         <c:if test="${item.ostatus == 1}">
-          <h6>배송완료</h6>
+          <h6>결제완료</h6>
         </c:if>
         <c:if test="${item.ostatus == 0}">
-          <h6>입금완료</h6>
+          <h6>주문취소</h6>
         </c:if>      	
       	<h6>(${item.otime})</h6>
       </td>
@@ -307,7 +307,7 @@
 			<h6>아이디</h6>
 		</div>
 		<div class="col-10">
-			<h6>user</h6>
+			<h6>${member.mid}</h6>
 		</div>
 	</div>
 	<div class="d-flex my-3">
@@ -323,7 +323,7 @@
 			<h6>이메일</h6>
 		</div>
 		<div class="col-10">
-			<h6>user@gmail.com</h6>
+			<h6>${member.memail}</h6>
 		</div>
 	</div>
 	<div class="d-flex my-3">
@@ -331,9 +331,17 @@
 			<h6>이름</h6>
 		</div>
 		<div class="col-10">
-			<h6>조영신</h6>
+			<h6>${member.mname}</h6>
 		</div>
 	</div>
+    <div class="d-flex my-3">
+      <div class="col-2 text-center">
+        <h6>전화번호</h6>
+      </div>
+      <div class="col-10">
+        <h6>${member.mtel}</h6>
+      </div>
+    </div>
 	<div class="d-flex my-3">
 		<div class="col-2 text-center">
 			<h6>생년월일</h6>

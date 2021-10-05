@@ -54,7 +54,7 @@ public class CartController {
 			
 			Product product = productService.selectOne(citem.getPcode(), citem.getPcolor(), citem.getPsize());
 			items.add(new CartitemJoinProduct(citem.getMid(),citem.getPcode(),citem.getPcolor(),citem.getPsize(),
-											  citem.getPquantity(), product.getPname(), product.getPimage1(),product.getPcolorimage(),
+											  citem.getPquantity(), product.getPname(), product.getPimage1(), product.getPimage2(), product.getPimage3(),product.getPcolorimage(),
 											  product.getPprice(), product.getPbrand(), product.getPstock()));
 			
 //			============== 카트에 담겨있는 상품의 코드를 기준으로 코드가 같은 상품을 전부 담은 상품 리스트

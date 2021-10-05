@@ -2,6 +2,17 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<style>
+    .pop {
+      transition: 0.4s;
+      cursor: pointer;
+    }
+    .pop:active {
+    transform: rotate;
+    opacity: 0.5;
+    }
+</style>
+
 <div class="d-flex justify-content-center">
 <div class="col-8">
 
@@ -27,7 +38,7 @@
 		  <label class="form-check-label" for="item${status.index}Id">
 		  </label>
 		</div>
-      	<img src="${item.pimage1}" class="card-img-top" style="width: 6rem;" alt="">
+      	<img src="${item.pimage1}" class="card-img-top" style="width: 7rem;" alt="">
       </th>
       <td>
       	<h6 class="fw-bold">${item.pbrand}</h6>
@@ -68,10 +79,10 @@
                         <div class="carousel-item active">
                           <c:forEach var="i" items="${product.value.pimage1TreeSet}" begin="0" end="${fn:length(product.value.pimage1TreeSet) - 1}" varStatus="c1i">
                             <c:if test="${item.pimage1 == i}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: block;">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${pmindex.index}sep${c1i.index}" style="display: block;">
                             </c:if>
                             <c:if test="${item.pimage1 != i}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: none;">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${pmindex.index}sep${c1i.index}" style="display: none;">
                             </c:if>
                           </c:forEach>
                         </div>
@@ -80,11 +91,11 @@
                        <!-- Carousel image 2 -->
                         <div class="carousel-item">
                           <c:forEach var="i" items="${product.value.pimage2TreeSet}" begin="0" end="${fn:length(product.value.pimage2TreeSet) - 1}" varStatus="c2i">
-                            <c:if test="${c2i.index == 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${c2i.index}" style="display: block;">
+                            <c:if test="${item.pimage2 == i}">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${pmindex.index}sep${c2i.index}" style="display: block;">
                             </c:if>
-                            <c:if test="${c2i.index > 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${c2i.index}" style="display: none;">
+                            <c:if test="${item.pimage2 != i}">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${pmindex.index}sep${c2i.index}" style="display: none;">
                             </c:if>
                           </c:forEach>
                         </div>
@@ -92,11 +103,11 @@
                         <!-- Carousel image 3 -->
                         <div class="carousel-item">
                           <c:forEach var="i" items="${product.value.pimage3TreeSet}" begin="0" end="${fn:length(product.value.pimage3TreeSet) - 1}" varStatus="c3i">
-                            <c:if test="${c3i.index == 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${c3i.index}" style="display: block;">
+                            <c:if test="${item.pimage3 == i}">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${pmindex.index}sep${c3i.index}" style="display: block;">
                             </c:if>
-                            <c:if test="${c3i.index > 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${c3i.index}" style="display: none;">
+                            <c:if test="${item.pimage3 != i}">
+                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${pmindex.index}sep${c3i.index}" style="display: none;">
                             </c:if>
                           </c:forEach>
                         </div> 
@@ -137,12 +148,46 @@
                     	function changeColor${status.index}sep${pmindex.index}sep${ipcstatus.index}() {
                     		const isChecked = document.getElementById("colorId${status.index}sep${pmindex.index}sep${ipcstatus.index}").checked
                     		const checkedId = document.getElementById("colorId${status.index}sep${pmindex.index}sep${ipcstatus.index}")
-
+							const cimage = document.getElementById("carousel1image${status.index}sep${pmindex.index}sep${ipcstatus.index}")
+                    		
                     		console.log(isChecked)
                     		console.log(checkedId)
+                    		console.log(cimage)
+                    		
+                    		const cimageArray1 = new Array();
+                            const cimageArray2 = new Array();
+                            const cimageArray3 = new Array();
+                            
+                    		for (let i = 0; i < ${fn:length(product.value.pimage1TreeSet)}; i++) {
+                              cimageArray1[i] = "carousel1image${status.index}sep${pmindex.index}sep" + i
+                            }
+                            for (let i = 0; i < ${fn:length(product.value.pimage2TreeSet)}; i++) {
+                              cimageArray2[i] = "carousel2image${status.index}sep${pmindex.index}sep" + i
+                            }
+                            for (let i = 0; i < ${fn:length(product.value.pimage3TreeSet)}; i++) {
+                              cimageArray3[i] = "carousel3image${status.index}sep${pmindex.index}sep" + i
+                            } 
+                    		
                     		
                     		if (isChecked) {
                     			$('input[name=new_pcolor]').attr('value', checkedId.value);
+                    			
+                    			for (let i = 0; i < ${fn:length(product.value.pimage1TreeSet)}; i++) {
+                                    const tempId1 = cimageArray1[i]
+                                    const tempId2 = cimageArray2[i]
+                                    const tempId3 = cimageArray3[i]
+                                   
+                                    
+                                    if (i == ${ipcstatus.index}) {
+                                      document.getElementById(tempId1).style.display = "block"
+                                      document.getElementById(tempId2).style.display = "block"
+                                      document.getElementById(tempId3).style.display = "block"
+                                    } else {
+                                      document.getElementById(tempId1).style.display = "none"
+                                      document.getElementById(tempId2).style.display = "none"
+                                      document.getElementById(tempId3).style.display = "none"
+                                    }
+                                 }
                     		}
                     	}
                     </script>
@@ -191,7 +236,7 @@
                 </c:forEach>
                 
                 <div>
-                <!-- 변경요청 정보 form -->
+                <!-- 색상변경요청 정보 input -->
                 <form action="option" method="post">
                   <input type="text" id="pcode" name="pcode" class="form-control" value="${item.pcode}" style="display: none;">
                   <input type="text" id="origin_pcolor" name="origin_pcolor" class="form-control" value="${item.pcolor}" style="display: none;">
@@ -207,182 +252,9 @@
                 </div>
                  </div>
                 </div>
-                
- <%--                  <!-- 상품 Modal - Carousel -->
-                  <div style="max-width: fit-content;">
-                    <div id="carouselExampleIndicators${status.index}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                      <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      </div>
-                      <div class="carousel-inner">
-
-                        <!-- Carousel image 1 -->
-                        <div class="carousel-item active">
-                          <c:forEach var="i" items="${item.pimage1TreeSet}" begin="0" end="${fn:length(item.pimage1TreeSet) - 1}" varStatus="c1i">
-                            <c:if test="${c1i.index == 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: block;">
-                            </c:if>
-                            <c:if test="${c1i.index > 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel1image${status.index}sep${c1i.index}" style="display: none;">
-                            </c:if>
-                          </c:forEach>
-                        </div>
-                        
-                        <!-- Carousel image 2 -->
-                        <div class="carousel-item">
-                          <c:forEach var="i" items="${item.pimage2TreeSet}" begin="0" end="${fn:length(item.pimage2TreeSet) - 1}" varStatus="c2i">
-                            <c:if test="${c2i.index == 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${c2i.index}" style="display: block;">
-                            </c:if>
-                            <c:if test="${c2i.index > 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel2image${status.index}sep${c2i.index}" style="display: none;">
-                            </c:if>
-                          </c:forEach>
-                        </div>
-                        
-                        <!-- Carousel image 3 -->
-                        <div class="carousel-item">
-                          <c:forEach var="i" items="${item.pimage3TreeSet}" begin="0" end="${fn:length(item.pimage3TreeSet) - 1}" varStatus="c3i">
-                            <c:if test="${c3i.index == 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${c3i.index}" style="display: block;">
-                            </c:if>
-                            <c:if test="${c3i.index > 0}">
-                              <img src="${i}" class="card-img-top" alt="" id="carousel3image${status.index}sep${c3i.index}" style="display: none;">
-                            </c:if>
-                          </c:forEach>
-                        </div>
-
-                      </div>
-
-                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators${status.index}" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>
-                  </div> --%>
-
-<%--                   <form action="put" method="post">
-                    <input type="text" id="pcode" name="pcode" class="form-control" value="${item.pcode}" style="display: none;">
-
-                    <div class="card-body">
-                      <!-- Color 선택 -->
-                      <div class="d-flex justify-content-between">
-                        <h6 style="margin-top: 8px;">Color&nbsp;&nbsp;</h6>
-                        <div class="d-flex">
-
-                          <c:forEach var="i" items="${item.pcolorTreeSet}" begin="0" end="${fn:length(item.pcolorTreeSet) - 1}" varStatus="icstatus">
-                            <div class="form-check me-3">
-                              <c:if test="${icstatus.index == 0}">
-                                <input class="form-check-input" type="radio" name="color" id="colorId${status.index}sep${icstatus.index}" value="${i}" onclick="changeImage${status.index}sep${icstatus.index}()" checked>
-                              </c:if>
-                              <c:if test="${icstatus.index > 0}">
-                                <input class="form-check-input" type="radio" name="color" id="colorId${status.index}sep${icstatus.index}" value="${i}" onclick="changeImage${status.index}sep${icstatus.index}()">
-                              </c:if>
-                              <label class="form-check-label" for="colorId${status.index}">
-                                <p onclick="changeImage${status.index}sep${icstatus.index}()">${i}</p>
-                              </label>
-                            </div>
-                            <script>
-              // 색상버튼 변경시 carousel 이미지 변경하는 함수
-              function changeImage${status.index}sep${icstatus.index}() {
-                const isChecked = document.getElementById("colorId${status.index}sep${icstatus.index}").checked
-                const isCheckedIndex = document.getElementById("colorId${status.index}sep${icstatus.index}")
-                
-                const cimage = document.getElementById("carousel1image${status.index}sep${icstatus.index}") 
-                const cimageArray1 = new Array();
-                const cimageArray2 = new Array();
-                const cimageArray3 = new Array();
-                
-                
-                for (let i = 0; i < ${fn:length(item.pcolorTreeSet)}; i++) {
-                  cimageArray1[i] = "carousel1image${status.index}sep" + i
-                }
-                for (let i = 0; i < ${fn:length(item.pcolorTreeSet)}; i++) {
-                  cimageArray2[i] = "carousel2image${status.index}sep" + i
-                }
-                for (let i = 0; i < ${fn:length(item.pcolorTreeSet)}; i++) {
-                  cimageArray3[i] = "carousel3image${status.index}sep" + i
-                }               
-                  
-                if (isChecked) {    
-
-                  for (let i = 0; i < ${fn:length(item.pcolorTreeSet)}; i++) {
-                    const tempId1 = cimageArray1[i]
-                    const tempId2 = cimageArray2[i]
-                    const tempId3 = cimageArray3[i]
-                    if (i == ${icstatus.index}) {
-                      document.getElementById(tempId1).style.display = "block"
-                      document.getElementById(tempId2).style.display = "block"
-                      document.getElementById(tempId3).style.display = "block"
-                    } else {
-                      document.getElementById(tempId1).style.display = "none"
-                      document.getElementById(tempId2).style.display = "none"
-                      document.getElementById(tempId3).style.display = "none"
-                    }
-                  }
-                    
-                }
-              }
-              </script>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <!-- 색상 이미지 -->
-                      <div class="d-flex justify-content-end mb-2">
-                        <c:forEach var="i2" items="${item.pcolorimageTreeSet}" begin="0" end="${fn:length(item.pcolorimageTreeSet) - 1}">
-                          <img alt="" src="${i2}" class="mx-3" style="width: 24px; height: 24px;">
-                        </c:forEach>
-                      </div>
-                      <!-- Size 선택 -->
-                      <div class="d-flex justify-content-between">
-                        <h6 style="margin-top: 8px;">Size&nbsp;&nbsp;&nbsp;</h6>
-                        <div class="d-flex">
-                          <c:forEach var="i" items="${item.psizeTreeSet}" begin="0" end="${fn:length(item.psizeTreeSet) - 1}" varStatus="isstatus">
-                            <div class="form-check me-3">
-                              <c:if test="${isstatus.index == 0}">
-                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}" value="${i}" checked>
-                              </c:if>
-                              <c:if test="${isstatus.index > 0}">
-                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}" value="${i}">
-                              </c:if>
-                              <label class="form-check-label" for="sizeId${status.index}"> ${i} </label>
-                            </div>
-                          </c:forEach>
-                        </div>
-                      </div>
-                      <input type="text" id="param3" name="quantity" class="form-control" value="1" style="display: none;"> <input type="text" id="param3" name="price" class="form-control" value="${item.pprice}" style="display: none;">
-                      <div class="d-flex justify-content-between">
-                        <h6 style="margin-top: 8px;">Quantity</h6>
-                        <div class="d-flex">
-                          <div class="me-1 btn btn-sm" onclick='changeQuantity${status.index}("minus")'>-</div>
-                          <p id="countId${status.index}">1</p>
-                          <div class="me-1 btn btn-sm" onclick='changeQuantity${status.index}("plus")'>+</div>
-                        </div>
-                      </div>
-                      <hr class="my-2">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="card-title">Total</h5>
-                        <div class="d-flex">
-                          <h5>\</h5>
-                          <h5 class="card-title ms-3" id="totalId${status.index}">${item.pprice}</h5>
-                          <h5 id="tempId${status.index}" style="display: none;">${item.pprice}</h5>
-                        </div>
-                      </div>
-                      <hr class="my-2">
-                      <div class="d-flex justify-content-center mt-2">
-                        <input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="쇼핑백 담기" type="submit">
-                      </div>
-                    </div>
-                  </form> --%>
-
                 </div>
               </div>
-            </div>
-          </div>
+
           
       <td>
     	<div class="d-flex justify-content-center" style="margin-top: 35%;">
@@ -391,6 +263,7 @@
           <div class="ms-2 btn btn-sm fs-5" onclick='changeQuantity${status.index}("plus")'>+</div>
 	   	</div>
         <div class="d-flex justify-content-center">
+        <!-- 수량변경 input -->
         <form action="option" method="post">
           <input type="text" id="pcode" name="pcode" class="form-control" value="${item.pcode}" style="display: none;">
           <input type="text" id="origin_pcolor" name="origin_pcolor" class="form-control" value="${item.pcolor}" style="display: none;">
@@ -430,7 +303,7 @@
                   <h5>정말 삭제하시겠습니까?</h5> 
                 </div>
                 <div class="d-flex justify-content-center">
-                  <img alt="" src="${pageContext.request.contextPath}/resources/images/error_cat.png" style="width: 50%;">
+                  <img alt="" src="${pageContext.request.contextPath}/resources/images/error_cat.png" class="pop" style="width: 50%;">
                 </div>
                 <div class="d-flex justify-content-end p-3">             
                   <input class="btn btn-dark me-2" value="확인" type="submit">
@@ -536,7 +409,17 @@
   </tbody>
 </table>
 <div class="d-flex justify-content-center mt-5">
-	<a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
+  <a href="${pageContext.request.contextPath}/listView" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
+  <a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
+  <form action="order/orderPage" method="post">
+    <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
+      ${rstatus.index}
+      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: block;">
+      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: block;">
+      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: block;">
+    </c:forEach>
+    <input class="btn btn-sm" value="[ 주문 ]" type="submit">
+  </form>
 </div>
 
 </div>
