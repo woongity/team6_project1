@@ -10,5 +10,9 @@ public class Coupon {
 	private String mid;
 	private String cname;
 	private int crate;
+	private String ccontent;
+	private String creleasedate;
+	private String cexpiredate;
 	private char cstatus;
+	private String ecode;
 }

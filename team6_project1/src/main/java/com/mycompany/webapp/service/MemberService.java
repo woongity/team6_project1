@@ -1,7 +1,5 @@
 package com.mycompany.webapp.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -13,8 +11,8 @@ import com.mycompany.webapp.dto.Member;
 public class MemberService {
 	@Resource
 	private MemberDao memberDao;
-
-	public List<Member> selectByMid(String mid){
+	
+	public Member selectByMid(String mid) {
 		return memberDao.selectByMid(mid);
 	}
 }

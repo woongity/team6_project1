@@ -17,15 +17,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+
+	/*
+	 * @RequestMapping("/home") public String content() { logger.info("Run /home");
+	 * return "home"; }
+	 */
+
+
 	@RequestMapping("/")
-	public String content() {
-		logger.info("Run /home");
-		return "home";
+	public String main() {
+		logger.info("Run /main");
+		return "main";
 	}
 
 	@RequestMapping("/error/403")
 	public String error403() {
-		logger.info("실행");
+		logger.info("error/403");
 		return "error/403";
+	}
+
+	@RequestMapping("/error/500")
+	public String error500() {
+		logger.info("error/500");
+		return "error/500";
 	}
 }
