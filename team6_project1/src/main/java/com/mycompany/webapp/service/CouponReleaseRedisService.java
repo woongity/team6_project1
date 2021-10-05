@@ -1,6 +1,5 @@
 package com.mycompany.webapp.service;
 
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dto.Coupon;
-
 
 @Service
 public class CouponReleaseRedisService {

@@ -1,7 +1,5 @@
 package com.mycompany.webapp.controller;
 
-import java.io.PrintWriter;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,10 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,10 +24,11 @@ import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 import com.mycompany.webapp.service.MemberService;
-import com.mycompany.webapp.service.OrderViewService;
+import com.mycompany.webapp.service.OrderService;
 import com.mycompany.webapp.service.OrderitemService;
 
 @Controller
@@ -43,7 +39,7 @@ public class OrderController {
 	@Resource
 	private MemberService memberService;
 	@Resource 
-	private OrderViewService orderService;
+	private OrderService orderService;
 	@Resource
 	private OrderitemService orderitemService;
 	@Resource 
@@ -67,6 +63,10 @@ public class OrderController {
 		//mid 정보 가져오기
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
+		//로그인 하지 않은 사용자 예외처리
+		if(mid == "anonymousUser") {
+			throw new NotAuthenticatedUserException();
+		}
 
 		//장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
 		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPcolor, orderPsize);
@@ -95,6 +95,9 @@ public class OrderController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
+		if(mid == "anonymousUser") {
+			throw new NotAuthenticatedUserException();
+		}
 		long oidTime = System.currentTimeMillis();
 		String oid = mid + oidTime;
 		logger.info("1");
