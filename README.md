@@ -5,9 +5,8 @@
 
 ## 회의 내용 
 프로젝트 B 회의 notion : https://www.notion.so/1-c74655f6dc0948a0bc8cdd7d4188adcb
-
 ## DB 구조 
-<img src="https://user-images.githubusercontent.com/26537043/135388225-7f54f7d6-7fef-4db3-b309-afb85541a7d8.png" width="800" height="600"/>
+<img src="https://user-images.githubusercontent.com/26537043/135944149-bdec767f-e166-4f28-b489-bb2e63022fa2.png" width="900" height="600"/>
 
 ## 기술 스택
  - Oracle DB , MyBatis, redis
