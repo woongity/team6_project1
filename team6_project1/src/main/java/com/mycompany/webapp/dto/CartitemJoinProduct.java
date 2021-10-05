@@ -2,21 +2,32 @@ package com.mycompany.webapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class CartitemJoinProduct {
 	private String mid;
+	@NonNull
 	private String pcode;
+	@NonNull
 	private String pcolor;
+	@NonNull
 	private String psize;
+	@NonNull
 	private int pquantity;
+	@NonNull
 	private String pname;
+	@NonNull
 	private String pimage1;
 	private String pimage2;
 	private String pimage3;
 	private String pcolorimage;
+	@NonNull
 	private int pprice;
+	@NonNull
 	private String pbrand;
 	private int pstock;
 	@Override

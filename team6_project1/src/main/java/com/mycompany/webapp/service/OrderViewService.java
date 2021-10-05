@@ -19,13 +19,13 @@ import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 
 @Service
 public class OrderViewService {
+	private static final Logger logger = LoggerFactory.getLogger(OrderViewService.class);	
+	
 	@Resource 
-
 	private OrderDao orderDao;
 	@Resource
 	private OrderitemDao orderitemDao;
-	private static final Logger logger = LoggerFactory.getLogger(OrderViewService.class);	
-
+	
 	public List<Order> selectByMid(String mid){
 		return orderDao.selectByMid(mid);
 	}
@@ -50,5 +50,9 @@ public class OrderViewService {
 
 	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
 		return orderitemDao.selectOrderitemJoinProductByMid(mid);
+	}
+	
+	public void insertOrder(Order order) {
+		orderDao.insertOrder(order);
 	}
 }
