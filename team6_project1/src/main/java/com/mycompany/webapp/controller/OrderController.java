@@ -54,59 +54,33 @@ public class OrderController {
 	//장바구니에서 선택한 상품 주문하기
 	@RequestMapping("/orderPage")
 	public String orderPage(@RequestParam(value="orderPcode", required=true) ArrayList<String> orderPcode, 
-							@RequestParam(value="orderPpcolor", required=true) ArrayList<String> orderPpcolor, 
+							@RequestParam(value="orderPcolor", required=true) ArrayList<String> orderPcolor, 
 							@RequestParam(value="orderPsize", required=true) ArrayList<String> orderPsize,
 							Model model,
 							HttpServletResponse response) throws Exception {
 		logger.info("Run order/orderPage");
 		
 		logger.info(orderPcode.toString());
-		logger.info(orderPpcolor.toString());
+		logger.info(orderPcolor.toString());
 		logger.info(orderPsize.toString());
-
-		//JSP로 넘어가는지 테스트용
-//		ArrayList<String> pcode = new ArrayList<String>();
-//		pcode.add("CM2B0NPC568W");
-//		pcode.add("CM2B1KTO409W");
-//		ArrayList<String> pcolor = new ArrayList<String>();
-//		pcolor.add("IV");
-//		pcolor.add("DN");
-//		ArrayList<String> psize = new ArrayList<String>();
-//		psize.add("67");
-//		psize.add("85");
 		
-		//주문 상품이 없는 상태로 결제하기를 누를 경우 예외처리
-		if(orderPcode.size() == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('주문 상품을 선택해주세요.'); history.go(-1);</script>");
-            out.flush();
-            
-		} else {
-			//mid 정보 가져오기
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String mid = authentication.getName();
+		//mid 정보 가져오기
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
 
-			//장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
-			List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPpcolor, orderPsize);
-			model.addAttribute("orderProducts", cartitemJoinProduct);
+		//장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
+		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPcolor, orderPsize);
+		model.addAttribute("orderProducts", cartitemJoinProduct);
 
-			//주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
-			//1. 주문자 정보 : mname, mtel, memail
-			Member orderMember = memberService.selectByMid(mid);
-			model.addAttribute("orderMember", orderMember);
-			
-			//2. 배송지 정보 : maddress, mname, mtel
-			Member deliveryMember = memberService.selectByMid(mid);
-			model.addAttribute("deliveryMember", deliveryMember);
-		}
+		//주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
+		Member orderMember = memberService.selectByMid(mid);
+		model.addAttribute("orderMember", orderMember);
 			
 		return "order/orderPage";
 	}
 	
 	//주문페이지에서 주문완료하기
-	@RequestMapping(value="/orderComplete", method={RequestMethod.POST})
-	@ResponseBody
+	@RequestMapping("/orderComplete")
 	public String orderComplete(@RequestParam(value="pcode", required=true) ArrayList<String> pcode, 
 								@RequestParam(value="pcolor", required=true) ArrayList<String> pcolor, 
 								@RequestParam(value="psize", required=true) ArrayList<String> psize,
@@ -167,6 +141,8 @@ public class OrderController {
 			totalprice += product.getPprice() * orderitem.getPquantity();
 		}
 		logger.info("6");
+		Member orderMember = memberService.selectByMid(mid);
+		model.addAttribute("orderMember", orderMember);
 		
 		model.addAttribute("order", order);
 		model.addAttribute("ordereditems", ordereditems);
@@ -176,13 +152,31 @@ public class OrderController {
 		return "order/orderComplete";
 	}
 	
-	@PostMapping("delete")
-	public String delete(String oid) {
-		logger.info("Run order/delete");
-		Order order = orderService.selectOneByOid(oid);
-		order.setOstatus('0');
-		orderService.update(order);
-		return "home.jsp";
-	}
+	   @RequestMapping("/delete")
+	   public String delete(String oid) {
+	      logger.info("Run order/delete");
+	      
+	      //주문 상태 0으로 변경
+	      Order order = orderService.selectOneByOid(oid);
+	      order.setOstatus('0');
+	      orderService.update(order);
+	      
+	      //재고 복원
+	      List<Orderitem> orderItems = orderService.selectByOid(oid);
+	      for(Orderitem orderitem : orderItems) {
+	         Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(), orderitem.getPsize());
+	         productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(), product.getPstock() + orderitem.getPquantity());
+	      }
+	      return "main";
+	   }
+	   
+	   @RequestMapping("/count")
+	   @ResponseBody
+	   public String count() {
+	      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	      String mid = authentication.getName();
+	      int itemCount = cartitemService.selectCount(mid);
+	      return String.valueOf(itemCount);
+	   }
 	
 }  

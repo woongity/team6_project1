@@ -23,16 +23,27 @@
 	<h5>주문 페이지</h5>
 	
 	<!-- 서버에서 넘긴 데이터 확인 테스트 -->
-	<c:forEach var="product" items="${orderProducts}">
+ 	<c:forEach var="product" items="${orderProducts}">
     	<p>${product}</p>
 	</c:forEach>
-	<c:forEach var="orderMember" items="${orderMember}">
-    	<p>${orderMember}</p>
-	</c:forEach>
-	<c:forEach var="deliveryMember" items="${deliveryMember}">
-    	<p>${deliveryMember}</p>
-	</c:forEach>
-	
+${orderMember}
+${deliveryMember}
+
+  <form action="${pageContext.request.contextPath}/order/orderComplete" method="post">
+    <c:forEach var="result" items="${orderProducts}" varStatus="rstatus">
+      ${rstatus.index}
+      <input type="text" id="orderPcode" name="pcode" class="form-control" value="${result.pcode}" style="display: block;">
+      <input type="text" id="orderPcolor" name="pcolor" class="form-control" value="${result.pcolor}" style="display: block;">
+      <input type="text" id="orderPsize" name="psize" class="form-control" value="${result.psize}" style="display: block;">
+      <input type="text" id="orderPquantity" name="pquantity" class="form-control" value="${result.pquantity}" style="display: block;">
+    </c:forEach>
+        <input type="text" id="oname" name="oname" class="form-control" value="12" style="display: block;">
+      <input type="text" id="otel" name="otel" class="form-control" value="12" style="display: block;">
+      <input type="text" id="oaddress" name="oaddress" class="form-control" value="12" style="display: block;">
+      <input type="text" id="ocomment" name="ocomment" class="form-control" value="12" style="display: block;">
+      <input type="text" id="opaymentmethod" name="opaymentmethod" class="form-control" value="12" style="display: block;">
+    <input class="btn btn-sm" value="[ 주문 ]" type="submit">
+  </form>
 	<h3>주문하기</h3>
 		<!-- 주문 정보 -->
 		<div class="d-flex">

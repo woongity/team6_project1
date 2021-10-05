@@ -46,5 +46,8 @@ public class CartitemService {
 	public List<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize) {
 		return cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode, pcolor, psize);
 	}
+	public int selectCount(String mid) {
+		return cartitemDao.selectCount(mid);
+    }
 
 }
