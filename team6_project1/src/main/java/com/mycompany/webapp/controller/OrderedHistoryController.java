@@ -23,7 +23,7 @@ import com.mycompany.webapp.service.OrderitemService;
 public class OrderedHistoryController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderedHistoryController.class);
 	
-	@Resource private OrderitemService orderService;
+	@Resource private OrderitemService orderitemService;
 	@Resource private MemberService memberService;
 	@Resource private CouponService couponService;
 	
@@ -47,7 +47,7 @@ public class OrderedHistoryController {
 // 				oiJoinList.add(product);
 // 			}
 // 		}
-		List<OrderitemJoinProductJoinOrder> list  = orderService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
+		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
 		for(OrderitemJoinProductJoinOrder product:list) {
 				logger.info(product.toString());
 				
