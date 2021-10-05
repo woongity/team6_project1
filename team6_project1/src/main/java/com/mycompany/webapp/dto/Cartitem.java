@@ -11,9 +11,4 @@ public class Cartitem {
 	private String pcolor;
 	private String psize;
 	private int pquantity;
-	@Override
-	public String toString() {
-		return "CartbagDto [mid=" + mid + ", pcode=" + pcode + ", pcolor=" + pcolor + ", psize=" + psize
-				+ ", pquantity=" + pquantity + "]";
-	}
 }
