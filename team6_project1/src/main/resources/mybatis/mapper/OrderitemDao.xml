@@ -12,6 +12,7 @@
             orderinfo ord
         on o.oid = ord.oid
         where ord.mid = #{mid}
+        order by ord.otime desc
 	</select>
   <select id="selectOrderitemJoinProductByOid" parameterType="String" resultType="com.mycompany.webapp.dto.OrderitemJoinProduct">
 		select p.pname, o.pquantity, p.pimage1, p.pbrand, p.pcolor, p.psize, p.pcode, o.oid ,o.pquantity*p.pprice as oprice
