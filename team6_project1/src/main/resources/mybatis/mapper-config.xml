@@ -7,7 +7,7 @@
 		<typeAlias type="com.mycompany.webapp.dto.Order" alias="order"/>
 		<typeAlias type="com.mycompany.webapp.dto.Orderitem" alias="orderitem"/>
 		<typeAlias type="com.mycompany.webapp.dto.Product" alias="product"/>
-		<typeAlias type="com.mycompany.webapp.dto.Member" alias="_member"/>
+		<typeAlias type="com.mycompany.webapp.dto.Member" alias="member"/>
 		<typeAlias type="com.mycompany.webapp.dto.Coupon" alias="coupon"/>
 	</typeAliases>	
 </configuration>

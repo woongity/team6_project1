@@ -13,4 +13,5 @@ public interface OrderDao {
 	List<Orderitem> selectByOid(String oid);
 	Order selectOneByOid(String oid);
 	void update(Order order);
+	void insertOrder(Order order);
 }

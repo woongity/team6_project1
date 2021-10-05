@@ -1,5 +1,6 @@
 package com.mycompany.webapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.CartitemDao;
 import com.mycompany.webapp.dto.Cartitem;
+import com.mycompany.webapp.dto.CartitemJoinProduct;
 
 @Service
 public class CartitemService {
@@ -40,6 +42,9 @@ public class CartitemService {
 	}
 	public Cartitem selecOne(String mid,String pcode, String pcolor, String psize){
 		return cartitemDao.selectOne(mid,pcode,pcolor,psize);
+	}
+	public List<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize) {
+		return cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode, pcolor, psize);
 	}
 
 }

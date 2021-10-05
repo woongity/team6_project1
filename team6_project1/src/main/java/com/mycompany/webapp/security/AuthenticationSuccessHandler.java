@@ -22,7 +22,7 @@ SavedRequestAwareAuthenticationSuccessHandler
 //public class Ch17AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler  {
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	private static final Logger logger = LoggerFactory.getLogger(AuthenticationSuccessHandler.class);
-	
+
 	@Override
 	public void onAuthenticationSuccess(
 			HttpServletRequest request, 
