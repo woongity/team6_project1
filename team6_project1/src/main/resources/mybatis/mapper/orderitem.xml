@@ -13,6 +13,7 @@
             orderinfo ord
         on o.oid = ord.oid
         where ord.mid = #{mid}
+        order by ord.otime desc
 	</select>
 	
 	<insert id="insertOrderitem" parameterType="orderitem">
