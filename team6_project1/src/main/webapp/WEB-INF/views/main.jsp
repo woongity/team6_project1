@@ -23,7 +23,7 @@
 				<!-- 로그인 유저 페이지 정상적으로 이동 -->
 				<sec:authorize access="isAuthenticated()">
 				<div class="mt-5">
-					<a href="/listView"><div class="btn btn-outline-dark col-2 mt-5">SHOP NOW</div></a>
+					<a href="/list/view"><div class="btn btn-outline-dark col-2 mt-5">SHOP NOW</div></a>
 					<a href="/eventpage"><div class="btn btn-dark col-2 mt-5">EVENT</div></a>
 				</div>
 				</sec:authorize>

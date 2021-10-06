@@ -413,7 +413,7 @@
   </tbody>
 </table>
 <div class="d-flex justify-content-center mt-5">
-  <a href="${pageContext.request.contextPath}/listView" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
+  <a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
   <form action="${pageContext.request.contextPath}/order/orderPage" method="post" class="col-3">
     <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
       <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: none;">
