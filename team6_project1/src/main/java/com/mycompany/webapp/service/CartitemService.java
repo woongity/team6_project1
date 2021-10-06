@@ -40,7 +40,7 @@ public class CartitemService {
 	public List<Cartitem> selectAllByMid(String mid){
 		return cartitemDao.selectAllByMid(mid);
 	}
-	public Cartitem selecOne(String mid,String pcode, String pcolor, String psize){
+	public Cartitem selectOne(String mid,String pcode, String pcolor, String psize){
 		return cartitemDao.selectOne(mid,pcode,pcolor,psize);
 	}
 	public List<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize) {

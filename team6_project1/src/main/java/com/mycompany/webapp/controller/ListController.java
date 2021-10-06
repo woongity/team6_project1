@@ -21,13 +21,14 @@ import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 
 @Controller
+@RequestMapping("list")
 public class ListController {
 	private static final Logger logger = LoggerFactory.getLogger(ListController.class);
 	
 	@Resource ListviewService listviewService;
 	@Resource CartitemService cartService;
 	
-	@RequestMapping("/listView")
+	@RequestMapping("/view")
 	public String content(Model model) {
 		logger.info("시작");
 		HashMap<String,ListProduct> hashmap = listviewService.selectAll();
@@ -54,6 +55,6 @@ public class ListController {
 		}else {
 			cartService.insertItem(cartitemDto);
 		}
-		return "redirect:/listView";
+		return "redirect:/list/view";
 	}
 }

@@ -17,16 +17,16 @@ import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CouponService;
 import com.mycompany.webapp.service.MemberService;
-import com.mycompany.webapp.service.OrderViewService;
+import com.mycompany.webapp.service.OrderitemService;
 
 @Controller
-public class OrderedHistoryController {
-	private static final Logger logger = LoggerFactory.getLogger(OrderedHistoryController.class);
-	@Resource private OrderViewService orderviewService;
+public class MyPageController {
+	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
+	@Resource private OrderitemService orderitemService;
 	@Resource private MemberService memberService;
 	@Resource private CouponService couponService;
 	
-	@RequestMapping("/orderedHistory")
+	@RequestMapping("/mypage")
 	public String orderedHistory(Model model,Principal principal) {
 			// mid를 가지고 order을 가져옴. order에서 가져온 oid를 통해서 orderitem을 가져옴. orderitem들에서 pcode를 통해서 product를 가져옴. 
 		// 따라서 orderitem이랑 product랑 join함. 그리고 
@@ -46,7 +46,8 @@ public class OrderedHistoryController {
 // 				oiJoinList.add(product);
 // 			}
 // 		}
-		List<OrderitemJoinProductJoinOrder> list  = orderviewService.selectOrderitemJoinProductJoinOrderByOid(mid);
+		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
+
 		for(OrderitemJoinProductJoinOrder product:list) {
 				logger.info(product.toString());
 				
@@ -62,7 +63,7 @@ public class OrderedHistoryController {
 		List<Coupon> couponlist = couponService.selectByMid(mid);
 		model.addAttribute("couponlist", couponlist);
 		
- 		return "order/orderHistory";
-// 		return "mypage";
+// 		return "order/orderHistory";
+ 		return "mypage";
 	}
 }

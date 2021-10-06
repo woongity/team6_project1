@@ -10,7 +10,6 @@ import com.mycompany.webapp.dto.Orderitem;
 
 @Mapper
 public interface OrderitemDao {
-	List<OrderitemJoinProduct> selectOrderitemJoinProductByOid(String oid);
-	List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductByMid(String mid);
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderinfoByMid(String mid);
 	public void insertOrderitem(Orderitem orderitem);
 }
