@@ -25,7 +25,7 @@ public class HomeController {
 		logger.info("Run /main");
 		return "main";
 	}
-	
+
     @RequestMapping("/getname")
     @ResponseBody
     public String count() {

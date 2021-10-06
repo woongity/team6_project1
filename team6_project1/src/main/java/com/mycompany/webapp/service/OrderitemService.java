@@ -14,13 +14,12 @@ import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 public class OrderitemService {
 	@Resource
 	private OrderitemDao orderitemDao;
-	
-	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderinfoByMid(String mid){
-		return orderitemDao.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
-	}
-	
+
 	public void insertOrderitem(Orderitem orderitem) {
 		orderitemDao.insertOrderitem(orderitem);
 	}
 
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderinfoByMid(String mid) {
+		return orderitemDao.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
+	}
 }

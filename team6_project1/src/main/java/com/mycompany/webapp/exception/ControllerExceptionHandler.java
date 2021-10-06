@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 //객체로 생성해서 관리하도록 설정
 @Component
@@ -19,10 +20,18 @@ public class ControllerExceptionHandler {
 		e.printStackTrace();
 		return "error/500";
 	}
+	
 	@ExceptionHandler
 	public String handleNotAuthenticatedUserException(NotAuthenticatedUserException e) {
 		logger.info("로그인 되지 않은 유저");
 		e.printStackTrace();
-		return "/member/loginForm";
+		return "redirect:/member/loginForm";
+	}
+	
+	@ExceptionHandler
+	public String handle404Exception(NoHandlerFoundException e) {
+		logger.info("실행");
+		e.printStackTrace();
+		return "error/404";
 	}
 }

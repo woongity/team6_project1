@@ -9,8 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.OrderDao;
+import com.mycompany.webapp.dao.OrderitemDao;
 import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
+import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
+
+
 
 @Service
 public class OrderService {
@@ -18,15 +23,13 @@ public class OrderService {
 	
 	@Resource 
 	private OrderDao orderDao;
-	
+
 	public void insertOrder(Order order) {
 		orderDao.insertOrder(order);
 	}
-	
 	public List<Order> selectByMid(String mid){
 		return orderDao.selectByMid(mid);
 	}
-
 	public List<String> selectOidByMid(String mid){
 		return orderDao.selectOidByMid(mid);
 	}
@@ -42,5 +45,4 @@ public class OrderService {
 	public void update(Order order) {
 		orderDao.update(order);
 	}
-
 }
