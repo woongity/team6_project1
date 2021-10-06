@@ -409,15 +409,13 @@
 </table>
 <div class="d-flex justify-content-center mt-5">
   <a href="${pageContext.request.contextPath}/listView" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
-  <a href="${pageContext.request.contextPath}/order/orderPage" class="btn btn-dark col-3">주문하기</a>
-  <form action="${pageContext.request.contextPath}/order/orderPage" method="post">
+  <form action="${pageContext.request.contextPath}/order/orderPage" method="post" class="col-3">
     <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
-      ${rstatus.index}
-      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: block;">
-      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: block;">
-      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: block;">
+      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: none;">
+      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: none;">
+      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: none;">
     </c:forEach>
-    <input class="btn btn-sm" value="[ 주문 ]" type="submit">
+    <input class="btn btn-dark" value="주문하기" type="submit" style="width: 100%;">
   </form>
 </div>
 

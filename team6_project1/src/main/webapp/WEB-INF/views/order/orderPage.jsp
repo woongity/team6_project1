@@ -20,30 +20,15 @@
 
 <div class="d-flex justify-content-center">
 	<div class="col-8">
-	<h5>주문 페이지</h5>
 	
-	<!-- 서버에서 넘긴 데이터 확인 테스트 -->
- 	<c:forEach var="product" items="${orderProducts}">
-    	<p>${product}</p>
-	</c:forEach>
-${orderMember}
-${deliveryMember}
-
   <form action="${pageContext.request.contextPath}/order/orderComplete" method="post">
     <c:forEach var="result" items="${orderProducts}" varStatus="rstatus">
-      ${rstatus.index}
-      <input type="text" id="orderPcode" name="pcode" class="form-control" value="${result.pcode}" style="display: block;">
-      <input type="text" id="orderPcolor" name="pcolor" class="form-control" value="${result.pcolor}" style="display: block;">
-      <input type="text" id="orderPsize" name="psize" class="form-control" value="${result.psize}" style="display: block;">
-      <input type="text" id="orderPquantity" name="pquantity" class="form-control" value="${result.pquantity}" style="display: block;">
+      <input type="text" id="orderPcode" name="pcode" class="form-control" value="${result.pcode}" style="display: none;">
+      <input type="text" id="orderPcolor" name="pcolor" class="form-control" value="${result.pcolor}" style="display: none;">
+      <input type="text" id="orderPsize" name="psize" class="form-control" value="${result.psize}" style="display: none;">
+      <input type="text" id="orderPquantity" name="pquantity" class="form-control" value="${result.pquantity}" style="display: none;">
     </c:forEach>
-        <input type="text" id="oname" name="oname" class="form-control" value="12" style="display: block;">
-      <input type="text" id="otel" name="otel" class="form-control" value="12" style="display: block;">
-      <input type="text" id="oaddress" name="oaddress" class="form-control" value="12" style="display: block;">
-      <input type="text" id="ocomment" name="ocomment" class="form-control" value="12" style="display: block;">
-      <input type="text" id="opaymentmethod" name="opaymentmethod" class="form-control" value="12" style="display: block;">
-    <input class="btn btn-sm" value="[ 주문 ]" type="submit">
-  </form>
+
 	<h3>주문하기</h3>
 		<!-- 주문 정보 -->
 		<div class="d-flex">
@@ -58,44 +43,32 @@ ${deliveryMember}
 		    </tr>
 		  </thead>
 		  <tbody>
+		  	<c:set var="count" value="0" />
+		  	<c:set var="total" value="0" />
+		   	<c:forEach var="product" items="${orderProducts}">
+ 		  	<c:set var="count" value="${count + 1}" />
+		  	<c:set var="total" value="${total + product.pprice * product.pquantity}" />
 		    <tr>
 		      <th scope="row" class="d-flex">
-		      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
+		      	<img src="${product.pimage1}" class="card-img-top" style="width: 6rem;" alt="">
 		      </th>
 		      <td>
-		      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
-		      	<h6>미니멀 오버핏 폴리 셔츠 화이트</h6>    	
+		      	<h6 class="fw-bold">${product.pbrand}</h6>
+		      	<h6>${product.pname}</h6>    	
 		      	<h6>&nbsp;</h6>
 		      	<h6>&nbsp;</h6>
-		      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
+		      	<h6 class="text-muted">Color: ${product.pcolor} / Size: ${product.psize}</h6>
+		      	${multiple}
 		      </td>
 		      <td>
 		    	<div class="d-flex justify-content-center" style="margin-top: 60%;">
-			    	<div class="me-1 fs-5">1</div>
+			    	<div class="me-1 fs-5">${product.pquantity}</div>
 			   	</div>
 		      </td>
-		      <td class="text-center align-middle">\ 36,000</td>
+		      <td class="text-center align-middle"><span>\</span>${product.pprice * product.pquantity}</td>
 		    </tr>
-		
-		    <tr>
-		      <th scope="row" class="d-flex">
-		      	<img src="${pageContext.request.contextPath}/resources/images/male_shirt_4.jpg" class="card-img-top" style="width: 8rem;" alt="">
-		      </th>
-		      <td>
-		      	<h6 class="fw-bold">AVAN AD201 2021 ALL</h6>
-		      	<h6>미니멀 오버핏 폴리 셔츠 블루</h6>    	
-		      	<h6>&nbsp;</h6>
-		      	<h6>&nbsp;</h6>
-		      	<h6 class="text-muted">Color: 🟦Blue / Size: XL(105)</h6>
-		      </td>
-		      <td>
-		    	<div class="d-flex justify-content-center" style="margin-top: 60%;">
-			    	<div class="me-1 fs-5">1</div>	
-			   	</div>
-		      </td>
-		      <td class="text-center align-middle">\ 35,200</td>
-		    </tr>
-
+			</c:forEach>
+			
 		  </tbody>
 		</table>
 
@@ -107,7 +80,7 @@ ${deliveryMember}
 				<h6>주문자</h6>
 			</div>
 			<div class="col-10">
-				<h6>user</h6>
+				<h6>${orderMember.mname}</h6>
 			</div>
 		</div>
 		<!-- 주문자 휴대폰 -->
@@ -116,7 +89,7 @@ ${deliveryMember}
 				<h6>휴대폰</h6>
 			</div>
 			<div class="col-10">
-				<h6>010 - 8253 - 3218</h6>
+				<h6>${orderMember.mtel}</h6>
 			</div>
 		</div>
 		<!-- 주문자 E-mail -->
@@ -125,13 +98,31 @@ ${deliveryMember}
 				<h6>이메일</h6>
 			</div>
 			<div class="col-10">
-				<h6>team6-miniproject@gmail.com</h6>
+				<h6>${orderMember.memail}</h6>
 			</div>
 		</div>
 		<hr class="mb-5">
 		
 		<h5 class="my-4">배송지 정보</h5>
 		<hr>
+		<!-- 수령인 이름 -->
+		<div class="d-flex">
+			<div class="col-2 text-center">
+				<h6>수령인</h6>
+			</div>
+			<div class="col-10">
+				<input type="text" id="oname" name="oname" class="form-control" value="${orderMember.mname}" style="display: block;">
+			</div>
+		</div>
+		<!-- 수령인 휴대폰 -->
+		<div class="d-flex my-2">
+			<div class="col-2 text-center">
+				<h6>휴대폰</h6>
+			</div>
+			<div class="col-10">
+				<input type="text" id="otel" name="otel" class="form-control" value="${orderMember.mtel}" style="display: block;">
+			</div>
+		</div>
 		<!-- 배송지 주소 -->
 		<div class="d-flex">
 			<div class="col-2 text-center">
@@ -142,26 +133,7 @@ ${deliveryMember}
 					<h6 class="align-middle">05717</h6>
 					<h6 class="btn btn-outline-dark btn-sm ms-5">우편번호 조회</h6>			
 				</div>
-				<h6>서울특별시 송파구 가락동 78</h6>
-				<h6>서관 12층 L2</h6>
-			</div>
-		</div>
-		<!-- 수령인 이름 -->
-		<div class="d-flex">
-			<div class="col-2 text-center">
-				<h6>수령인</h6>
-			</div>
-			<div class="col-10">
-				<h6>user</h6>
-			</div>
-		</div>
-		<!-- 수령인 휴대폰 -->
-		<div class="d-flex my-2">
-			<div class="col-2 text-center">
-				<h6>휴대폰</h6>
-			</div>
-			<div class="col-10">
-				<h6>010 - 8253 - 3218</h6>
+				<input type="text" id="oaddress" name="oaddress" class="form-control" value="${orderMember.maddress}" style="display: block;">
 			</div>
 		</div>
 		<!-- 수령인 E-mail -->
@@ -179,13 +151,14 @@ ${deliveryMember}
 				<h6>배송요청사항</h6>
 			</div>
 			<div class="col-10">
-				<h6>못참겠어요 빨리와주세요...😥</h6>
+				<input type="text" id="ocomment" name="ocomment" class="form-control" value="조심히 가져다주세요. 감사합니다 :)" style="display: block;">
 			</div>
 		</div>
 		<hr class="mb-5">
 		
 		<h5 class="my-4">결제 정보</h5>
 		<hr>
+		<!-- <input type="text" id="opaymentmethod" name="opaymentmethod" class="form-control" value="12" style="display: block;"> -->
 		<!-- 결제수단 선택 -->
 		<div class="d-flex">
 			<div class="col-2 text-center">
@@ -193,26 +166,26 @@ ${deliveryMember}
 			</div>
 			<div class="d-flex col-10">
 				<div class="form-check me-3">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+				  <input class="form-check-input" type="radio" name="opaymentmethod" id="flexRadioDefault1" value="1" checked>
 				  <label class="form-check-label" for="flexRadioDefault1">
 				    CLICK결제
 				  </label>
 				</div>
 				<div class="form-check me-3">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+				  <input class="form-check-input" type="radio" name="opaymentmethod" id="flexRadioDefault2" value="2">
 				  <label class="form-check-label" for="flexRadioDefault2">
 				    신용카드
 				  </label>
 				</div>
 				<div class="form-check me-3">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-				  <label class="form-check-label" for="flexRadioDefault2">
+				  <input class="form-check-input" type="radio" name="opaymentmethod" id="flexRadioDefault3" value="3">
+				  <label class="form-check-label" for="flexRadioDefault3">
 				    계좌이체
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-				  <label class="form-check-label" for="flexRadioDefault2">
+				  <input class="form-check-input" type="radio" name="opaymentmethod" id="flexRadioDefault4" value="4">
+				  <label class="form-check-label" for="flexRadioDefault4">
 				    무통장입금
 				  </label>
 				</div>
@@ -233,11 +206,11 @@ ${deliveryMember}
 			      <div>
 			      	<div class="d-flex justify-content-between my-2">
 				      	<h5>총</h5>
-				      	<h5><span class="fw-bold ms-2" style="color: darkKhaki">2</span> 개 상품</h5>
+				      	<h5><span class="fw-bold ms-2" style="color: darkKhaki">${count}</span> 개 상품</h5>
 			      	</div>
 			      	<div class="d-flex justify-content-between mt-2">
 				      	<h6>상품 합계</h6>
-				      	<h6>\ 71,200</h6>	      	
+				      	<h6>\ ${total}</h6>	      	
 			      	</div>
 			      	<div class="d-flex justify-content-between mb-2">
 				      	<h6>배송비</h6>
@@ -245,7 +218,7 @@ ${deliveryMember}
 			      	</div>
 			      	<div class="d-flex justify-content-between mt-3">
 				      	<h5>합계</h5>
-				      	<h5 class="fw-bold" style="color: darkKhaki">\ 71,200</h5>	      	
+				      	<h5 class="fw-bold" style="color: darkKhaki">\ ${total}</h5>	      	
 			      	</div>
 			 	  </div>
 			</div>
@@ -272,15 +245,16 @@ ${deliveryMember}
 		 	    </div>
 			</div>
 			
+			<!-- 비활성화 -->
+			<div class="d-flex justify-content-center">			
+				<input class="btn btn-dark col-8" id="ableButton" value="결제하기" type="submit" style="display: none;">
+			</div>
 			<!-- 활성화 -->
 			<div class="d-flex justify-content-center">
-				<a href="${pageContext.request.contextPath}/info" class="btn btn-dark col-10" id="ableButton" style="display: none;">결제하기</a>
-			</div>
-			<!-- 비활성화 -->
-			<div class="d-flex justify-content-center">
-				<button class="btn btn-dark col-10" id="disableButton" style="display: block;" disabled>결제하기</button>
+				<input class="btn btn-dark col-8" id="disableButton" value="결제하기" type="submit" style="display: block;" disabled>
 			</div>
 			
+  		</form>
 				
 			
 		</div>

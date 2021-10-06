@@ -119,9 +119,9 @@
 <div class="d-flex justify-content-center">
 <div class="col-8">
 
-<c:forEach var="item" items="${orderedList}">
+<%-- <c:forEach var="item" items="${orderedList}">
 	<p>${item}</p>
-</c:forEach>
+</c:forEach> --%>
 
 <p>${member}</p>
 
@@ -153,7 +153,8 @@
     </tr>
   </thead>
   <tbody>
-    <c:forEach var="item" items="${orderedList}">
+    <c:forEach var="item" items="${orderedList}" varStatus="oistatus" begin="0" end="4">
+    ${item}
     <tr>
       <th class="text-center align-middle">
       	<h6>${item.oid}</h6>
@@ -168,7 +169,7 @@
       	<h6>${item.pname}</h6>    	
       	<h6>&nbsp;</h6>
       	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ${item.pcolor} / Size: ${item.psize}</h6>
+      	<h6 class="text-muted">Color: <img alt="" src="${item.pcolorimage}" style="width: 20px; height: 20px;"> ${item.pcolor} / Size: ${item.psize}</h6>
    	  </div>
       </td>
       <td class="text-center align-middle">
@@ -184,11 +185,44 @@
         </c:if>      	
       	<h6>(${item.otime})</h6>
         <form action="order/delete" method="post">
-          <input type="text" id="oid" name="oid" class="form-control" value="${item.oid}" style="display: block;">
-          <input class="btn btn-sm" value="[ 주문취소 ]" type="submit">
+          <!-- 주문취소 확인 Modal -->
+          <div class="modal" id="getDeleteModal${oistatus.index}" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">▶ 알림</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-start">
+                  <h5>정말 주문을 취소하시겠습니까?</h5> 
+                </div>
+                <div class="d-flex justify-content-center">
+                  <img alt="" src="${pageContext.request.contextPath}/resources/images/error_cat.png" class="pop" style="width: 50%;">
+                </div>
+                <div class="d-flex justify-content-end p-3">             
+                  <input class="btn btn-dark me-2" value="확인" type="submit">
+                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="text" id="oid" name="oid" class="form-control" value="${item.oid}" style="display: none;">
+          <c:if test="${item.ostatus == 1}">
+          	<input class="btn btn-sm" id="deleteModalBtn${oistatus.index}" value="[ 주문취소 ]" type="submit">
+          </c:if>
+          
         </form>
       </td>
     </tr>
+    
+    <script>
+	    // deleteModal
+		$('#deleteModalBtn${oistatus.index}').click(function(e){
+			e.preventDefault();
+			$('#getDeleteModal${oistatus.index}').modal("show");
+		});
+    </script>
+    
     </c:forEach>
   </tbody>
 </table>
@@ -420,30 +454,44 @@
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	<c:forEach var="coupon" items="${couponlist}">
+		  <p>${coupon}</p>
+		
 	    <tr>
 	      <th class="text-center align-middle">
-	      	<h6>신규회원 무료</h6>
-	      	<h6>반품 쿠폰</h6>
+	      	<h6>${coupon.cname}</h6>
 	      </th>
 	      <td class="text-center align-middle">
-	      	<h6>RT2-021-092-3FF-8N</h6>
+	      	<h6>${coupon.ccode}</h6>
 	      </td>
-	      <td>
-			<h6>•반품 시 배송비 무료</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	    	<h6>X</h6>
+	      <td class="align-middle">
+			<h6>•${coupon.ccontent}</h6>
 	      </td>
 	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2022. 01. 31.</h6>
+	    	<h6>${coupon.crate}</h6>
 	      </td>
 	      <td class="text-center align-middle">
-	      	<h6>미사용</h6>
+	      	<h6>${coupon.creleasedate} ~</h6>
+	      	<h6>${coupon.cexpiredate}</h6>
+	      </td>
+	      <td class="text-center align-middle">
+	      ${coupon.cstatus}
+	      ${coupon.creleasedate}
+	      	<c:if test="${coupon.cstatus == 0}">
+	      		<h6>미사용</h6>
+	      	</c:if>
+	      	<c:if test="${coupon.cstatus == 1}">
+	      		<h6>${coupon.creleasedate}</h6>
+	      	</c:if>
+	      	<c:if test="${coupon.cstatus == 2}">
+	      		<h6>기간만료</h6>
+	      	</c:if>
+	      	
 	      </td>
 	    </tr>
-	
-	    <tr>
+		</c:forEach>
+		
+<!-- 	    <tr>
 	      <th class="text-center align-middle">
 	      	<h6>신규회원 전용</h6>
 	      	<h6>정상 15% 쿠폰</h6>
@@ -492,7 +540,7 @@
 	      	<h6>미사용</h6>
 	      </td>
 	    </tr>
-	
+	 -->
 	  </tbody>
 	</table>
 

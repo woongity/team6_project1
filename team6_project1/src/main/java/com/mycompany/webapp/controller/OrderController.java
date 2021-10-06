@@ -139,7 +139,7 @@ public class OrderController {
 		model.addAttribute("totalnumber", totalnumber);
 		model.addAttribute("totalprice", totalprice);
 		
-		return "order/orderComplete";
+		return "/orderComplete";
 	}
 	
 	   @RequestMapping("/delete")
