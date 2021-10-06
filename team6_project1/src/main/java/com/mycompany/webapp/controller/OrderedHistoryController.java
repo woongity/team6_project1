@@ -17,7 +17,7 @@ import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
 import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CouponService;
 import com.mycompany.webapp.service.MemberService;
-import com.mycompany.webapp.service.OrderViewService;
+import com.mycompany.webapp.service.OrderitemService;
 
 @Controller
 public class OrderedHistoryController {

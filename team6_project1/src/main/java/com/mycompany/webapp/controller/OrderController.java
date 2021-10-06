@@ -32,7 +32,7 @@ import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 import com.mycompany.webapp.service.MemberService;
-import com.mycompany.webapp.service.OrderViewService;
+import com.mycompany.webapp.service.OrderService;
 import com.mycompany.webapp.service.OrderitemService;
 
 @Controller
@@ -43,7 +43,7 @@ public class OrderController {
 	@Resource
 	private MemberService memberService;
 	@Resource 
-	private OrderViewService orderService;
+	private OrderService orderService;
 	@Resource
 	private OrderitemService orderitemService;
 	@Resource 
@@ -97,18 +97,15 @@ public class OrderController {
 		String mid = authentication.getName();
 		long oidTime = System.currentTimeMillis();
 		String oid = mid + oidTime;
-		logger.info("1");
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		Date date = new Date();
 		date.setTime(oidTime);
 		String otime = simpleDateFormat.format(date);
-		logger.info("2");
 				
 		//사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
 		Order order = new Order(oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, '1');
 		orderService.insertOrder(order);
-		logger.info("3");
 		
 		//주문상품 데이터(Orderitem Table)를 DB에 저장
 		for(int i=0; i<pcode.size(); i++) {
@@ -123,10 +120,8 @@ public class OrderController {
 			//주문 완료 상품의 장바구니(Cartitem) 데이터 삭제
 			cartitemService.deleteItem(mid, pcode.get(i), pcolor.get(i), psize.get(i));
 		}
-		logger.info("4");
 		
 		List<Orderitem> orders = orderService.selectByOid(oid);
-		logger.info("5");
 		
 		ArrayList<OrderitemJoinProduct> ordereditems = new ArrayList<OrderitemJoinProduct>();
 		int totalprice = 0;		//총 주문 비용
@@ -140,7 +135,6 @@ public class OrderController {
 			totalnumber += orderitem.getPquantity();
 			totalprice += product.getPprice() * orderitem.getPquantity();
 		}
-		logger.info("6");
 		Member orderMember = memberService.selectByMid(mid);
 		model.addAttribute("orderMember", orderMember);
 		
