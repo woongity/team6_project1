@@ -1,5 +1,6 @@
 package com.mycompany.webapp.service;
 
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dto.Coupon;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+
 
 @Service
 public class CouponReleaseRedisService {
@@ -39,17 +42,28 @@ public class CouponReleaseRedisService {
 	// 저장 성공시 return true
 	// 저장 실패시 return false
 	public boolean insertCoupon(Coupon coupon) {
-		String cName = coupon.getCcode();
 		String mid = coupon.getMid();
-		String cCode = coupon.getCcode();
-		if(hashOps.get(mid,cName)==null) {
-			hashOps.put(mid, cName, cCode);
+		if(!redisTemplate.hasKey(mid)) {
+			valueOps.set(mid, coupon);
 			return true;
 		}else {
 			return false;
 		}
 	}
-	public String getCouponCode(String mid, String cName) {
-		return hashOps.get(mid, cName);
+	public int getLeftCouponCount() {
+		return (int) valueOps.get("leftCouponCount");
+	}
+	public Coupon getCouponCode(String mid) {
+		return (Coupon)valueOps.get(mid);
+	}
+	
+	public void setCouponCount(int quantity) {
+		valueOps.set("leftCouponCount", quantity);
+	}
+	public void decrementCouponCount() {
+		valueOps.decrement("leftCouponCount");
+	}
+	public void incrementCouponCount() {
+		valueOps.increment("leftCouponCount");
 	}
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.dao.CartitemDao">
 
@@ -30,6 +31,7 @@
 	<delete id="deleteItem" parameterType="String">
 		delete from cartitem where mid=#{mid} and pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</delete>
+
 	<insert id="insertItem" parameterType="cartitem">
 		insert into cartitem (mid,pcode,pcolor,psize,pquantity) values (#{mid},#{pcode},#{pcolor},#{psize},#{pquantity})
 	</insert>
