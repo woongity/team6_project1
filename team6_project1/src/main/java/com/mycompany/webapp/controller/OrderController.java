@@ -1,6 +1,7 @@
 package com.mycompany.webapp.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -156,7 +157,7 @@ public class OrderController {
 	         Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(), orderitem.getPsize());
 	         productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(), product.getPstock() + orderitem.getPquantity());
 	      }
-	      return "main";
+	      return "order/orderDelete";
 	   }
 	   
 	   @RequestMapping("/count")
