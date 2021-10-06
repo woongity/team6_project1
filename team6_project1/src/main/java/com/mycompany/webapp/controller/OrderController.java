@@ -24,7 +24,6 @@ import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
 import com.mycompany.webapp.dto.Product;
-import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 import com.mycompany.webapp.service.MemberService;
