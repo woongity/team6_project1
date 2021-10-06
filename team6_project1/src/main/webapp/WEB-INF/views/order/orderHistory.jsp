@@ -11,15 +11,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<style>
- 	
-  	.paginator {
-	  transition: 0.5s;
-	  cursor: pointer;
-  	}
- 	
-   </style>
-
 <script>
 	
 	function getHistory() {
@@ -83,34 +74,6 @@
 		}
 	}
 
-	function page1() {
-		const showPage1 = document.getElementById("page1");
-		const showPage2 = document.getElementById("page2");
-		const changeSize1 = document.getElementById("changeSize1")
-		const changeSize2 = document.getElementById("changeSize2")
-		
-		console.log("page1()")
-		if (showPage1.style.display == "none") {
-			showPage1.style.display = "block";
-			showPage2.style.display = "none";
-			changeSize1.style.fontSize = "calc(0.8rem + .6vw)";
-			changeSize2.style.fontSize = "calc(0.325rem + .6vw)";
-		}
-	}
-
-	function page2() {
-		const showPage1 = document.getElementById("page1");
-		const showPage2 = document.getElementById("page2");
-		
-		console.log("page2()")
-		
-		if (showPage1.style.display == "block") {
-			showPage1.style.display = "none";
-			showPage2.style.display = "block";
-			changeSize1.style.fontSize = "calc(0.325rem + .6vw)";
-			changeSize2.style.fontSize = "calc(0.8rem + .6vw)";
-		}
-	}
 </script>
 
 </head>
@@ -119,15 +82,6 @@
 <div class="d-flex justify-content-center">
 <div class="col-8">
 
-<%-- <c:forEach var="item" items="${orderedList}">
-	<p>${item}</p>
-</c:forEach> --%>
-
-<p>${member}</p>
-
-<c:forEach var="coupon" items="${couponlist}">
-  <p>${coupon}</p>
-</c:forEach>
 <h3>마이 페이지</h3>
 
 <!-- 마이페이지 버튼 -->
@@ -153,8 +107,7 @@
     </tr>
   </thead>
   <tbody>
-    <c:forEach var="item" items="${orderedList}" varStatus="oistatus" begin="0" end="4">
-    ${item}
+    <c:forEach var="item" items="${orderedList}" varStatus="oistatus" begin="0" end="8">
     <tr>
       <th class="text-center align-middle">
       	<h6>${item.oid}</h6>
@@ -227,113 +180,6 @@
   </tbody>
 </table>
 
-<!-- page2 -->
-<table class="table table-striped" id="page2" style="display: none;">
-  <thead class="text-center">
-    <tr>
-      <th class="col-1">주문번호</th>
-      <th class="col-2"></th>
-      <th class="col-4">상품정보</th>
-      <th class="col-1">수량</th>
-      <th class="col-2">판매가</th>
-      <th class="col-2">주문상태</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10135229</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">NICK&NICOLE N_21SUMMER 2021 S/S</h6>
-      	<h6>엠브로더리 코튼 셔츠 화이트</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 56,000</td>
-      <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10412368</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_2.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN AD307 2020 F/W</h6>
-      	<h6>로얄블루 오버핏 울 체크셔츠</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: 🟦Blue / Size: L(100)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 35,900</td>
-      <td class="text-center align-middle">
-      	<h6>배송완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10136490</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_3.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN 20FW35 2020 ALL</h6>
-      	<h6>SPRING OVERSIZED SHIRT GREEN</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: 🟩Green / Size: L(100)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 45,200</td>
-      <td class="text-center align-middle">
-      	<h6>배송완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
-
-<div class="d-flex justify-content-center mt-4">
-	<h3 class="mx-3 paginator" id="changeSize1" onclick="page1()" style="font-size: calc(0.8rem + .6vw);">1페이지</h3>
-	<h3 class="paginator"  onclick="page2()" id="changeSize2" style="font-size: calc(0.325rem + .6vw);">2페이지</h3>
-</div>
 </div>
 
 <!-- 프로필 -->

@@ -148,11 +148,7 @@
                     		const isChecked = document.getElementById("colorId${status.index}sep${pmindex.index}sep${ipcstatus.index}").checked
                     		const checkedId = document.getElementById("colorId${status.index}sep${pmindex.index}sep${ipcstatus.index}")
 							const cimage = document.getElementById("carousel1image${status.index}sep${pmindex.index}sep${ipcstatus.index}")
-                    		
-                    		console.log(isChecked)
-                    		console.log(checkedId)
-                    		console.log(cimage)
-                    		
+                                      		
                     		const cimageArray1 = new Array();
                             const cimageArray2 = new Array();
                             const cimageArray3 = new Array();
@@ -373,6 +369,15 @@
     <c:set var="totalPrice" value="${totalPrice + (item.pquantity * item.pprice)}" />
     </c:forEach>
  
+     <!-- 쇼핑백에 상품이 없을 경우 -->
+    <c:if test="${count == 0}">
+    <tr>
+      <td colspan="12" class="text-center align-middle" style="height: 160px;">
+      	<h4>쇼핑백에 상품이 담겨있지 않습니다.</h4>
+      </td>
+    </tr>
+    </c:if>
+    
     <!-- 쇼핑백 상품 합계 -->
     <tr>
       <td colspan="3"></td>
@@ -415,7 +420,12 @@
       <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: none;">
       <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: none;">
     </c:forEach>
+    <c:if test="${count == 0}">
+    <input class="btn btn-dark" value="주문하기" type="submit" style="width: 100%;" disabled>
+    </c:if>
+    <c:if test="${count != 0}">
     <input class="btn btn-dark" value="주문하기" type="submit" style="width: 100%;">
+    </c:if>
   </form>
 </div>
 

@@ -49,7 +49,7 @@ public class OrderedHistoryController {
 // 		}
 		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
 		for(OrderitemJoinProductJoinOrder product:list) {
-				logger.info(product.toString());
+				// logger.info(product.toString());
 				
 			}
 //		model.addAttribute("orderedList", oiJoinList);

@@ -25,24 +25,12 @@ public class HomeController {
 		logger.info("Run /main");
 		return "main";
 	}
-
-	@RequestMapping("/error/403")
-	public String error403() {
-		logger.info("error/403");
-		return "error/403";
-	}
-
-	@RequestMapping("/error/500")
-	public String error500() {
-		logger.info("error/500");
-		return "error/500";
-	}
 	
-	   @RequestMapping("/getname")
-	   @ResponseBody
-	   public String count() {
-	      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	      String mid = authentication.getName();
-	      return mid;
-	   }
+    @RequestMapping("/getname")
+    @ResponseBody
+    public String count() {
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String mid = authentication.getName();
+       return mid;
+    }
 }

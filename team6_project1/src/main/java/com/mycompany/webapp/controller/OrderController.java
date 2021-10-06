@@ -1,6 +1,7 @@
 package com.mycompany.webapp.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,6 @@ import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
 import com.mycompany.webapp.dto.Product;
-import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 import com.mycompany.webapp.service.MemberService;
@@ -139,7 +139,7 @@ public class OrderController {
 		model.addAttribute("totalnumber", totalnumber);
 		model.addAttribute("totalprice", totalprice);
 		
-		return "/orderComplete";
+		return "order/orderComplete";
 	}
 	
 	   @RequestMapping("/delete")
@@ -157,7 +157,7 @@ public class OrderController {
 	         Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(), orderitem.getPsize());
 	         productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(), product.getPstock() + orderitem.getPquantity());
 	      }
-	      return "main";
+	      return "order/orderDelete";
 	   }
 	   
 	   @RequestMapping("/count")
