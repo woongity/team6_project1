@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
+import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.Orderitem;
 
 @Mapper
 public interface OrderitemDao {
