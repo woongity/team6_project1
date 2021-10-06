@@ -27,8 +27,8 @@ public class MyPageController {
 	@Resource private CouponService couponService;
 	
 	@RequestMapping("/mypage")
-	public String orderedHistory(Model model,Principal principal) {
-			// mid를 가지고 order을 가져옴. order에서 가져온 oid를 통해서 orderitem을 가져옴. orderitem들에서 pcode를 통해서 product를 가져옴. 
+	public String orderedHistory(Model model, Principal principal) {
+		// mid를 가지고 order을 가져옴. order에서 가져온 oid를 통해서 orderitem을 가져옴. orderitem들에서 pcode를 통해서 product를 가져옴. 
 		// 따라서 orderitem이랑 product랑 join함. 그리고 
 		// order 테이블과 product 테이블을 엮는다. pcode를 기준으로.
 		//로그인이 안되어있을경우
@@ -49,7 +49,7 @@ public class MyPageController {
 		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
 
 		for(OrderitemJoinProductJoinOrder product:list) {
-				logger.info(product.toString());
+				// logger.info(product.toString());
 				
 			}
 //		model.addAttribute("orderedList", oiJoinList);
@@ -63,7 +63,6 @@ public class MyPageController {
 		List<Coupon> couponlist = couponService.selectByMid(mid);
 		model.addAttribute("couponlist", couponlist);
 		
-// 		return "order/orderHistory";
  		return "mypage";
 	}
 }
