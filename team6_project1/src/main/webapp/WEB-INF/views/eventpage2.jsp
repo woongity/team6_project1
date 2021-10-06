@@ -27,7 +27,7 @@
 	<script>
 	function joinEvent() {
     	$.ajax({
-       		url:"joinEvent1"
+       		url:"/event2/join"
    		}).done((data) => {
    			if(data.result=="success"){
    				console.log(data.result);

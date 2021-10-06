@@ -22,6 +22,7 @@ import com.mycompany.webapp.service.CouponService;
 import com.mycompany.webapp.service.EventService;
 
 @Controller
+@RequestMapping("/event2")
 public class EventController2 {
 	private static final Logger logger = LoggerFactory.getLogger(EventController2.class);
 	// ExecutorService 객체 생성
@@ -32,7 +33,7 @@ public class EventController2 {
 	@Resource
 	private CouponService couponService;
 
-	@RequestMapping("/eventpage1")
+	@RequestMapping("/page")
 	public String content(Principal principal) {
 		if (principal == null) {
 			throw new NotAuthenticatedUserException();
@@ -41,7 +42,7 @@ public class EventController2 {
 		return "eventpage2";
 	}
 
-	@RequestMapping(value = "/joinEvent1", produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "/join", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String joinEvent(Principal principal) throws Exception {
 

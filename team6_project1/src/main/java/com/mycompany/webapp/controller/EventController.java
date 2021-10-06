@@ -24,6 +24,7 @@ import com.mycompany.webapp.service.CouponService;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 @Controller
+@RequestMapping("/event1")
 public class EventController {
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	// ExecutorService 객체 생성
@@ -31,7 +32,7 @@ public class EventController {
 
 	@Resource 
 	private CouponReleaseRedisService couponReleaseService;
-	@RequestMapping("/eventpage")
+	@RequestMapping("/page")
 	public String content(Principal principal) {
 		if(principal==null) {
 			throw new NotAuthenticatedUserException();
@@ -40,7 +41,7 @@ public class EventController {
 		return "eventpage";
 	}
 
-	@RequestMapping(value = "/joinEvent", produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "/join", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String joinEvent(Principal principal) throws Exception {
 		
