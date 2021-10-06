@@ -9,24 +9,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.OrderDao;
+import com.mycompany.webapp.dao.OrderitemDao;
 import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
+import com.mycompany.webapp.dto.OrderitemJoinProduct;
+import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
+
+
 
 @Service
-public class OrderService {
-	private static final Logger logger = LoggerFactory.getLogger(OrderService.class);	
+public class OrderViewService {
+	private static final Logger logger = LoggerFactory.getLogger(OrderViewService.class);	
 	
 	@Resource 
 	private OrderDao orderDao;
-	
-	public void insertOrder(Order order) {
-		orderDao.insertOrder(order);
-	}
+	@Resource
+	private OrderitemDao orderitemDao;
 	
 	public List<Order> selectByMid(String mid){
 		return orderDao.selectByMid(mid);
 	}
-
+	public List<OrderitemJoinProduct> selectOrderitemJoinProductByOid(String oid){
+		return orderitemDao.selectOrderitemJoinProductByOid(oid);
+	}
 	public List<String> selectOidByMid(String mid){
 		return orderDao.selectOidByMid(mid);
 	}
@@ -43,4 +48,11 @@ public class OrderService {
 		orderDao.update(order);
 	}
 
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderByOid(String mid){
+		return orderitemDao.selectOrderitemJoinProductByMid(mid);
+	}
+	
+	public void insertOrder(Order order) {
+		orderDao.insertOrder(order);
+	}
 }

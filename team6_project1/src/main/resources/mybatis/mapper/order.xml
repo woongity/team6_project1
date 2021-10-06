@@ -11,19 +11,15 @@
 	<select id="selectByMid" parameterType="String" resultType="order">
 		select * from orderinfo where mid=#{mid}
 	</select>
-	
 	<select id="selectOidByMid" parameterType="String" resultType="String">
 		select oid from orderinfo where mid=#{mid}
 	</select>
-	
 	<select id="selectByOid" parameterType="String" resultType="orderitem">
 		select * from orderitem where oid=#{oid}
 	</select> 
-	
 	<select id="selectOneByOid" parameterType="String" resultType="order">
 		select * from orderinfo where oid=#{oid}
 	</select> 
-	
 	<update id="update" parameterType="order">
 		update orderinfo set ostatus=#{ostatus} where oid=#{oid}
 	</update>
