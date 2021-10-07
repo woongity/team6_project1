@@ -257,9 +257,15 @@
 
           
       <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 35%;">
+      	<div class="d-flex justify-content-center mt-4 mb-3">Stock: ${item.pstock}</div>
+    	<div class="d-flex justify-content-center">
           <div class="me-2 btn btn-sm fs-5" onclick='changeQuantity${status.index}("minus")'>-</div>
-          <p class="fs-5 mt-1" id="countId${status.index}">${item.pquantity}</p>
+          <c:if test="${item.pquantity > item.pstock}">
+          	<p class="fs-5 mt-1" id="countId${status.index}">${item.pstock}</p>
+          </c:if>
+          <c:if test="${item.pquantity < item.pstock + 1}">
+          	<p class="fs-5 mt-1" id="countId${status.index}">${item.pquantity}</p>
+          </c:if>
           <div class="ms-2 btn btn-sm fs-5" onclick='changeQuantity${status.index}("plus")'>+</div>
 	   	</div>
         <div class="d-flex justify-content-center">
@@ -348,8 +354,8 @@
 		let finalTotal1 = finalTotalValue1.innerText
 		let finalTotal2 = finalTotalValue2.innerText
 		
-		if (ischeckedItemId) {
-			if (operator == "plus") {
+ 		if (ischeckedItemId) { 
+			if (operator == "plus" && count < ${item.pstock}) {
 				count = parseInt(count) + 1
 				total = parseInt(total) + parseInt(temp)
 				finalCount = parseInt(finalCount) + 1
