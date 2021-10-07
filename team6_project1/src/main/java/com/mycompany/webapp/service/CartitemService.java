@@ -50,15 +50,17 @@ public class CartitemService {
 	}
 	
 	@Transactional
-	public ArrayList<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize) {
+	public ArrayList<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> isSelected) {
 		ArrayList<CartitemJoinProduct> returnCartitemJoinProduct = new ArrayList<CartitemJoinProduct>();
 		
-		List<CartitemJoinProduct> cartitemJoinProduct = cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode, pcolor, psize);
-		for(CartitemJoinProduct cp : cartitemJoinProduct) {
-			if(cp.getPquantity() > productDao.selectPquantity(cp.getPcode(), cp.getPcolor(), cp.getPsize())) {
-				throw new OutOfStockExceptionHandler(cp.getPname() + " 제품의 재고가 부족합니다.");
-			} else {
-				returnCartitemJoinProduct.add(cp);
+		for(int i=0; i<pcode.size(); i++) {
+			if(isSelected.get(i) == 1) {
+				CartitemJoinProduct cartitemJoinProduct = cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode.get(i), pcolor.get(i), psize.get(i));
+				if(cartitemJoinProduct.getPquantity() > productDao.selectPquantity(pcode.get(i), pcolor.get(i), psize.get(i))) {
+					throw new OutOfStockExceptionHandler(cartitemJoinProduct.getPname());
+				} else {
+					returnCartitemJoinProduct.add(cartitemJoinProduct);
+				}
 			}
 		}
 		
