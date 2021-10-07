@@ -124,25 +124,16 @@
 			</div>
 		</div>
 		<!-- 배송지 주소 -->
-		<div class="d-flex">
+		<div class="d-flex my-3">
 			<div class="col-2 text-center">
 				<h6>배송지 주소</h6>
 			</div>
 			<div class="col-10">
 				<div class="d-flex">
-					<h6 class="align-middle">05717</h6>
-					<h6 class="btn btn-outline-dark btn-sm ms-5">우편번호 조회</h6>			
+					<h6 class="align-middle ms-3">05717</h6>
+					<h6 class="btn btn-outline-dark btn-sm ms-4">우편번호 조회</h6>			
 				</div>
 				<input type="text" id="oaddress" name="oaddress" class="form-control" value="${orderMember.maddress}" style="display: block;">
-			</div>
-		</div>
-		<!-- 수령인 E-mail -->
-		<div class="d-flex my-2">
-			<div class="col-2 text-center">
-				<h6>이메일</h6>
-			</div>
-			<div class="col-10">
-				<h6>team6-miniproject@gmail.com</h6>
 			</div>
 		</div>
 		<!-- 배송요청사항 -->
