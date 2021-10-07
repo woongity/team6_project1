@@ -3,6 +3,7 @@ package com.mycompany.webapp.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -15,13 +16,6 @@ public class ControllerExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 	
 	@ExceptionHandler
-	public String handleOtherException(Exception e) {
-		logger.info("실행");
-		e.printStackTrace();
-		return "error/500";
-	}
-	
-	@ExceptionHandler
 	public String handleNotAuthenticatedUserException(NotAuthenticatedUserException e) {
 		logger.info("로그인 되지 않은 유저");
 		e.printStackTrace();
@@ -29,9 +23,24 @@ public class ControllerExceptionHandler {
 	}
 	
 	@ExceptionHandler
+	public String OutOfStockException(OutOfStockExceptionHandler e, Model model) {
+		logger.info("Run / OutOfStockException");
+		e.printStackTrace();
+		model.addAttribute("message", e.getMessage());
+		return "error/OutOfStockException";
+	}
+	
+	@ExceptionHandler
 	public String handle404Exception(NoHandlerFoundException e) {
 		logger.info("실행");
 		e.printStackTrace();
 		return "error/404";
+	}
+	
+	@ExceptionHandler
+	public String handleOtherException(Exception e) {
+		logger.info("실행");
+		e.printStackTrace();
+		return "error/500";
 	}
 }
