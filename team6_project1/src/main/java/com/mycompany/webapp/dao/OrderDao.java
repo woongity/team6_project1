@@ -12,6 +12,6 @@ public interface OrderDao {
 	List<String> selectOidByMid(String mid);
 	List<Orderitem> selectByOid(String oid);
 	Order selectOneByOid(String oid);
-	void update(Order order);
+	void update(String oid);
 	void insertOrder(Order order);
 }

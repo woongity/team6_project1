@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.aspect.LoginChecking;
 import com.mycompany.webapp.aspect.LoginChecking401;
@@ -95,12 +96,14 @@ public class CartController {
 		logger.info("Run cart/option");
 		//기존 카트 아이템 코드, 컬러, 사이즈를 받고 기존 카트 아이템 삭제, 
 		//새로운 카트 아이템 insert
+		//에서 기존 상품 update로 변경
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		
-		cartService.deleteItem(mid, pcode, origin_pcolor, origin_psize);
-		cartService.insertItem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
+//		cartService.deleteItem(mid, pcode, origin_pcolor, origin_psize);
+//		cartService.insertItem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
+		cartService.updateOption(mid,pcode, origin_pcolor, origin_psize, new_pcolor, new_psize, new_pquantity);
 		
 		return "redirect:/cart/list";
 	}
@@ -118,4 +121,13 @@ public class CartController {
 		return "redirect:/cart/list";
 	}
 	
+	@LoginChecking401
+	@RequestMapping("/count")
+	@ResponseBody
+	public String count() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
+		int itemCount = cartService.selectCount(mid);
+		return String.valueOf(itemCount);
+	}
 }
