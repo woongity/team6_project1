@@ -19,7 +19,17 @@
 <table class="table table-striped">
   <thead class="text-center">
     <tr>
-      <th class="col-2">전체</th>
+      <th class="col-2">
+<!-- 	      <div class="d-flex">
+		      <div class="form-check mx-2">
+				<input class="form-check-input" type="checkbox" value="" id="allCheckbox" onclick="checkAllBtn()">
+				<label class="form-check-label" for="flexCheckDefault">
+				</label>
+			  </div>
+		      <div style="margin-left: 3vw;">전체</div>
+	      </div> -->
+	      전체
+      </th>
       <th class="col-4">상품정보</th>
       <th class="col-2">수량</th>
       <th class="col-2">판매가</th>
@@ -33,8 +43,8 @@
     <tr>
       <th scope="row" class="d-flex">
       	<div class="form-check mx-2">
-		  <input class="form-check-input" type="checkbox" value="" id="item${status.index}Id">
-		  <label class="form-check-label" for="item${status.index}Id">
+		  <input class="form-check-input" type="checkbox" value="" id="itemId${status.index}" onclick="getCheckbox${status.index}()">
+		  <label class="form-check-label" for="itemId${status.index}">
 		  </label>
 		</div>
       	<img src="${item.pimage1}" class="card-img-top" style="width: 7rem;" alt="">
@@ -211,11 +221,6 @@
                       function changeSize${status.index}sep${pmindex.index}sep${ipsstatus.index}() {
                         const sisChecked = document.getElementById("sizeId${status.index}sep${pmindex.index}sep${ipsstatus.index}").checked
                         const scheckedId = document.getElementById("sizeId${status.index}sep${pmindex.index}sep${ipsstatus.index}")
-
-                        console.log(sisChecked)
-                        console.log(scheckedId)
-                        console.log(scheckedId.value)
-
                         
                         if (sisChecked) {
                           $('input[name=new_psize]').attr('value', scheckedId.value);
@@ -363,6 +368,79 @@
 		finalTotalId1.innerText = finalTotal1
 		finalTotalId2.innerText = finalTotal2
 	}
+	
+	// 체크박스로 선택한 상품만 집계되도록 하는 함수
+	function getCheckbox${status.index}() {
+		const checkedItemId = document.getElementById("itemId${status.index}")
+		const ischeckedItemId = document.getElementById("itemId${status.index}").checked
+		
+		const testcountId = document.getElementById("testcount")
+		const testtotalId = document.getElementById("testtotal")
+		
+		const finalCountValueId = document.getElementById("finalCountValue")
+		const finalTotalValue1Id = document.getElementById("finalTotalValue1")
+		const finalTotalValue2Id = document.getElementById("finalTotalValue2")
+		
+		const itemCount = document.getElementById("countId${status.index}").innerText
+		const itemPrice = document.getElementById("totalId${status.index}").innerText
+		
+		const abledBtnId = document.getElementById("abledBtn")
+		const disabledBtnId = document.getElementById("disabledBtn")
+	
+		let sumCount = parseInt(testcountId.innerText)
+		let sumPrice = parseInt(testtotalId.innerText)
+		let temp1 = "itemId"
+		let temp2 = "countId"
+		let temp3 = "totalId"
+		for (let i = 0; i < ${fn:length(cartitems)}; i++) {
+			temp1 = temp1 + i
+			temp2 = temp2 + i
+			temp3 = temp3 + i
+			if (document.getElementById(temp1).checked) {
+				sumCount += parseInt(document.getElementById(temp2).innerText)
+				sumPrice += parseInt(document.getElementById(temp3).innerText)
+			} 
+			
+			temp1 = "itemId"
+			temp2 = "countId"
+			temp3 = "totalId"
+		}
+
+		finalCountValueId.innerText = sumCount
+		finalTotalValue1Id.innerText = sumPrice
+		finalTotalValue2Id.innerText = sumPrice
+		
+		if (sumCount == 0) {
+			abledBtnId.style.display = "none"
+			disabledBtnId.style.display = "block"
+		} else {
+			abledBtnId.style.display = "block"
+			disabledBtnId.style.display = "none"			
+		}
+		
+	}
+	
+	function checkAllBtn() {
+		const allCheckboxId = document.getElementById("allCheckbox")
+		
+		if (allCheckboxId.checked) {
+			let temp1 = "itemId"
+			let temp2 = "countId"
+			let temp3 = "totalId"
+			for (let i = 0; i < ${fn:length(cartitems)}; i++) {
+				temp1 = temp1 + i
+				temp2 = temp2 + i
+				temp3 = temp3 + i
+				if (!document.getElementById(temp1).checked) {
+					document.getElementById(temp1).checked = true
+				} 
+				
+				temp1 = "itemId"
+				temp2 = "countId"
+				temp3 = "totalId"
+			}
+		}
+	}
     
     </script>
     <c:set var="count" value="${count + item.pquantity}" />
@@ -386,14 +464,17 @@
       	<div class="d-flex justify-content-between mt-2">
 	      	<div class="fs-5">총</div>
             <div>
-              <span class="fw-bold fs-5 ms-2" id="finalCountValue" style="color: darkKhaki">${count}</span><span class="fs-5"> 개 상품</span>
+              <span class="fw-bold fs-5 ms-2" id="finalCountValue" style="color: darkKhaki">0</span><span class="fs-5"> 개 상품</span>
             </div>
+            <div style="display: none;">
+            	<span class="fw-bold fs-5 ms-2" id="testcount" style="color: darkKhaki">0</span><span class="fs-5"> 개 상품</span>
+          	</div>
       	</div>
       	<div class="d-flex justify-content-between mt-3">
 	      	<h6>상품 합계</h6>
             <div class="d-flex">
               <h6>\&nbsp;</h6>
-  	      	  <h6 id="finalTotalValue1">${totalPrice}</h6>           
+  	      	  <h6 id="finalTotalValue1">0</h6>           
             </div>  	
       	</div>
       	<div class="d-flex justify-content-between mb-2">
@@ -403,7 +484,10 @@
       	<div class="d-flex justify-content-between">
         	<div class="fs-5">합계</div>
             <div>
-              <span class="fs-5">\ </span><span class="fw-bold fs-5" id="finalTotalValue2" style="color: darkKhaki">${totalPrice}</span>
+              <span class="fs-5">\&nbsp;</span><span class="fw-bold fs-5" id="finalTotalValue2" style="color: darkKhaki">0</span>
+            </div>
+            <div style="display: none;">
+              <span class="fs-5">\&nbsp;</span><span class="fw-bold fs-5" id="testtotal" style="color: darkKhaki">0</span>
             </div>
         		      	
       	</div>
@@ -420,12 +504,8 @@
       <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: none;">
       <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: none;">
     </c:forEach>
-    <c:if test="${count == 0}">
-    <input class="btn btn-dark" value="주문하기" type="submit" style="width: 100%;" disabled>
-    </c:if>
-    <c:if test="${count != 0}">
-    <input class="btn btn-dark" value="주문하기" type="submit" style="width: 100%;">
-    </c:if>
+    <input class="btn btn-dark" id="disabledBtn" value="주문하기" type="submit" style="width: 100%; dispaly: block;" disabled>
+    <input class="btn btn-dark" id="abledBtn" value="주문하기" type="submit" style="width: 100%; display: none;">
   </form>
 </div>
 

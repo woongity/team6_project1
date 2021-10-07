@@ -46,7 +46,7 @@
 		  	<c:set var="count" value="0" />
 		  	<c:set var="total" value="0" />
 		   	<c:forEach var="product" items="${orderProducts}">
- 		  	<c:set var="count" value="${count + 1}" />
+ 		  	<c:set var="count" value="${count + product.pquantity}" />
 		  	<c:set var="total" value="${total + product.pprice * product.pquantity}" />
 		    <tr>
 		      <th scope="row" class="d-flex">
