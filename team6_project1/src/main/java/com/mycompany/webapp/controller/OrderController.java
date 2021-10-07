@@ -1,6 +1,7 @@
 package com.mycompany.webapp.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -138,8 +139,8 @@ public class OrderController {
 		model.addAttribute("totalprice", totalprice);
 
 		return "order/orderComplete";
-	}
-
+  }
+  
 	@LoginChecking401
 	@RequestMapping("/delete")
 	public String delete(String oid) {

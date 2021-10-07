@@ -31,7 +31,6 @@
 	<delete id="deleteItem" parameterType="String">
 		delete from cartitem where mid=#{mid} and pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</delete>
-
 	<insert id="insertItem" parameterType="cartitem">
 		insert into cartitem (mid,pcode,pcolor,psize,pquantity) values (#{mid},#{pcode},#{pcolor},#{psize},#{pquantity})
 	</insert>
