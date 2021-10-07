@@ -19,4 +19,5 @@ public class CartitemJoinAllProduct {
    private int pprice;
    private String pbrand;
    private int pstock;
+   
 }

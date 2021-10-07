@@ -22,7 +22,7 @@
   <div class="col-8">
     <div class="row">
 
-      <c:forEach var="item" begin="15" end="30" items="${productArray}" varStatus="status">
+      <c:forEach var="item" begin="31" end="42" items="${productArray}" varStatus="status">
 
         <!-- 상품리스트 -->
         <div class="text-center ps-0 pe-1" style="width: 16.5vw;">
@@ -332,7 +332,7 @@
 		let total = totalId${status.index}.innerText
 		let temp = tempId${status.index}.innerText
 		
-		if (operator == "plus" && count < 5) {
+		if (operator == "plus") {
 			count = parseInt(count) + 1
 			total = parseInt(total) + parseInt(temp)
 		} else if (operator == "minus" && count > 1) {

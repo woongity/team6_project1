@@ -22,7 +22,6 @@ import com.mycompany.webapp.service.OrderitemService;
 @Controller
 public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
-	
 	@Resource private OrderitemService orderitemService;
 	@Resource private MemberService memberService;
 	@Resource private CouponService couponService;
@@ -48,13 +47,14 @@ public class MyPageController {
 // 			}
 // 		}
 		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
+
 		for(OrderitemJoinProductJoinOrder product:list) {
 				// logger.info(product.toString());
 				
 			}
 //		model.addAttribute("orderedList", oiJoinList);
  		model.addAttribute("orderedList", list);
-//		=================================================================================
+  //		=================================================================================
 //		이 후는 mypage화면에 추가로 필요한 data들
 		
 		Member member = memberService.selectByMid(mid);

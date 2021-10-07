@@ -25,6 +25,7 @@
 				<div class="mt-5">
 					<a href="/list/view"><div class="btn btn-outline-dark col-2 mt-5">SHOP NOW</div></a>
 					<a href="/eventpage"><div class="btn btn-dark col-2 mt-5">EVENT</div></a>
+					<a href="/eventpage1"><div class="btn btn-dark col-2 mt-5">EVENT1</div></a>
 				</div>
 				</sec:authorize>
 				<!-- 로그인 하지 않았다면 로그인 창으로 보내준다. -->
