@@ -236,7 +236,7 @@
                       </div>
                       <hr class="my-2">
                       <div class="d-flex justify-content-center mt-2">
-
+						
                       	<input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="쇼핑백 담기" type="submit">
                       	<!-- <input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="해당 Color/Size는 품절되었습니다." type="submit" disabled> -->
                     	

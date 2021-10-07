@@ -7,11 +7,15 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.aspect.LoginChecking;
+import com.mycompany.webapp.aspect.LoginChecking401;
 import com.mycompany.webapp.dto.Coupon;
 import com.mycompany.webapp.dto.Member;
 import com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder;
@@ -48,5 +52,15 @@ public class MyPageController {
 		model.addAttribute("couponlist", couponlist);
 		
  		return "mypage";
+	}
+	
+	@LoginChecking401
+	@RequestMapping("/couponCount")
+	@ResponseBody
+	public String count() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
+		int couponCount = couponService.selectCouponCount(mid);
+		return String.valueOf(couponCount);
 	}
 }

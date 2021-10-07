@@ -10,4 +10,5 @@ import com.mycompany.webapp.dto.Coupon;
 public interface CouponDao {
 	List<Coupon> selectByMid(String mid);
 	void insertCoupon(Coupon coupon);
+	int selectCouponCount(String mid);
 }

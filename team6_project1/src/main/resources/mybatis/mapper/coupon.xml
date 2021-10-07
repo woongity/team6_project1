@@ -9,4 +9,7 @@
 	<insert id="insertCoupon" parameterType="coupon">
 		INSERT INTO coupon(ccode,mid,cname,crate,ccontent,creleasedate,cexpiredate,ecode,cstatus) VALUES (#{ccode},#{mid},#{cname},#{crate},#{ccontent},#{creleasedate},#{cexpiredate},#{ecode},#{cstatus})
 	</insert>
+		<select id="selectCouponCount" parameterType="String" resultType="int">
+      select count(*) from coupon where mid=#{mid}
+   	</select>
 </mapper>

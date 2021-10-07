@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.aspect.LoginChecking;
 import com.mycompany.webapp.dto.Cartitem;
@@ -60,4 +62,16 @@ public class ListController {
 		}
 		return "redirect:/list/view";
 	}
+	
+	/*
+	 * @PostMapping(value = "/isPuttable", produces =
+	 * "application/json; charset=UTF-8")
+	 * 
+	 * @ResponseBody public String isPuttable(String pcode, String pColor, String
+	 * pSize,int quantity) { logger.info("isputable"); JSONObject jsonObject = new
+	 * JSONObject(); int pstock = listviewService.selectPquantity(pcode, pColor,
+	 * pSize); if (pstock < quantity) { jsonObject.put("result", "fail"); } else {
+	 * jsonObject.put("result", "success"); } String json = jsonObject.toString();
+	 * return json; }
+	 */
 }
