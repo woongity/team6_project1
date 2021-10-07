@@ -17,9 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.webapp.aspect.LoginChecking;
+import com.mycompany.webapp.aspect.LoginChecking401;
 import com.mycompany.webapp.dto.Cartitem;
 import com.mycompany.webapp.dto.CartitemJoinAllProduct;
-import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.service.CartitemService;
@@ -35,10 +36,7 @@ public class CartController {
 	@Resource
 	ListviewService productService;
 	
-	private String getMid(Principal principal) {
-		return principal.getName();
-	}
-	
+	@LoginChecking
 	@GetMapping("/list")
 	public String list(Principal principal, Model model) {
 		logger.info("Run cart/list");
@@ -91,6 +89,7 @@ public class CartController {
 		return "order/shoppingbag";
 	}
 	
+	@LoginChecking401
 	@RequestMapping("/option")
 	public String option(String pcode,String origin_pcolor,String origin_psize, String new_pcolor, String new_psize, String new_pquantity) {
 		logger.info("Run cart/option");
@@ -106,6 +105,7 @@ public class CartController {
 		return "redirect:/cart/list";
 	}
 	
+	@LoginChecking401
 	@RequestMapping("/deleteitem")
 	public String deleteitem(String pcode,String pcolor, String psize) {
 		logger.info("Run cart/delete");

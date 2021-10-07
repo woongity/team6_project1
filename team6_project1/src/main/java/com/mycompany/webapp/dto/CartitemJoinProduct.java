@@ -6,6 +6,7 @@ import lombok.Data;
 public class CartitemJoinProduct {
    private String pcode;
    private String pimage1;
+   private String pcolorimage;
    private String pbrand;
    private String pname;
    private String pcolor;
