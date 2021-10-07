@@ -22,7 +22,7 @@
   <div class="col-8">
     <div class="row">
 
-      <c:forEach var="item" begin="15" end="30" items="${productArray}" varStatus="status">
+      <c:forEach var="item" begin="31" end="42" items="${productArray}" varStatus="status">
 
         <!-- 상품리스트 -->
         <div class="text-center ps-0 pe-1" style="width: 16.5vw;">
@@ -34,6 +34,7 @@
             <p class="card-text">${item.pname}</p>
             <p class="card-text">${item.pcode}</p>
             <p class="card-text">\ ${item.pprice}</p>
+            
             <!-- 재고계산 -->
             <c:set var="count" value="0" />
             <c:forEach var="i" items="${item.pstock}" begin="0" end="${fn:length(item.pstock) - 1}">
@@ -130,7 +131,7 @@
                       <div class="d-flex justify-content-between">
                         <h6 style="margin-top: 8px;">Color&nbsp;&nbsp;</h6>
                         <div class="d-flex">
-
+						
                           <c:forEach var="i" items="${item.pcolorTreeSet}" begin="0" end="${fn:length(item.pcolorTreeSet) - 1}" varStatus="icstatus">
                             <div class="form-check me-3">
                               <c:if test="${icstatus.index == 0}">
@@ -166,7 +167,6 @@
 								}								
 									
 								if (isChecked) {		
-
 									for (let i = 0; i < ${fn:length(item.pcolorTreeSet)}; i++) {
 										const tempId1 = cimageArray1[i]
 										const tempId2 = cimageArray2[i]
@@ -184,6 +184,8 @@
 										
 								}
 							}
+							
+							
 							</script>
                           </c:forEach>
                         </div>
@@ -201,13 +203,15 @@
                           <c:forEach var="i" items="${item.psizeTreeSet}" begin="0" end="${fn:length(item.psizeTreeSet) - 1}" varStatus="isstatus">
                             <div class="form-check me-3">
                               <c:if test="${isstatus.index == 0}">
-                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}" value="${i}" checked>
+                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}sep${isstatus.index}" value="${i}" onclick="changeSize${status.index}sep${isstatus.index}()" checked>
                               </c:if>
                               <c:if test="${isstatus.index > 0}">
-                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}" value="${i}">
+                                <input class="form-check-input" type="radio" name="size" id="sizeId${status.index}sep${isstatus.index}" value="${i}" onclick="changeSize${status.index}sep${isstatus.index}()">
                               </c:if>
-                              <label class="form-check-label" for="sizeId${status.index}"> ${i} </label>
-                            </div>
+                              <label class="form-check-label" for="sizeId${status.index}sep${isstatus.index}">
+                              	<p onclick="changeSize${status.index}sep${isstatus.index}()">${i}</p>
+                              </label>
+                            </div>                           
                           </c:forEach>
                         </div>
                       </div>
@@ -232,7 +236,10 @@
                       </div>
                       <hr class="my-2">
                       <div class="d-flex justify-content-center mt-2">
-                        <input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="쇼핑백 담기" type="submit">
+
+                      	<input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="쇼핑백 담기" type="submit">
+                      	<!-- <input class="btn btn-dark btn-sm col-6" data-bs-dismiss="modal" value="해당 Color/Size는 품절되었습니다." type="submit" disabled> -->
+                    	
                       </div>
                     </div>
                   </form>
@@ -307,7 +314,7 @@
           </div>
         </c:if>
 
-        <script>
+    <script>
 	
 	
 	// Modal창 관리
@@ -339,8 +346,7 @@
 		totalId.innerText = total
 
 
-	}
-	
+	}	
 	
 	</script>
 

@@ -11,15 +11,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<style>
- 	
-  	.paginator {
-	  transition: 0.5s;
-	  cursor: pointer;
-  	}
- 	
-   </style>
-
 <script>
 	
 	function getHistory() {
@@ -83,34 +74,6 @@
 		}
 	}
 
-	function page1() {
-		const showPage1 = document.getElementById("page1");
-		const showPage2 = document.getElementById("page2");
-		const changeSize1 = document.getElementById("changeSize1")
-		const changeSize2 = document.getElementById("changeSize2")
-		
-		console.log("page1()")
-		if (showPage1.style.display == "none") {
-			showPage1.style.display = "block";
-			showPage2.style.display = "none";
-			changeSize1.style.fontSize = "calc(0.8rem + .6vw)";
-			changeSize2.style.fontSize = "calc(0.325rem + .6vw)";
-		}
-	}
-
-	function page2() {
-		const showPage1 = document.getElementById("page1");
-		const showPage2 = document.getElementById("page2");
-		
-		console.log("page2()")
-		
-		if (showPage1.style.display == "block") {
-			showPage1.style.display = "none";
-			showPage2.style.display = "block";
-			changeSize1.style.fontSize = "calc(0.325rem + .6vw)";
-			changeSize2.style.fontSize = "calc(0.8rem + .6vw)";
-		}
-	}
 </script>
 
 </head>
@@ -119,15 +82,6 @@
 <div class="d-flex justify-content-center">
 <div class="col-8">
 
-<c:forEach var="item" items="${orderedList}">
-	<p>${item}</p>
-</c:forEach>
-
-<p>${member}</p>
-
-<c:forEach var="coupon" items="${couponlist}">
-  <p>${coupon}</p>
-</c:forEach>
 <h3>마이 페이지</h3>
 
 <!-- 마이페이지 버튼 -->
@@ -153,7 +107,11 @@
     </tr>
   </thead>
   <tbody>
-    <c:forEach var="item" items="${orderedList}">
+  	<c:set var="historyCount" value="0" />
+  	<c:set var="couponCount" value="0" />
+    <!-- 쇼핑내역 정보 -->
+    <c:forEach var="item" items="${orderedList}" varStatus="oistatus">
+    <c:set var="historyCount" value="${historyCount + 1}" />
     <tr>
       <th class="text-center align-middle">
       	<h6>${item.oid}</h6>
@@ -168,7 +126,7 @@
       	<h6>${item.pname}</h6>    	
       	<h6>&nbsp;</h6>
       	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ${item.pcolor} / Size: ${item.psize}</h6>
+      	<h6 class="text-muted">Color: <img alt="" src="${item.pcolorimage}" style="width: 20px; height: 20px;"> ${item.pcolor} / Size: ${item.psize}</h6>
    	  </div>
       </td>
       <td class="text-center align-middle">
@@ -184,122 +142,56 @@
         </c:if>      	
       	<h6>(${item.otime})</h6>
         <form action="order/delete" method="post">
-          <input type="text" id="oid" name="oid" class="form-control" value="${item.oid}" style="display: block;">
-          <input class="btn btn-sm" value="[ 주문취소 ]" type="submit">
+          <!-- 주문취소 확인 Modal -->
+          <div class="modal" id="getDeleteModal${oistatus.index}" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">▶ 알림</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-start">
+                  <h5>정말 주문을 취소하시겠습니까?</h5> 
+                </div>
+                <div class="d-flex justify-content-center">
+                  <img alt="" src="${pageContext.request.contextPath}/resources/images/error_cat.png" class="pop" style="width: 50%;">
+                </div>
+                <div class="d-flex justify-content-end p-3">             
+                  <input class="btn btn-dark me-2" value="확인" type="submit">
+                  <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="text" id="oid" name="oid" class="form-control" value="${item.oid}" style="display: none;">
+          <c:if test="${item.ostatus == 1}">
+          	<input class="btn btn-sm" id="deleteModalBtn${oistatus.index}" value="[ 주문취소 ]" type="submit">
+          </c:if>
+          
         </form>
       </td>
     </tr>
+    
+    <script>
+	    // deleteModal
+		$('#deleteModalBtn${oistatus.index}').click(function(e){
+			e.preventDefault();
+			$('#getDeleteModal${oistatus.index}').modal("show");
+		});
+    </script>
+    
     </c:forEach>
+   <!-- 쇼핑백에 상품이 없을 경우 -->
+    <c:if test="${historyCount == 0}">
+    <tr>
+      <td colspan="12" class="text-center align-middle" style="height: 160px; width: 75vw;">
+      	<h4>쇼핑내역이 없습니다.</h4>
+      </td>
+    </tr>
+    </c:if>
   </tbody>
 </table>
 
-<!-- page2 -->
-<table class="table table-striped" id="page2" style="display: none;">
-  <thead class="text-center">
-    <tr>
-      <th class="col-1">주문번호</th>
-      <th class="col-2"></th>
-      <th class="col-4">상품정보</th>
-      <th class="col-1">수량</th>
-      <th class="col-2">판매가</th>
-      <th class="col-2">주문상태</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10135229</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_1.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">NICK&NICOLE N_21SUMMER 2021 S/S</h6>
-      	<h6>엠브로더리 코튼 셔츠 화이트</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ⬜White / Size: M(95)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 56,000</td>
-      <td class="text-center align-middle">
-      	<h6>입금완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10412368</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_2.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN AD307 2020 F/W</h6>
-      	<h6>로얄블루 오버핏 울 체크셔츠</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: 🟦Blue / Size: L(100)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 35,900</td>
-      <td class="text-center align-middle">
-      	<h6>배송완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-    <tr>
-      <th class="text-center align-middle">
-      	<h6>211131P10136490</h6>
-      	<h6>(2021.11.31)</h6>
-      </th>
-      <td>
-      	<img src="${pageContext.request.contextPath}/resources/images/female_shirt_3.jpg" class="card-img-top" style="width: 8rem;" alt="">
-      </td>
-      <td>
-      <div>
-      	<h6 class="fw-bold">AVAN 20FW35 2020 ALL</h6>
-      	<h6>SPRING OVERSIZED SHIRT GREEN</h6>    	
-      	<h6>&nbsp;</h6>
-      	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: 🟩Green / Size: L(100)</h6>
-   	  </div>
-      </td>
-      <td>
-    	<div class="d-flex justify-content-center" style="margin-top: 50%;">
-	    	<div class="me-1 fs-5">1</div>	
-	   	</div>
-      </td>
-      <td class="text-center align-middle">\ 45,200</td>
-      <td class="text-center align-middle">
-      	<h6>배송완료</h6>
-      	<h6>(2021.11.31)</h6>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
-
-<div class="d-flex justify-content-center mt-4">
-	<h3 class="mx-3 paginator" id="changeSize1" onclick="page1()" style="font-size: calc(0.8rem + .6vw);">1페이지</h3>
-	<h3 class="paginator"  onclick="page2()" id="changeSize2" style="font-size: calc(0.325rem + .6vw);">2페이지</h3>
-</div>
 </div>
 
 <!-- 프로필 -->
@@ -420,84 +312,58 @@
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	<c:forEach var="coupon" items="${couponlist}">
+		<c:set var="couponCount" value="${couponCount + 1}" />
 	    <tr>
 	      <th class="text-center align-middle">
-	      	<h6>신규회원 무료</h6>
-	      	<h6>반품 쿠폰</h6>
+	      	<h6>${coupon.cname}</h6>
 	      </th>
 	      <td class="text-center align-middle">
-	      	<h6>RT2-021-092-3FF-8N</h6>
+	      	<h6>${coupon.ccode}</h6>
 	      </td>
-	      <td>
-			<h6>•반품 시 배송비 무료</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	    	<h6>X</h6>
+	      <td class="align-middle">
+			<h6>•${coupon.ccontent}</h6>
 	      </td>
 	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2022. 01. 31.</h6>
+	    	<h6>${coupon.crate}</h6>
 	      </td>
 	      <td class="text-center align-middle">
-	      	<h6>미사용</h6>
+	      	<h6>${coupon.creleasedate} ~</h6>
+	      	<h6>${coupon.cexpiredate}</h6>
+	      </td>
+	      <td class="text-center align-middle">
+	      ${coupon.cstatus}
+	      ${coupon.creleasedate}
+	      	<c:if test="${coupon.cstatus == 0}">
+	      		<h6>미사용</h6>
+	      	</c:if>
+	      	<c:if test="${coupon.cstatus == 1}">
+	      		<h6>${coupon.creleasedate}</h6>
+	      	</c:if>
+	      	<c:if test="${coupon.cstatus == 2}">
+	      		<h6>기간만료</h6>
+	      	</c:if>
+	      	
 	      </td>
 	    </tr>
-	
+		</c:forEach>
+	   <!-- 발급받은 쿠폰이 없을 경우 -->
+	    <c:if test="${couponCount == 0}">
 	    <tr>
-	      <th class="text-center align-middle">
-	      	<h6>신규회원 전용</h6>
-	      	<h6>정상 15% 쿠폰</h6>
-	      </th>
-	      <td class="text-center align-middle">
-	      	<h6>BT2-021-092-3HU-HSB-6G1</h6>
-	      </td>
-	      <td>
-	      	<h6>•THE HANDSOME에 신규가입하신 회원님께 드리는 혜택이며, 정상 상품 구매 시 15% 할인이 적용됩니다.</h6>
-	      	<h6>•아울렛 제외 / 오프라인 매장 불가</h6>    	
-	      </td>
-	      <td class="text-center align-middle">
-			<h6>15%</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2021. 10. 23.</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 10. 01.</h6>
+	      <td colspan="12" class="text-center align-middle" style="height: 160px; width: 75vw;">
+	      	<h4>발급받은 쿠폰이 없습니다.</h4>
 	      </td>
 	    </tr>
-	
-	    <tr>
-	      <th class="text-center align-middle">
-	      	<h6>신규회원 전용</h6>
-	      	<h6>아울렛 5% 쿠폰</h6>
-	      </th>
-	      <td>
-	      	<h6>OU2-021-092-3HA-Y28-W9Z</h6>
-	      </td>
-	      <td>
-	      <div>	
-	      	<h6>•THE HANDSOME에 신규가입하신 회원님께 드리는 혜택이며, 아울렛 상품 구매 시 5% 할인이 적용됩니다.</h6>
-	      	<h6>•오프라인 매장 불가</h6>  
-	   	  </div>
-	      </td>
-	      <td class="text-center align-middle">
-			<h6>5%</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2021. 10. 23.</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>미사용</h6>
-	      </td>
-	    </tr>
-	
+	    </c:if>
+
 	  </tbody>
 	</table>
-
+	
 </div>
-
+	<div class="d-flex justify-content-center mt-5">
+  		<a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>
+  		<a href="${pageContext.request.contextPath}/cart/list" class="btn btn-dark col-3 me-3">쇼핑백 보기</a>
+	</div>
 </div>
 </div>
 
