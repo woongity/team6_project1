@@ -47,6 +47,7 @@
 		  <label class="form-check-label" for="itemId${status.index}">
 		  </label>
 		</div>
+		<div id="isItemCheck${status.index}">0</div>
       	<img src="${item.pimage1}" class="card-img-top" style="width: 7rem;" alt="">
       </th>
       <td>
@@ -339,6 +340,8 @@
 		const finalTotalId1 = document.getElementById("finalTotalValue1")
 		const finalTotalId2 = document.getElementById("finalTotalValue2")
 		
+		const ischeckedItemId = document.getElementById("itemId${status.index}").checked
+		
 		let count = countId${status.index}.innerText
 		let total = totalId${status.index}.innerText
 		let temp = tempId${status.index}.innerText
@@ -346,27 +349,30 @@
 		let finalTotal1 = finalTotalValue1.innerText
 		let finalTotal2 = finalTotalValue2.innerText
 		
-		if (operator == "plus") {
-			count = parseInt(count) + 1
-			total = parseInt(total) + parseInt(temp)
-			finalCount = parseInt(finalCount) + 1
-			finalTotal1 = parseInt(finalTotal1) + parseInt(temp)
-			finalTotal2 = parseInt(finalTotal2) + parseInt(temp)
-		} else if (operator == "minus" && count > 1) {
-			count = parseInt(count) - 1
-			total = parseInt(total) - parseInt(temp)
-			finalCount = parseInt(finalCount) - 1
-			finalTotal1 = parseInt(finalTotal1) - parseInt(temp)
-			finalTotal2 = parseInt(finalTotal2) - parseInt(temp)
+		if (ischeckedItemId) {
+			if (operator == "plus") {
+				count = parseInt(count) + 1
+				total = parseInt(total) + parseInt(temp)
+				finalCount = parseInt(finalCount) + 1
+				finalTotal1 = parseInt(finalTotal1) + parseInt(temp)
+				finalTotal2 = parseInt(finalTotal2) + parseInt(temp)
+			} else if (operator == "minus" && count > 1) {
+				count = parseInt(count) - 1
+				total = parseInt(total) - parseInt(temp)
+				finalCount = parseInt(finalCount) - 1
+				finalTotal1 = parseInt(finalTotal1) - parseInt(temp)
+				finalTotal2 = parseInt(finalTotal2) - parseInt(temp)
+			}
+
+			$('input[name=new_pquantity]').attr('value', count);
+				
+			countId.innerText = count
+			totalId.innerText = total
+			finalCountId.innerText = finalCount
+			finalTotalId1.innerText = finalTotal1
+			finalTotalId2.innerText = finalTotal2			
 		}
 
-		$('input[name=new_pquantity]').attr('value', count);
-			
-		countId.innerText = count
-		totalId.innerText = total
-		finalCountId.innerText = finalCount
-		finalTotalId1.innerText = finalTotal1
-		finalTotalId2.innerText = finalTotal2
 	}
 	
 	// 체크박스로 선택한 상품만 집계되도록 하는 함수
@@ -386,6 +392,11 @@
 		
 		const abledBtnId = document.getElementById("abledBtn")
 		const disabledBtnId = document.getElementById("disabledBtn")
+		
+		const selectItemId = document.getElementById("isItemCheck${status.index}")
+		const inputIsSelectedId = document.getElementById("isSelected${status.index}")
+		
+		console.log(inputIsSelectedId)
 	
 		let sumCount = parseInt(testcountId.innerText)
 		let sumPrice = parseInt(testtotalId.innerText)
@@ -418,9 +429,15 @@
 			disabledBtnId.style.display = "none"			
 		}
 		
+		if (ischeckedItemId) {
+			inputIsSelectedId.value = "1"
+		} else if (!ischeckedItemId) {
+			inputIsSelectedId.value = "0"
+		}
+		
 	}
 	
-	function checkAllBtn() {
+/* 	function checkAllBtn() {
 		const allCheckboxId = document.getElementById("allCheckbox")
 		
 		if (allCheckboxId.checked) {
@@ -440,7 +457,7 @@
 				temp3 = "totalId"
 			}
 		}
-	}
+	} */
     
     </script>
     <c:set var="count" value="${count + item.pquantity}" />
@@ -497,16 +514,18 @@
   </tbody>
 </table>
 <div class="d-flex justify-content-center mt-5">
-  <a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>	
+  <a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>
   <form action="${pageContext.request.contextPath}/order/orderPage" method="post" class="col-3">
     <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
-      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: none;">
-      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: none;">
-      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: none;">
+      <input type="text" id="isSelected${rstatus.index}" name="isSelected" class="form-control" value="0" style="display: block;">
+      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: block;">
+      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: block;">
+      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: block;">
     </c:forEach>
     <input class="btn btn-dark" id="disabledBtn" value="주문하기" type="submit" style="width: 100%; dispaly: block;" disabled>
     <input class="btn btn-dark" id="abledBtn" value="주문하기" type="submit" style="width: 100%; display: none;">
   </form>
+ 
 </div>
 
 
