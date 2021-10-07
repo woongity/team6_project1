@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.webapp.aspect.LoginChecking;
 import com.mycompany.webapp.dto.Cartitem;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.service.CartitemService;
@@ -41,6 +42,7 @@ public class ListController {
 		return "home";
 	}
 	
+	@LoginChecking
 	@PostMapping("/put")
 	public String putIntoCart(String pcode, String color, String size, int quantity,int price) {
 		logger.info("실행");

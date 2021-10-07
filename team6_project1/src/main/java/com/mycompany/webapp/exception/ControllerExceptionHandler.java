@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 //객체로 생성해서 관리하도록 설정
 @Component
@@ -28,13 +27,19 @@ public class ControllerExceptionHandler {
 		e.printStackTrace();
 		model.addAttribute("message", e.getMessage());
 		return "error/OutOfStockException";
+
+	@ExceptionHandler
+	public String handleNotAuthenticatedUserRequestException(UnauthorizedException e) { 
+		logger.info("handleNotAuthenticatedUserRequestException 실행");
+		e.printStackTrace();
+		return "error/401";
 	}
 	
 	@ExceptionHandler
-	public String handle404Exception(NoHandlerFoundException e) {
-		logger.info("실행");
+	public String handleNullPointerException(NullPointerException e) {
+		logger.info("NullPointException");
 		e.printStackTrace();
-		return "error/404";
+		return "error/500";
 	}
 	
 	@ExceptionHandler
@@ -43,4 +48,5 @@ public class ControllerExceptionHandler {
 		e.printStackTrace();
 		return "error/500";
 	}
+
 }
