@@ -57,7 +57,7 @@
 		      	<h6>${product.pname}</h6>    	
 		      	<h6>&nbsp;</h6>
 		      	<h6>&nbsp;</h6>
-		      	<h6 class="text-muted">Color: ${product.pcolor} / Size: ${product.psize}</h6>
+		      	<h6 class="text-muted">Color: <span><img src="${product.pcolorimage}" class="mx-1" style="width: 20px; height: 20px;"></span>${product.pcolor} / Size: ${product.psize}</h6>
 		      	${multiple}
 		      </td>
 		      <td>

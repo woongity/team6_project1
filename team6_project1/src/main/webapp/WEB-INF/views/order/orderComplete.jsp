@@ -67,7 +67,7 @@
       	<h6>${oi.pname}</h6>    	
       	<h6>&nbsp;</h6>
       	<h6>&nbsp;</h6>
-      	<h6 class="text-muted">Color: ${oi.pcolor} / Size: ${oi.psize}</h6>
+      	<h6 class="text-muted">Color: <span><img src="${oi.pcolorimage}" class="mx-1" style="width: 20px; height: 20px;"></span>${oi.pcolor} / Size: ${oi.psize}</h6>
       </td>
       <td>
     	<div class="d-flex justify-content-center" style="margin-top: 30%;">
