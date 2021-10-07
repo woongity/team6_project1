@@ -1,5 +1,6 @@
 package com.mycompany.webapp.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -64,4 +65,5 @@ public class ListviewService {
 	public void updatePstock(String pcode, String pcolor, String psize, int pquantity) {
 		productDao.updatePstock(pcode, pcolor, psize, pquantity);
 	}
+
 }
