@@ -53,7 +53,9 @@ public class OrderController {
 	@RequestMapping("/orderPage")
 	public String orderPage(@RequestParam(value = "orderPcode", required = true) ArrayList<String> orderPcode,
 			@RequestParam(value = "orderPcolor", required = true) ArrayList<String> orderPcolor,
-			@RequestParam(value = "orderPsize", required = true) ArrayList<String> orderPsize, Model model,
+			@RequestParam(value = "orderPsize", required = true) ArrayList<String> orderPsize, 
+			@RequestParam(value = "isSelected", required = true) ArrayList<Integer> isSelected, //0:선택x, 1:선택
+			Model model,
 			HttpServletResponse response) throws Exception {
 		logger.info("Run order/orderPage");
 
@@ -62,8 +64,7 @@ public class OrderController {
 		String mid = authentication.getName();
 
 		// 장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
-		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid,
-				orderPcode, orderPcolor, orderPsize);
+		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPcolor, orderPsize, isSelected);
 		model.addAttribute("orderProducts", cartitemJoinProduct);
 
 		// 주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
