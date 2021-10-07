@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.aspect.LoginChecking401;
 import com.mycompany.webapp.dto.CartitemJoinProduct;
@@ -94,9 +96,9 @@ public class OrderController {
 		return "order/orderPage";
 	}
 
-	// 주문페이지에서 주문완료하기
+	// 주문페이지에서 주문완료하기(DB 저장)
 	@LoginChecking401
-	@RequestMapping("/orderComplete")
+	@PostMapping("/orderComplete")
 	public String orderComplete(@RequestParam(value="pcode", required=true) ArrayList<String> pcode, 
 								@RequestParam(value="pcolor", required=true) ArrayList<String> pcolor, 
 								@RequestParam(value="psize", required=true) ArrayList<String> psize,
@@ -106,13 +108,14 @@ public class OrderController {
 								String oaddress,
 								String ocomment,
 								String opaymentmethod,
-								Model model) {
+								HttpSession session) {
 		logger.info("Run order/orderComplete");
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		long oidTime = System.currentTimeMillis();
 		String oid = mid + oidTime;
+		session.setAttribute("oid", oid);
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		Date date = new Date();
@@ -121,33 +124,45 @@ public class OrderController {
 
 		// 사용자가 작성한 주문 데이터(Order Table)를 DB에 저장
 		Order order = new Order(oid, otime, mid, oname, otel, oaddress, ocomment, opaymentmethod, '1');
+		orderService.insertOrder(mid, order, pcode, pcolor, psize, pquantity);
 
-		if(orderService.insertOrder(mid, order, pcode, pcolor, psize, pquantity)) {
-			logger.info("주문 성공");
-			
-			List<Orderitem> orders = orderService.selectByOid(oid);
-			
-			ArrayList<OrderitemJoinProduct> ordereditems = new ArrayList<OrderitemJoinProduct>();
-			int totalprice = 0;		//총 주문 비용
-			int totalnumber = 0;	//총 주문 삼품 갯수
-			
-			for(Orderitem orderitem : orders) {
-				Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(),orderitem.getPsize());
-				ordereditems.add(new OrderitemJoinProduct(product.getPname(),orderitem.getPquantity(),product.getPimage1(), product.getPcolorimage(),
-														  product.getPbrand(),orderitem.getPcolor(),orderitem.getPsize(),
-														  orderitem.getPcode(),orderitem.getOid(),product.getPprice()));
-				totalnumber += orderitem.getPquantity();
-				totalprice += product.getPprice() * orderitem.getPquantity();
-			}
-			
-			Member orderMember = memberService.selectByMid(mid);
-			model.addAttribute("orderMember", orderMember);
-			
-			model.addAttribute("order", order);
-			model.addAttribute("ordereditems", ordereditems);
-			model.addAttribute("totalnumber", totalnumber);
-			model.addAttribute("totalprice", totalprice);
-		} 
+		return "redirect:/order/redirectOrderComplete";
+  }
+	
+	// 주문페이지에서 주문완료하기(뷰 데이터 전송)
+	@LoginChecking401
+	@GetMapping("/redirectOrderComplete")
+	public String orderComplete(HttpSession session, Model model) {
+		logger.info("Run order/redirectOrderComplete");
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
+		
+		String oid = session.getAttribute("oid").toString();
+		
+		List<Orderitem> orders = orderService.selectByOid(oid);
+		
+		ArrayList<OrderitemJoinProduct> ordereditems = new ArrayList<OrderitemJoinProduct>();
+		int totalprice = 0;		//총 주문 비용
+		int totalnumber = 0;	//총 주문 삼품 갯수
+		
+		for(Orderitem orderitem : orders) {
+			Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(),orderitem.getPsize());
+			ordereditems.add(new OrderitemJoinProduct(product.getPname(),orderitem.getPquantity(),product.getPimage1(), product.getPcolorimage(),
+													  product.getPbrand(),orderitem.getPcolor(),orderitem.getPsize(),
+													  orderitem.getPcode(),orderitem.getOid(),product.getPprice()));
+			totalnumber += orderitem.getPquantity();
+			totalprice += product.getPprice() * orderitem.getPquantity();
+		}
+		model.addAttribute ("ordereditems", ordereditems);
+		model.addAttribute("totalnumber", totalnumber);
+		model.addAttribute("totalprice", totalprice);
+		
+		Member orderMember = memberService.selectByMid(mid);
+		model.addAttribute ("orderMember", orderMember);
+		
+		Order order = orderService.selectOneByOid(oid);
+		model.addAttribute ("order", order);
 		
 		return "order/orderComplete";
   }

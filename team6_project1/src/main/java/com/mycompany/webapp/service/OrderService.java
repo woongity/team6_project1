@@ -34,7 +34,7 @@ public class OrderService {
 	private CartitemDao cartitemDao;
 
 	@Transactional
-	public boolean insertOrder(String mid, Order order, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> oquantity) {
+	public void insertOrder(String mid, Order order, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> oquantity) {
 
 		//주문내역 DB에 저장
 		orderDao.insertOrder(order);
@@ -56,7 +56,6 @@ public class OrderService {
 			}
 		}
 			
-		return true;
 	}
 	
 	public List<Order> selectByMid(String mid){
