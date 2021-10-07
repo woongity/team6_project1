@@ -9,6 +9,7 @@ public class OrderitemJoinProduct {
 	String pname;
 	int pquantity;
 	String pimage1;
+	String pcolorimage;
 	String pbrand;
 	String pcolor;
 	String psize;

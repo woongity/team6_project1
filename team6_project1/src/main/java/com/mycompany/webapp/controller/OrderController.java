@@ -107,12 +107,13 @@ public class OrderController {
 			
 			for(Orderitem orderitem : orders) {
 				Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(),orderitem.getPsize());
-				ordereditems.add(new OrderitemJoinProduct(product.getPname(),orderitem.getPquantity(),product.getPimage1(),
+				ordereditems.add(new OrderitemJoinProduct(product.getPname(),orderitem.getPquantity(),product.getPimage1(), product.getPcolorimage(),
 														  product.getPbrand(),orderitem.getPcolor(),orderitem.getPsize(),
 														  orderitem.getPcode(),orderitem.getOid(),product.getPprice()));
 				totalnumber += orderitem.getPquantity();
 				totalprice += product.getPprice() * orderitem.getPquantity();
 			}
+			
 			Member orderMember = memberService.selectByMid(mid);
 			model.addAttribute("orderMember", orderMember);
 			
