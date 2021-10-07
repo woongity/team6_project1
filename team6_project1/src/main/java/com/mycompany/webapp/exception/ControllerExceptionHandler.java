@@ -3,6 +3,7 @@ package com.mycompany.webapp.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -20,6 +21,14 @@ public class ControllerExceptionHandler {
 		return "redirect:/member/loginForm";
 	}
 	
+	@ExceptionHandler
+	public String OutOfStockException(OutOfStockExceptionHandler e, Model model) {
+		logger.info("Run / OutOfStockException");
+		e.printStackTrace();
+		model.addAttribute("message", e.getMessage());
+		return "error/OutOfStockException";
+	}
+
 	@ExceptionHandler
 	public String handleNotAuthenticatedUserRequestException(UnauthorizedException e) { 
 		logger.info("handleNotAuthenticatedUserRequestException 실행");
@@ -40,5 +49,5 @@ public class ControllerExceptionHandler {
 		e.printStackTrace();
 		return "error/500";
 	}
-	
+
 }
