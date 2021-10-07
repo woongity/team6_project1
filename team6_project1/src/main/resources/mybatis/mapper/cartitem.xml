@@ -8,18 +8,9 @@
 		from cartitem c, product p
 		where c.pcode = p.pcode and c.pcolor = p.pcolor and c.psize = p.psize
 		and c.mid = #{mid}
-		and c.pcode in
-		<foreach collection="pcode" item="pcode" index="index"  open="(" separator="," close=")">
-            #{pcode}
-        </foreach>
-		and c.pcolor in
-		<foreach collection="pcolor" item="pcolor" index="index"  open="(" separator="," close=")">
-            #{pcolor}
-        </foreach>
-		and c.psize in
-		<foreach collection="psize" item="psize" index="index"  open="(" separator="," close=")">
-            #{psize}
-        </foreach>
+		and c.pcode = #{pcode}
+		and c.pcolor = #{pcolor}
+		and c.psize = #{psize}
 	</select>
 
 	<select id="selectAllByMid" parameterType="String" resultType="cartitem">
