@@ -27,6 +27,7 @@ public class ControllerExceptionHandler {
 		e.printStackTrace();
 		model.addAttribute("message", e.getMessage());
 		return "error/OutOfStockException";
+	}
 
 	@ExceptionHandler
 	public String handleNotAuthenticatedUserRequestException(UnauthorizedException e) { 

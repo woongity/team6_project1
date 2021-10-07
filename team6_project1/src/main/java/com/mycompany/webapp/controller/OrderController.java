@@ -149,7 +149,7 @@ public class OrderController {
 			productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(),
 					product.getPstock() + orderitem.getPquantity());
 		}
-		return "main";
+		return "order/orderDelete";
 	}
 
 	@LoginChecking401
