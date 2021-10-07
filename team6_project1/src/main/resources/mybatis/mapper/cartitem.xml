@@ -4,7 +4,7 @@
 <mapper namespace="com.mycompany.webapp.dao.CartitemDao">
 
 	<select id="selectCartitemJoinProductByPcodePcolorPsize" resultType="com.mycompany.webapp.dto.CartitemJoinProduct">
-		select c.pcode, p.pimage1, p.pbrand, p.pname, c.pcolor, c.psize, p.pprice, c.pquantity
+		select c.pcode, p.pimage1, p.pcolorimage, p.pbrand, p.pname, c.pcolor, c.psize, p.pprice, c.pquantity
 		from cartitem c, product p
 		where c.pcode = p.pcode and c.pcolor = p.pcolor and c.psize = p.psize
 		and c.mid = #{mid}

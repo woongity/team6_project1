@@ -21,8 +21,9 @@ public class CouponService {
 
 	@Resource
 	private CouponDao couponDao;
-
-	@Resource EventDao eventDao;
+	@Resource 
+	private EventDao eventDao;
+	
 	public List<Coupon> selectByMid(String mid) {
 		return couponDao.selectByMid(mid);
 	}
