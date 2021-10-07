@@ -107,7 +107,11 @@
     </tr>
   </thead>
   <tbody>
-    <c:forEach var="item" items="${orderedList}" varStatus="oistatus" begin="0" end="8">
+  	<c:set var="historyCount" value="0" />
+  	<c:set var="couponCount" value="0" />
+    <!-- 쇼핑내역 정보 -->
+    <c:forEach var="item" items="${orderedList}" varStatus="oistatus">
+    <c:set var="historyCount" value="${historyCount + 1}" />
     <tr>
       <th class="text-center align-middle">
       	<h6>${item.oid}</h6>
@@ -177,6 +181,14 @@
     </script>
     
     </c:forEach>
+   <!-- 쇼핑백에 상품이 없을 경우 -->
+    <c:if test="${historyCount == 0}">
+    <tr>
+      <td colspan="12" class="text-center align-middle" style="height: 160px; width: 75vw;">
+      	<h4>쇼핑내역이 없습니다.</h4>
+      </td>
+    </tr>
+    </c:if>
   </tbody>
 </table>
 
@@ -301,8 +313,7 @@
 	  </thead>
 	  <tbody>
 	  	<c:forEach var="coupon" items="${couponlist}">
-		  <p>${coupon}</p>
-		
+		<c:set var="couponCount" value="${couponCount + 1}" />
 	    <tr>
 	      <th class="text-center align-middle">
 	      	<h6>${coupon.cname}</h6>
@@ -336,62 +347,23 @@
 	      </td>
 	    </tr>
 		</c:forEach>
-		
-<!-- 	    <tr>
-	      <th class="text-center align-middle">
-	      	<h6>신규회원 전용</h6>
-	      	<h6>정상 15% 쿠폰</h6>
-	      </th>
-	      <td class="text-center align-middle">
-	      	<h6>BT2-021-092-3HU-HSB-6G1</h6>
-	      </td>
-	      <td>
-	      	<h6>•THE HANDSOME에 신규가입하신 회원님께 드리는 혜택이며, 정상 상품 구매 시 15% 할인이 적용됩니다.</h6>
-	      	<h6>•아울렛 제외 / 오프라인 매장 불가</h6>    	
-	      </td>
-	      <td class="text-center align-middle">
-			<h6>15%</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2021. 10. 23.</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 10. 01.</h6>
-	      </td>
-	    </tr>
-	
+	   <!-- 발급받은 쿠폰이 없을 경우 -->
+	    <c:if test="${couponCount == 0}">
 	    <tr>
-	      <th class="text-center align-middle">
-	      	<h6>신규회원 전용</h6>
-	      	<h6>아울렛 5% 쿠폰</h6>
-	      </th>
-	      <td>
-	      	<h6>OU2-021-092-3HA-Y28-W9Z</h6>
-	      </td>
-	      <td>
-	      <div>	
-	      	<h6>•THE HANDSOME에 신규가입하신 회원님께 드리는 혜택이며, 아울렛 상품 구매 시 5% 할인이 적용됩니다.</h6>
-	      	<h6>•오프라인 매장 불가</h6>  
-	   	  </div>
-	      </td>
-	      <td class="text-center align-middle">
-			<h6>5%</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>2021. 09. 23. ~</h6>
-	      	<h6>2021. 10. 23.</h6>
-	      </td>
-	      <td class="text-center align-middle">
-	      	<h6>미사용</h6>
+	      <td colspan="12" class="text-center align-middle" style="height: 160px; width: 75vw;">
+	      	<h4>발급받은 쿠폰이 없습니다.</h4>
 	      </td>
 	    </tr>
-	 -->
+	    </c:if>
+
 	  </tbody>
 	</table>
-
+	
 </div>
-
+	<div class="d-flex justify-content-center mt-5">
+  		<a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>
+  		<a href="${pageContext.request.contextPath}/cart/list" class="btn btn-dark col-3 me-3">쇼핑백 보기</a>
+	</div>
 </div>
 </div>
 
