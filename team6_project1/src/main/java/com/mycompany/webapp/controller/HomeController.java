@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.aspect.LoginChecking;
+
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -18,9 +20,10 @@ public class HomeController {
 		return "main";
 	}
 
+	@LoginChecking
     @RequestMapping("/getname")
     @ResponseBody
-    public String count() {
+    public String getname() {
        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
        String mid = authentication.getName();
        return mid;

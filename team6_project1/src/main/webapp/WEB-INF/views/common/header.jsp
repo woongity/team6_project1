@@ -99,7 +99,7 @@
 	<script>
 		window.onload = function() {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/order/count"
+				url: "${pageContext.request.contextPath}/cart/count"
 			}) .done((data) => {
 				$("#shoppingbagcount").html("<div class=\"\" style=\"text-underline-position:under;\">" + "(" + data + ")" + "</div>")
 			})

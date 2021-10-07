@@ -158,29 +158,21 @@ public class OrderController {
 		logger.info("Run order/delete");
 
 		// 주문 상태 0으로 변경
-		Order order = orderService.selectOneByOid(oid);
-		order.setOstatus('0');
-		orderService.update(order);
+//		Order order = orderService.selectOneByOid(oid);
+//		order.setOstatus('0');
+		orderService.update(oid);
 
 		// 재고 복원
 		List<Orderitem> orderItems = orderService.selectByOid(oid);
 		for (Orderitem orderitem : orderItems) {
-			Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(),
-					orderitem.getPsize());
-			productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(),
-					product.getPstock() + orderitem.getPquantity());
+//			Product product = productService.selectOne(orderitem.getPcode(), orderitem.getPcolor(),
+//					orderitem.getPsize());
+//			productService.updatePstock(product.getPcode(), product.getPcolor(), product.getPsize(),
+//					product.getPstock() + orderitem.getPquantity());
+//						
+			productService.updatePstock(orderitem.getPcode(), orderitem.getPcolor(), orderitem.getPsize(), orderitem.getPquantity());
 		}
 		return "order/orderDelete";
-	}
-
-	@LoginChecking401
-	@RequestMapping("/count")
-	@ResponseBody
-	public String count() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String mid = authentication.getName();
-		int itemCount = cartitemService.selectCount(mid);
-		return String.valueOf(itemCount);
 	}
 
 }

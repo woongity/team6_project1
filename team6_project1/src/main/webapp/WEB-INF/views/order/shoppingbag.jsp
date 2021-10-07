@@ -47,7 +47,6 @@
 		  <label class="form-check-label" for="itemId${status.index}">
 		  </label>
 		</div>
-		<div id="isItemCheck${status.index}">0</div>
       	<img src="${item.pimage1}" class="card-img-top" style="width: 7rem;" alt="">
       </th>
       <td>
@@ -395,8 +394,6 @@
 		
 		const selectItemId = document.getElementById("isItemCheck${status.index}")
 		const inputIsSelectedId = document.getElementById("isSelected${status.index}")
-		
-		console.log(inputIsSelectedId)
 	
 		let sumCount = parseInt(testcountId.innerText)
 		let sumPrice = parseInt(testtotalId.innerText)

@@ -74,7 +74,7 @@ public class OrderService {
 		return orderDao.selectOneByOid(oid);
 	}
 	
-	public void update(Order order) {
-		orderDao.update(order);
+	public void update(String oid) {
+		orderDao.update(oid);
 	}
 }

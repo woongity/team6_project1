@@ -35,24 +35,10 @@ public class MyPageController {
 		// order 테이블과 product 테이블을 엮는다. pcode를 기준으로.
 		String mid = principal.getName();
 		
-//		List<String> oidList = orderviewService.selectOidByMid(mid);
-// 		List<OrderitemJoinProductJoinOrder> oiJoinList = new ArrayList<OrderitemJoinProductJoinOrder>();
-// 		for(String oid:oidList) {
-// 			List<OrderitemJoinProductJoinOrder> list  = orderviewService.selectOrderitemJoinProductJoinOrderByOid(oid);
-// 			for(OrderitemJoinProductJoinOrder product:list) {
-// 				logger.info(product.toString());
-// 				oiJoinList.add(product);
-// 			}
-// 		}
 		List<OrderitemJoinProductJoinOrder> list  = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
 
-		for(OrderitemJoinProductJoinOrder product:list) {
-				// logger.info(product.toString());
-				
-			}
-//		model.addAttribute("orderedList", oiJoinList);
  		model.addAttribute("orderedList", list);
-  //		=================================================================================
+//		=================================================================================
 //		이 후는 mypage화면에 추가로 필요한 data들
 		
 		Member member = memberService.selectByMid(mid);
