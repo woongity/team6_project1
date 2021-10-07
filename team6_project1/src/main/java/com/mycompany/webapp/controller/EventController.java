@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.aspect.LoginChecking;
 import com.mycompany.webapp.dto.Coupon;
 import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CouponReleaseRedisService;
@@ -32,11 +33,10 @@ public class EventController {
 
 	@Resource 
 	private CouponReleaseRedisService couponReleaseService;
+	
+	@LoginChecking
 	@RequestMapping("/page")
-	public String content(Principal principal) {
-		if(principal==null) {
-			throw new NotAuthenticatedUserException();
-		}
+	public String content() {
 		logger.info("Run /eventpage");
 		return "eventpage";
 	}
