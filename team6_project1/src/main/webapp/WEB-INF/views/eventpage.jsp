@@ -15,13 +15,16 @@
 
 	<div class="d-flex justify-content-center">
 		<div class="col-8">
-			<h5>이벤트</h5>
-			<div class="" style="height: 100px;"></div>
+			<h3>이벤트</h3>
 			<div class="d-flex justify-content-center">
-				<a class="btn btn-dark col-2" href="javascript:joinEvent()">쿠폰
-					발급받기</a>
+				<img src="${pageContext.request.contextPath}/resources/images/eventmain1.jpg" class="mt-3 mb-3">
 			</div>
-			<div class="" style="height: 100px;"></div>
+			<div class="d-flex justify-content-center">
+				<a class="btn btn-dark col-2" href="javascript:joinEvent()">쿠폰 발급받기</a>
+			</div>
+			<div class="d-flex justify-content-center">
+				<img src="${pageContext.request.contextPath}/resources/images/eventcomment1.jpg" class="mt-3 mb-5">
+			</div>
 		</div>
 	</div>
 	<script>
@@ -32,7 +35,7 @@
    			if(data.result=="success"){
    				console.log(data.result);
    			}else{
-   				alert("수량이 초과되었습니다 ㅅㄱ");
+   				alert("수량이 초과되었습니다.");
    				window.location.reload();
    			}
     	});
