@@ -49,8 +49,7 @@ public class OrderService {
 				orderitemDao.insertOrderitem(orderitem);
 				
 				//Product 테이블의 재고 수정
-				int quantity = pstock - oquantity.get(i);
-				productDao.updatePstock(pcode.get(i), pcolor.get(i), psize.get(i), quantity);
+				productDao.updatePstock(pcode.get(i), pcolor.get(i), psize.get(i), (-1)*oquantity.get(i));
 				
 				//주문 상품 카트에서 삭제
 				cartitemDao.deleteItem(mid, pcode.get(i), pcolor.get(i), psize.get(i));

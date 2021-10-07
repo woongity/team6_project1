@@ -1,7 +1,6 @@
 package com.mycompany.webapp.controller;
 
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +25,7 @@ import com.mycompany.webapp.dto.Order;
 import com.mycompany.webapp.dto.Orderitem;
 import com.mycompany.webapp.dto.OrderitemJoinProduct;
 import com.mycompany.webapp.dto.Product;
+import com.mycompany.webapp.exception.OutOfStockExceptionHandler;
 import com.mycompany.webapp.service.CartitemService;
 import com.mycompany.webapp.service.ListviewService;
 import com.mycompany.webapp.service.MemberService;
@@ -51,9 +51,16 @@ public class OrderController {
 	// 장바구니에서 선택한 상품 주문하기
 	@LoginChecking401
 	@RequestMapping("/orderPage")
-	public String orderPage(@RequestParam(value = "orderPcode", required = true) ArrayList<String> orderPcode,
+	public String orderPage(
+			@RequestParam(value = "orderPcode", required = true) ArrayList<String> orderPcode,
+			@RequestParam(value = "orderPimage1", required = true) ArrayList<String> orderPimage1,
+			@RequestParam(value = "orderPcolorimage", required = true) ArrayList<String> orderPcolorimage,
+			@RequestParam(value = "orderPbrand", required = true) ArrayList<String> orderPbrand,
+			@RequestParam(value = "orderPname", required = true) ArrayList<String> orderPname,
 			@RequestParam(value = "orderPcolor", required = true) ArrayList<String> orderPcolor,
-			@RequestParam(value = "orderPsize", required = true) ArrayList<String> orderPsize, 
+			@RequestParam(value = "orderPsize", required = true) ArrayList<String> orderPsize,
+			@RequestParam(value = "orderPprice", required = true) ArrayList<Integer> orderPprice,
+			@RequestParam(value = "orderPquantity", required = true) ArrayList<Integer> orderPquantity,
 			@RequestParam(value = "isSelected", required = true) ArrayList<Integer> isSelected, //0:선택x, 1:선택
 			Model model,
 			HttpServletResponse response) throws Exception {
@@ -64,7 +71,20 @@ public class OrderController {
 		String mid = authentication.getName();
 
 		// 장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
-		List<CartitemJoinProduct> cartitemJoinProduct = cartitemService.selectCartitemJoinProductByPcodePcolorPsize(mid, orderPcode, orderPcolor, orderPsize, isSelected);
+		ArrayList<CartitemJoinProduct> cartitemJoinProduct = new ArrayList<CartitemJoinProduct>();
+				
+		for(int i=0; i<orderPcode.size(); i++) {
+			if(isSelected.get(i) == 1) {
+				int stock = productService.selectPquantity(orderPcode.get(i), orderPcolor.get(i), orderPsize.get(i));
+				if(orderPquantity.get(i) > stock) {
+					throw new OutOfStockExceptionHandler(orderPname.get(i) + " 제품의 재고가 부족합니다.");
+				} else {
+					cartitemJoinProduct.add(new CartitemJoinProduct(
+							orderPcode.get(i), orderPimage1.get(i), orderPcolorimage.get(i), orderPbrand.get(i), 
+							orderPname.get(i), orderPcolor.get(i), orderPsize.get(i), orderPprice.get(i), orderPquantity.get(i)));
+				}
+			}
+		}
 		model.addAttribute("orderProducts", cartitemJoinProduct);
 
 		// 주문자 정보(Member Table)에서 가져와서 주문자 정보와 배송지 정보로 전달
