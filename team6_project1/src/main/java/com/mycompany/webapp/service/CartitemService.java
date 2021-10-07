@@ -57,7 +57,7 @@ public class CartitemService {
 			if(isSelected.get(i) == 1) {
 				CartitemJoinProduct cartitemJoinProduct = cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode.get(i), pcolor.get(i), psize.get(i));
 				if(cartitemJoinProduct.getPquantity() > productDao.selectPquantity(pcode.get(i), pcolor.get(i), psize.get(i))) {
-					throw new OutOfStockExceptionHandler(cartitemJoinProduct.getPname() + " 제품의 재고가 부족합니다.");
+					throw new OutOfStockExceptionHandler(cartitemJoinProduct.getPname());
 				} else {
 					returnCartitemJoinProduct.add(cartitemJoinProduct);
 				}

@@ -22,7 +22,7 @@
 			<div class="form-group mb-4">
 			    <label for="mid" class="fs-6 mb-2">아이디</label>
 			    <input type="text" class="form-control" id="mid" name="mid">
-				<h5 class="text-muted fs-6 mt-1">▪ ID@example.com</h5>					
+				<h5 class="text-muted fs-6 mt-2">▪ ID@example.com</h5>					
 				<h5 class="text-muted fs-6 mt-1">▪ We'll never share your email with anyone else.</h5>
 			</div>
 			<div class="form-group mb-2">

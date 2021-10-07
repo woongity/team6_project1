@@ -73,7 +73,10 @@
 					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark">Login</a>
 					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">
 						<img src="${pageContext.request.contextPath}/resources/images/shopping-bag.svg" style="width: 24px;" alt="">
-					</a>		
+					</a>
+					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">
+						<img src="${pageContext.request.contextPath}/resources/images/gift1.png" style="width: 24px;" alt="">
+					</a>							
 				</sec:authorize>
 				</li>
 				<%-- <a href="${pageContext.request.contextPath}/order/count" class="btn btn-dark">asdf</a> --%>
@@ -85,8 +88,12 @@
 						<a href="${pageContext.request.contextPath}/logout" class="text-decoration-none text-dark">Logout</a>
 						<a href="${pageContext.request.contextPath}/cart/list" class="text-decoration-none text-dark ms-3">
 							<img src="${pageContext.request.contextPath}/resources/images/shopping-bag.svg" style="width: 24px;" alt="">
-						</a>
+						</a>							
 						<div style="margin-top: 4px;" id="shoppingbagcount"></div>
+						<a href="${pageContext.request.contextPath}/mypage" class="text-decoration-none text-dark ms-2">
+							<img src="${pageContext.request.contextPath}/resources/images/gift1.png" style="width: 24px;" alt="">
+						</a>
+						<div style="margin-top: 4px;" id="couponcount">(0)</div>					
 					</form>
 					
 				</sec:authorize>			
