@@ -39,7 +39,8 @@ public class EventController2 {
 			throw new NotAuthenticatedUserException();
 		}
 		logger.info("Run /eventpage2");
-		return "event/eventpage2";
+
+		return "eventpage2";
 	}
 
 	@RequestMapping(value = "/join", produces = "application/json; charset=UTF-8")
