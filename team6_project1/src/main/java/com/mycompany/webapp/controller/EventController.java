@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mycompany.webapp.aspect.LoginChecking;
 import com.mycompany.webapp.dto.Coupon;
 import com.mycompany.webapp.exception.NotAuthenticatedUserException;
 import com.mycompany.webapp.service.CouponReleaseRedisService;
@@ -30,20 +29,23 @@ public class EventController {
 	// ExecutorService 객체 생성
 	private ExecutorService executorService = Executors.newFixedThreadPool(1);
 
-	@Resource 
-	private CouponReleaseRedisService couponReleaseService;
+	@Resource
+	private ApplicationEventPublisher applicationEventPublisher;
 
 	@Resource
 	private CouponService couponService;
 	
 	@Resource
 	private CouponReleaseRedisService redisCouponReleaseService;
-	
-	@LoginChecking
+
 	@RequestMapping("/page")
-	public String content() {
-		logger.info("Run /eventpage");
-		return "eventpage";
+	public String content(Principal principal) {
+		if (principal == null) {
+			throw new NotAuthenticatedUserException();
+		}
+		
+		logger.info("Run /eventpage1");
+		return "event/eventpage1";
 	}
 
 	@RequestMapping(value = "/join", produces = "application/json; charset=UTF-8")
