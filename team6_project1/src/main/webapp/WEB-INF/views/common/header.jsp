@@ -73,20 +73,27 @@
 					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark">Login</a>
 					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">
 						<img src="${pageContext.request.contextPath}/resources/images/shopping-bag.svg" style="width: 24px;" alt="">
-					</a>		
+					</a>
+					<a href="${pageContext.request.contextPath}/member/loginForm" class="text-decoration-none text-dark ms-3">
+						<img src="${pageContext.request.contextPath}/resources/images/gift1.png" style="width: 24px;" alt="">
+					</a>							
 				</sec:authorize>
 				</li>
 				<%-- <a href="${pageContext.request.contextPath}/order/count" class="btn btn-dark">asdf</a> --%>
 				<li class="d-flex justify-content-between">
 				<sec:authorize access="isAuthenticated()">
-					<a href="${pageContext.request.contextPath}/orderedHistory" class="text-decoration-none text-dark me-3">MyPage</a>
+					<a href="${pageContext.request.contextPath}/mypage" class="text-dark me-3" id="username"></a>
 					<form method="post" action="${pageContext.request.contextPath}/logout" class="d-flex">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 						<a href="${pageContext.request.contextPath}/logout" class="text-decoration-none text-dark">Logout</a>
 						<a href="${pageContext.request.contextPath}/cart/list" class="text-decoration-none text-dark ms-3">
 							<img src="${pageContext.request.contextPath}/resources/images/shopping-bag.svg" style="width: 24px;" alt="">
+						</a>							
+						<div style="margin-top: 4px;" id="shoppingbagcount"></div>
+						<a href="${pageContext.request.contextPath}/mypage" class="text-decoration-none text-dark ms-2">
+							<img src="${pageContext.request.contextPath}/resources/images/gift1.png" style="width: 24px;" alt="">
 						</a>
-						<div style="margin-top: 4px;">(2)</div>
+						<div style="margin-top: 4px;" id="couponcount">(0)</div>					
 					</form>
 					
 				</sec:authorize>			
@@ -95,6 +102,23 @@
 		</div>
 	</nav>
 	</div>
+	
+	<script>
+		window.onload = function() {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/cart/count"
+			}) .done((data) => {
+				$("#shoppingbagcount").html("<div class=\"\" style=\"text-underline-position:under;\">" + "(" + data + ")" + "</div>")
+			})
+			
+			$.ajax({
+				url: "/getname"
+			}) .done((data) => {
+				$("#username").html("<div class=\"\" style=\"text-underline-position:under;\">" + data + "</div>")
+			})
+		}
+		
+	</script>
 	
 </body>	
 </html>

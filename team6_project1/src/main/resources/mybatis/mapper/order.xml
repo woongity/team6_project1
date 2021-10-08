@@ -20,8 +20,8 @@
 	<select id="selectOneByOid" parameterType="String" resultType="order">
 		select * from orderinfo where oid=#{oid}
 	</select> 
-	<update id="update" parameterType="order">
-		update orderinfo set ostatus=#{ostatus} where oid=#{oid}
+	<update id="update" parameterType="String">
+		update orderinfo set ostatus='0' where oid=#{oid}
 	</update>
 	
 </mapper>

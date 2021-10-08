@@ -22,13 +22,20 @@
 			<div class="form-group mb-4">
 			    <label for="mid" class="fs-6 mb-2">아이디</label>
 			    <input type="text" class="form-control" id="mid" name="mid">
+				<h5 class="text-muted fs-6 mt-2">▪ ID@example.com</h5>					
+				<h5 class="text-muted fs-6 mt-1">▪ We'll never share your email with anyone else.</h5>
 			</div>
 			<div class="form-group mb-2">
 				<label for="mpassword" class="fs-6 mb-2">비밀번호</label>
 				<input type="password" class="form-control" id="mpassword" name="mpassword">
-			</div>
+			</div>		
+			<h5 class="text-muted fs-6 mt-1">▪ The password must be at least 8 digits.</h5>
+			<div class="form-group form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+				<label class="form-Check-label text-muted" for="exampleCheck1">아이디 저장</label>
+			</div>				
 			<div class="d-flex justify-content-center">
-				<button type="submit" class="btn btn-dark mt-4 col-4">로그인</button>
+				<button type="submit" class="btn btn-dark mt-4 col-6">로그인</button>
 			</div>
 		
 			

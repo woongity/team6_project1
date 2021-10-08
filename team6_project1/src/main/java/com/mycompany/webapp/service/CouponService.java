@@ -21,8 +21,9 @@ public class CouponService {
 
 	@Resource
 	private CouponDao couponDao;
-
-	@Resource EventDao eventDao;
+	@Resource 
+	private EventDao eventDao;
+	
 	public List<Coupon> selectByMid(String mid) {
 		return couponDao.selectByMid(mid);
 	}
@@ -31,10 +32,10 @@ public class CouponService {
 	public boolean insertCoupon(Coupon coupon) {
 		
 		String mid = coupon.getMid();
-
+		logger.info("insert coupon 쿠폰");
 		try {
 			int leftStock = eventDao.selectCount("1");
-			eventDao.decrementCount(leftStock);
+			eventDao.decrementCount();
 			couponDao.insertCoupon(coupon);
 			return true;
 		} catch (Exception e) {
@@ -49,5 +50,9 @@ public class CouponService {
 		} else {
 			return false;
 		}
+	}
+	
+	public int selectCouponCount(String mid) {
+		return couponDao.selectCouponCount(mid);
 	}
 }

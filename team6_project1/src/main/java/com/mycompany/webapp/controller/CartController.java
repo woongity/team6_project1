@@ -16,10 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.webapp.aspect.LoginChecking;
+import com.mycompany.webapp.aspect.LoginChecking401;
 import com.mycompany.webapp.dto.Cartitem;
 import com.mycompany.webapp.dto.CartitemJoinAllProduct;
-import com.mycompany.webapp.dto.CartitemJoinProduct;
 import com.mycompany.webapp.dto.ListProduct;
 import com.mycompany.webapp.dto.Product;
 import com.mycompany.webapp.service.CartitemService;
@@ -35,10 +37,7 @@ public class CartController {
 	@Resource
 	ListviewService productService;
 	
-	private String getMid(Principal principal) {
-		return principal.getName();
-	}
-	
+	@LoginChecking
 	@GetMapping("/list")
 	public String list(Principal principal, Model model) {
 		logger.info("Run cart/list");
@@ -91,21 +90,25 @@ public class CartController {
 		return "order/shoppingbag";
 	}
 	
+	@LoginChecking401
 	@RequestMapping("/option")
 	public String option(String pcode,String origin_pcolor,String origin_psize, String new_pcolor, String new_psize, String new_pquantity) {
 		logger.info("Run cart/option");
 		//기존 카트 아이템 코드, 컬러, 사이즈를 받고 기존 카트 아이템 삭제, 
 		//새로운 카트 아이템 insert
+		//에서 기존 상품 update로 변경
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 		
-		cartService.deleteItem(mid, pcode, origin_pcolor, origin_psize);
-		cartService.insertItem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
+//		cartService.deleteItem(mid, pcode, origin_pcolor, origin_psize);
+//		cartService.insertItem(new Cartitem(mid,pcode,new_pcolor,new_psize,Integer.parseInt(new_pquantity)));
+		cartService.updateOption(mid,pcode, origin_pcolor, origin_psize, new_pcolor, new_psize, new_pquantity);
 		
 		return "redirect:/cart/list";
 	}
 	
+	@LoginChecking401
 	@RequestMapping("/deleteitem")
 	public String deleteitem(String pcode,String pcolor, String psize) {
 		logger.info("Run cart/delete");
@@ -118,4 +121,13 @@ public class CartController {
 		return "redirect:/cart/list";
 	}
 	
+	@LoginChecking401
+	@RequestMapping("/count")
+	@ResponseBody
+	public String count() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String mid = authentication.getName();
+		int itemCount = cartService.selectCount(mid);
+		return String.valueOf(itemCount);
+	}
 }

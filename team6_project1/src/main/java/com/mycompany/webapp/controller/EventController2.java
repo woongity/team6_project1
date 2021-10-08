@@ -38,8 +38,8 @@ public class EventController2 {
 		if (principal == null) {
 			throw new NotAuthenticatedUserException();
 		}
-		logger.info("Run /eventpage");
-		return "eventpage2";
+		logger.info("Run /eventpage2");
+		return "event/eventpage2";
 	}
 
 	@RequestMapping(value = "/join", produces = "application/json; charset=UTF-8")
@@ -74,8 +74,7 @@ public class EventController2 {
 					// 이벤트 코드
 					// 쿠폰 발급 일자
 					String cReleaseDate = "2020/08/02";
-					Coupon coupon = new Coupon(cCode, mid, cName, cRate, ccontent, cReleaseDate, expiredate, ecode,
-							cStatus);
+					Coupon coupon = new Coupon(cCode, mid, cName, cRate, ccontent, cReleaseDate, expiredate, ecode,cStatus);
 
 					if (!couponService.isDuplicated(mid)) {
 						logger.info("저장 성공");
@@ -89,12 +88,11 @@ public class EventController2 {
 						// 저장 실패
 						logger.info("이미 발급받은 유저입니다");
 						logger.info("저장에 실패하였습니다");
-						return 0;
+						return 2;
 					}
 				}
 			}
 		};
-		logger.info("실행");
 		// 시간 체크용 코드
 		long start = System.currentTimeMillis();
 		Future<Integer> future = executorService.submit(task);
@@ -108,8 +106,10 @@ public class EventController2 {
 		JSONObject jsonObject = new JSONObject();
 		if (result == 1) {
 			jsonObject.put("result", "success");
-		} else {
-			jsonObject.put("result", "fail");
+		}else if(result==2) {
+			jsonObject.put("result", "duplicated");
+		}else {
+			jsonObject.put("result", "outOfStock");
 		}
 		logger.info((end - start) + "밀리초가 소요되었습니다");
 		return jsonObject.toString();
