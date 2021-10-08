@@ -43,8 +43,12 @@
    		}).done((data) => {
    			if(data.result=="success"){
    				console.log(data.result);
+   				alert("성공적으로 발급되었습니다.");
+   			}else if(data.result=="outOfStock"){
+   				alert("수량이 초과되었습니다 ㅅㄱ");
+   				window.location.reload();
    			}else{
-   				alert("수량이 초과되었습니다.");
+   				alert("이미 발급받은 유저입니다. 돌아가");
    				window.location.reload();
    			}
     	});

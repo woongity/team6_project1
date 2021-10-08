@@ -84,6 +84,7 @@ public class EventController {
 					if (!redisCouponReleaseService.isDuplicated(mid,ecode)) {
 						// 유저id, 이벤트 코드로 쿠폰 저장 
 						redisCouponReleaseService.inputCoupon(mid, ecode);
+						// oracle DB 영속화 
 						couponService.insertCoupon(coupon);
 						logger.info("저장에 성공하였습니다");
 //						logger.info(redisCouponReleaseService.getCoupon(mid).toString());
