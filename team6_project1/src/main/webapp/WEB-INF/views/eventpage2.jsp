@@ -10,6 +10,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style scoped>
+	
+	#mainBg {
+		z-index: -10;
+		position: absolute;
+	}
+
+
+</style>
 </head>
 <body>
 
@@ -17,12 +26,14 @@
 		<div class="col-8">
 			<h3>이벤트</h3>
 			<div class="d-flex justify-content-center">
-				<a class="btn btn-dark col-2" href="javascript:joinEvent()">쿠폰 발급받기</a>
+				<img src="${pageContext.request.contextPath}/resources/images/eventmain1.jpg" class="mt-3 mb-5" id="mainBg">
+			</div>
+			<div class="ms-5" style="margin-top: 50vh; margin-bottom: 11vh;">
+				<a class="btn btn-dark col-3" href="javascript:joinEvent()" style="margin-left: 10vw;">쿠폰 발급받기</a>
 			</div>
 			<div class="d-flex justify-content-center">
-				<img src="${pageContext.request.contextPath}/resources/images/eventmain1.jpg" class="mt-3 mb-5">
+				<img src="${pageContext.request.contextPath}/resources/images/eventcomment1.jpg" class="mt-5">
 			</div>
-			<div class="" style="height: 100px;"></div>
 		</div>
 	</div>
 	<script>
