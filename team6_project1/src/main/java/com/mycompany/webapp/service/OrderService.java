@@ -34,7 +34,7 @@ public class OrderService {
 	private CartitemDao cartitemDao;
 
 	@Transactional
-	public boolean insertOrder(String mid, Order order, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> oquantity) {
+	public void insertOrder(String mid, Order order, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> oquantity) {
 
 		//주문내역 DB에 저장
 		orderDao.insertOrder(order);
@@ -49,7 +49,6 @@ public class OrderService {
 				orderitemDao.insertOrderitem(orderitem);
 				
 				//Product 테이블의 재고 수정
-//				int quantity = pstock - oquantity.get(i);
 				productDao.updatePstock(pcode.get(i), pcolor.get(i), psize.get(i), (-1)*oquantity.get(i));
 				
 				//주문 상품 카트에서 삭제
@@ -57,7 +56,6 @@ public class OrderService {
 			}
 		}
 			
-		return true;
 	}
 	
 	public List<Order> selectByMid(String mid){

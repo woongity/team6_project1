@@ -32,10 +32,10 @@ public class CouponService {
 	public boolean insertCoupon(Coupon coupon) {
 		
 		String mid = coupon.getMid();
-
+		logger.info("insert coupon 쿠폰");
 		try {
 			int leftStock = eventDao.selectCount("1");
-			eventDao.decrementCount(leftStock);
+			eventDao.decrementCount();
 			couponDao.insertCoupon(coupon);
 			return true;
 		} catch (Exception e) {
