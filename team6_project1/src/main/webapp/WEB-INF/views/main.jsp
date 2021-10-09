@@ -3,14 +3,11 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <style scoped>
-	
 	#mainBg {
 		z-index: -10;
 		position: absolute;
 		width: 67vw;
 	}
-
-
 </style>
 
 <div class="d-flex justify-content-center">
@@ -37,8 +34,6 @@
 				</div>
 				</sec:authorize>
 			</div>
-			
-
 	</div>
 </div>
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,15 @@ public class CartitemService {
 		logger.info("insert item");
 		cartitemDao.insertItem(cartitem);
 	}
+	
 	public void updateItem(Cartitem cartitem) {
 		logger.info("실행");
 		cartitemDao.updateItem(cartitem);
+	}
+	
+	public void updateOption(String mid,String pcode,String pcolor, String psize, String new_pcolor, String new_psize,String new_pquantity) {
+		logger.info("실행");
+		cartitemDao.updateOption(mid,pcode,pcolor,psize,new_pcolor,new_psize,new_pquantity);
 	}
 	
 	public Cartitem selectItem(Cartitem cartitem) {

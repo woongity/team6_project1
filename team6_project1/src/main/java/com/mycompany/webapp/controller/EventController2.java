@@ -63,17 +63,17 @@ public class EventController2 {
 					// 쿠폰 코드
 					String cCode = mid + Long.toString(System.currentTimeMillis());
 					// 쿠폰 이름
-					String cName = "coupon123";
+					String cName = "신규회원할인";
 					// 쿠폰 사용여부
 					char cStatus = '0';
 					// 쿠폰 할인율
-					int cRate = 10;
-					String ccontent = "known coupon";
-					String expiredate = "2020-09-21";
+					int cRate = 15;
+					String ccontent = "THE HANDSOME에 신규 가입하신 회원님께 드리는 혜택이며, 상품 구매 시 15% 할인이 적용됩니다.";
+					String expiredate = "2021-12-31";
 					String ecode = "1";
 					// 이벤트 코드
 					// 쿠폰 발급 일자
-					String cReleaseDate = "2020/08/02";
+					String cReleaseDate = "2021-07-31";
 					Coupon coupon = new Coupon(cCode, mid, cName, cRate, ccontent, cReleaseDate, expiredate, ecode,cStatus);
 
 					if (!couponService.isDuplicated(mid)) {

@@ -51,4 +51,8 @@ public class CouponService {
 			return false;
 		}
 	}
+	
+	public int selectCouponCount(String mid) {
+		return couponDao.selectCouponCount(mid);
+	}
 }
