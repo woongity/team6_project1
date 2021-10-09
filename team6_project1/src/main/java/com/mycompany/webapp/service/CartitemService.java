@@ -56,24 +56,6 @@ public class CartitemService {
 		return cartitemDao.selectOne(mid,pcode,pcolor,psize);
 	}
 	
-	@Transactional
-	public ArrayList<CartitemJoinProduct> selectCartitemJoinProductByPcodePcolorPsize(String mid, ArrayList<String> pcode, ArrayList<String> pcolor, ArrayList<String> psize, ArrayList<Integer> isSelected) {
-		ArrayList<CartitemJoinProduct> returnCartitemJoinProduct = new ArrayList<CartitemJoinProduct>();
-		
-		for(int i=0; i<pcode.size(); i++) {
-			if(isSelected.get(i) == 1) {
-				CartitemJoinProduct cartitemJoinProduct = cartitemDao.selectCartitemJoinProductByPcodePcolorPsize(mid, pcode.get(i), pcolor.get(i), psize.get(i));
-				if(cartitemJoinProduct.getPquantity() > productDao.selectPquantity(pcode.get(i), pcolor.get(i), psize.get(i))) {
-					throw new OutOfStockExceptionHandler(cartitemJoinProduct.getPname());
-				} else {
-					returnCartitemJoinProduct.add(cartitemJoinProduct);
-				}
-			}
-		}
-		
-		return returnCartitemJoinProduct;
-	}
-	
 	public int selectCount(String mid) {
 		return cartitemDao.selectCount(mid);
     }

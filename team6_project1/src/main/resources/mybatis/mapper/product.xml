@@ -10,6 +10,7 @@
 		and psize=#{psize}
 	</select>
 	
+	
 	<update id="updatePstock">
 		update product set pstock = pstock + #{pquantity} 
 		where pcode=#{pcode} 
