@@ -26,13 +26,13 @@
 		insert into cartitem (mid,pcode,pcolor,psize,pquantity) values (#{mid},#{pcode},#{pcolor},#{psize},#{pquantity})
 	</insert>
 	<update id="updateItem" parameterType="cartitem">
-		update cartitem set pquantity=#{pquantity} where pcode = #{pcode}
+		update cartitem set pquantity=#{pquantity} where mid=#{mid} and pcode = #{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</update>
 	<update id="updateOption">
 		update cartitem set pcolor=#{new_pcolor},psize=#{new_psize},pquantity=#{new_pquantity} where mid=#{mid} and pcode = #{pcode} and pcolor=#{pcolor} and psize=#{psize}
 	</update>
 	<select id="selectItem" parameterType="cartitem" resultType="cartitem">
-		select * from cartitem where pcode=#{pcode} and pcolor=#{pcolor} and psize=#{psize}
+		select * from cartitem where pcode=#{pcode} and mid=#{mid} and pcolor=#{pcolor} and psize=#{psize}
 	</select>
 	<select id="selectCount" parameterType="String" resultType="int">
       select count(*) from cartitem where mid=#{mid}
