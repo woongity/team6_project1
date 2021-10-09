@@ -828,16 +828,16 @@
   <a href="${pageContext.request.contextPath}/list/view" class="btn btn-outline-dark col-3 me-3">쇼핑 계속하기</a>
   <form action="${pageContext.request.contextPath}/order/orderPage" method="post" class="col-3">
     <c:forEach var="result" items="${cartitems}" varStatus="rstatus">
-      <input type="text" id="isSelected${rstatus.index}" name="isSelected" class="form-control" value="0" style="display: block;">
-      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: block;">
-      <input type="text" id="orderPimage1" name="orderPimage1" class="form-control" value="${result.pimage1}" style="display: block;">
-      <input type="text" id="orderPcolorimage" name="orderPcolorimage" class="form-control" value="${result.pcolorimage}" style="display: block;">
-      <input type="text" id="orderPbrand" name="orderPbrand" class="form-control" value="${result.pbrand}" style="display: block;">
-      <input type="text" id="orderPname" name="orderPname" class="form-control" value="${result.pname}" style="display: block;">
-      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: block;">
-      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: block;">
-      <input type="text" id="orderPprice" name="orderPprice" class="form-control" value="${result.pprice}" style="display: block;">
-      <input type="text" id="orderPquantity" name="orderPquantity" class="form-control" value="${result.pquantity}" style="display: block;">
+      <input type="text" id="isSelected${rstatus.index}" name="isSelected" class="form-control" value="0" style="display: none;">
+      <input type="text" id="orderPcode" name="orderPcode" class="form-control" value="${result.pcode}" style="display: none;">
+      <input type="text" id="orderPimage1" name="orderPimage1" class="form-control" value="${result.pimage1}" style="display: none;">
+      <input type="text" id="orderPcolorimage" name="orderPcolorimage" class="form-control" value="${result.pcolorimage}" style="display: none;">
+      <input type="text" id="orderPbrand" name="orderPbrand" class="form-control" value="${result.pbrand}" style="display: none;">
+      <input type="text" id="orderPname" name="orderPname" class="form-control" value="${result.pname}" style="display: none;">
+      <input type="text" id="orderPcolor" name="orderPcolor" class="form-control" value="${result.pcolor}" style="display: none;">
+      <input type="text" id="orderPsize" name="orderPsize" class="form-control" value="${result.psize}" style="display: none;">
+      <input type="text" id="orderPprice" name="orderPprice" class="form-control" value="${result.pprice}" style="display: none;">
+      <input type="text" id="orderPquantity" name="orderPquantity" class="form-control" value="${result.pquantity}" style="display: none;">
     </c:forEach>
     <input class="btn btn-dark" id="disabledBtn" value="주문하기" type="submit" style="width: 100%; dispaly: block;" disabled>
     <input class="btn btn-dark" id="abledBtn" value="주문하기" type="submit" style="width: 100%; display: none;">

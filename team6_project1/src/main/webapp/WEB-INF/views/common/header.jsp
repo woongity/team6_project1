@@ -83,7 +83,8 @@
 					  <a class="btn dropdown-toggle fs-5" type="button" id="username" data-bs-toggle="dropdown" aria-expanded="false"></a>
 					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
-					    <li><a class="dropdown-item" href="/event2/page">이벤트</a></li>
+					    <li><a class="dropdown-item" href="/event1/page">이벤트 1</a></li>
+					    <li><a class="dropdown-item" href="/event2/page">이벤트 2</a></li>
 					    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 					  </ul>
 					</div>			

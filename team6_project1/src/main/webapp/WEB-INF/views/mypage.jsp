@@ -316,7 +316,6 @@
 	  <tbody>
 	  	<c:forEach var="coupon" items="${couponlist}">
 			<c:set var="couponCount" value="${couponCount + 1}" />
-			${coupon.cstatus}
 	    <tr>
 	      <th class="text-center align-middle">
 	      	<h6>&nbsp;</h6>
