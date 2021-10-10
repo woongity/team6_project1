@@ -95,8 +95,17 @@
 
 <!-- 쇼핑내역 -->
 <div id="historyPage" style="display: block;">
+
 <h5>쇼핑 내역</h5>
-<!-- page1 -->
+<!-- 기간별 조회 -->
+<div class="d-flex justify-content-center my-3">
+	<form action="" method="post">
+		<input type="date" id="start">
+		<span class="mx-2">~</span>
+		<input type="date" id="end">
+		<input class="btn btn-outline-dark btn-sm" type="submit" value="조회">
+	</form>
+</div>
 <table class="table table-striped" id="page1" style="display: block;">
   <thead class="text-center">
     <tr>
