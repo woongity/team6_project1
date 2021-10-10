@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 
 <script>
-	
+	// 쇼핑내역 페이지
 	function getHistory() {
 		const historyId = document.getElementById("historyPage")
 		const profileId = document.getElementById("profilePage")
@@ -33,6 +33,7 @@
 			couponBtnId.style.color = "white"
 		}
 	}
+	// 내 정보 페이지
 	function getProfile() {
 		const historyId = document.getElementById("historyPage")
 		const profileId = document.getElementById("profilePage")
@@ -53,6 +54,7 @@
 			couponBtnId.style.color = "white"
 		}
 	}
+	// 쿠폰함 페이지
 	function getCoupon() {
 		const historyId = document.getElementById("historyPage")
 		const profileId = document.getElementById("profilePage")
@@ -243,7 +245,7 @@
 			<h6>생년월일</h6>
 		</div>
 		<div class="col-10">
-			<h6>1993. 06. 02.</h6>
+			<h6>2021. 07. 31.</h6>
 		</div>
 	</div>
 	<hr>
@@ -313,10 +315,12 @@
 	  </thead>
 	  <tbody>
 	  	<c:forEach var="coupon" items="${couponlist}">
-		<c:set var="couponCount" value="${couponCount + 1}" />
+			<c:set var="couponCount" value="${couponCount + 1}" />
 	    <tr>
 	      <th class="text-center align-middle">
+	      	<h6>&nbsp;</h6>
 	      	<h6>${coupon.cname}</h6>
+	      	<h6>&nbsp;</h6>
 	      </th>
 	      <td class="text-center align-middle">
 	      	<h6>${coupon.ccode}</h6>
@@ -325,25 +329,14 @@
 			<h6>•${coupon.ccontent}</h6>
 	      </td>
 	      <td class="text-center align-middle">
-	    	<h6>${coupon.crate}</h6>
+	    	<h6>${coupon.crate}%</h6>
 	      </td>
 	      <td class="text-center align-middle">
 	      	<h6>${coupon.creleasedate} ~</h6>
 	      	<h6>${coupon.cexpiredate}</h6>
-	      </td>
+	      </td>      
 	      <td class="text-center align-middle">
-	      ${coupon.cstatus}
-	      ${coupon.creleasedate}
-	      	<c:if test="${coupon.cstatus == 0}">
-	      		<h6>미사용</h6>
-	      	</c:if>
-	      	<c:if test="${coupon.cstatus == 1}">
-	      		<h6>${coupon.creleasedate}</h6>
-	      	</c:if>
-	      	<c:if test="${coupon.cstatus == 2}">
-	      		<h6>기간만료</h6>
-	      	</c:if>
-	      	
+					<h6>미사용</h6>
 	      </td>
 	    </tr>
 		</c:forEach>
@@ -355,7 +348,6 @@
 	      </td>
 	    </tr>
 	    </c:if>
-
 	  </tbody>
 	</table>
 	

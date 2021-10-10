@@ -14,4 +14,4 @@
  - Spring / Spring security
 
 ## 시스템 개요
-![Untitled](https://user-images.githubusercontent.com/26537043/135946232-70b98c91-3a62-4ce9-b042-ba1190a7291a.png)
+![Untitled](https://user-images.githubusercontent.com/26537043/136504097-87bda932-9893-4099-b6fe-ca20635b13f1.png)

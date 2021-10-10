@@ -14,7 +14,6 @@ public class EventService {
 	}
 	public void decrementCount() {
 		// 임의로 이벤트 코드를 1로 지정함
-		int size = selectCount("1");
-		eventDao.decrementCount(--size);
+		eventDao.decrementCount();
 	}
 }
