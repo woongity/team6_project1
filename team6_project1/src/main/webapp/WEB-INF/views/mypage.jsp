@@ -99,10 +99,10 @@
 <h5>쇼핑 내역</h5>
 <!-- 기간별 조회 -->
 <div class="d-flex justify-content-center my-3">
-	<form action="" method="post">
-		<input type="date" id="start">
+	<form action="/mypage" method="get">
+		<input type="date" id="fromtime" name="fromtime">
 		<span class="mx-2">~</span>
-		<input type="date" id="end">
+		<input type="date" id="totime" name="totime">
 		<input class="btn btn-outline-dark btn-sm" type="submit" value="조회">
 	</form>
 </div>
