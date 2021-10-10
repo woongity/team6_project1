@@ -5,6 +5,6 @@
 		select estockcoupon from event where ecode = #{ecode}
 	</select>
 	<update id="decrementCount" parameterType="int">
-		update event set estockcoupon=#{estockcoupon} where ecode='1'
+		update event set estockcoupon=estockcoupon-1 where ecode='1'
 	</update>
 </mapper>
