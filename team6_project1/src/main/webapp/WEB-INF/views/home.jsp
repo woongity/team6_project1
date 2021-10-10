@@ -228,7 +228,7 @@
                       </div>
                         <input type="text" name="quantity" class="form-control" value="1" style="display: none;">
                         <input type="text" name="price" class="form-control" value="${item.pprice}" style="display: none;">
-                      <!-- ㅛㅜ햘 선택 -->
+                      <!-- 수량 선택 -->
                       <div class="d-flex justify-content-between">
                         <h6 style="margin-top: 8px;">Quantity</h6>
                         <div class="d-flex">
