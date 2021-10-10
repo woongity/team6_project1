@@ -6,14 +6,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderitemJoinProduct {
-	String pname;
-	int pquantity;
-	String pimage1;
-	String pcolorimage;
-	String pbrand;
-	String pcolor;
-	String psize;
-	String pcode;
-	String oid;
-	int oprice;
+	private String pname;
+	private int pquantity;
+	private String pimage1;
+	private String pcolorimage;
+	private String pbrand;
+	private String pcolor;
+	private String psize;
+	private String pcode;
+	private String oid;
+	private int oprice;
 }

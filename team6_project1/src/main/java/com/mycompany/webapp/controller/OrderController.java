@@ -72,7 +72,7 @@ public class OrderController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String mid = authentication.getName();
 
-		// 장바구니에서 선택한 상품 데이터를 DB에서 불러와 상품 주문 페이지로 전달
+		// 장바구니에서 선택한 상품 데이터를 상품 주문 페이지로 전달
 		ArrayList<CartitemJoinProduct> cartitemJoinProduct = new ArrayList<CartitemJoinProduct>();
 				
 		for(int i=0; i<orderPcode.size(); i++) {
@@ -102,7 +102,7 @@ public class OrderController {
 	public String orderComplete(@RequestParam(value="pcode", required=true) ArrayList<String> pcode, 
 								@RequestParam(value="pcolor", required=true) ArrayList<String> pcolor, 
 								@RequestParam(value="psize", required=true) ArrayList<String> psize,
-								@RequestParam(value="pquantity", required=true) ArrayList<Integer> pquantity, // 변수명 변경
+								@RequestParam(value="pquantity", required=true) ArrayList<Integer> pquantity, 
 								String oname,
 								String otel,
 								String oaddress,
