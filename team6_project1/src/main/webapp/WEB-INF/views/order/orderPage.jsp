@@ -9,7 +9,7 @@
 <html>
 <head>
 	<title>Spring Framework</title>
-  <style>
+  <style scoped>
   	#navSticky {
 		position: sticky;
 		top: 10px;

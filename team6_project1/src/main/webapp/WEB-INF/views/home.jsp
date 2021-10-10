@@ -3,24 +3,52 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <style scoped>
-.modalFont {
-	font-size: 0.8rem;
+	.modalFont {
+		font-size: 0.8rem;
+	}
+	.upper-image {
+		transition: opacity 0.8s;
+		opacity: 1;
+	}
+	.upper-image:hover {
+		opacity: 0.3;
+	}
+	.navSticky {
+		position: sticky;
+		top: 600px;
+	}
+.circle_progress_wrap {
+  width: 120px;
+  height: 120px;
 }
-.upper-image {
-	transition: opacity 0.8s;
-	opacity: 1;
+.circle_progress { transform: rotate(-90deg); }
+.frame, .bar { fill: none; }
+.frame { stroke: #e6e6e6; }
+.bar {
+  stroke: black;
+  stroke-linecap: round;
 }
-.upper-image:hover {
-	opacity: 0.3;
+.arrow {
+  position: absolute;
+  left: 38px;
+  right: 0;
+  bottom: 0;
+  top: 13px;
+  color: #888;
+  font-size: 16px;
+  line-height: 120px;
 }
 </style>
 
 <div class="d-flex justify-content-center">
+	<div class="col-2">
+		<div></div>
+	</div>
   <div class="col-8">
-    <div class="row">
+    <div class="row">   
     	<!-- 전체 상품리스트 -->
-      <c:forEach var="item" begin="31" end="42" items="${productArray}" varStatus="status">
-        <div class="text-center ps-0 pe-1" style="width: 16.5vw;">
+      <c:forEach var="item" items="${productArray}" begin="0" end="55" varStatus="status">
+        <div class="text-center ps-0 pe-1" style="width: 16.8vw;">
           <a id="getModalBtn${status.index}">
           	<img src="<c:forEach var="i" items="${item.pimage1TreeSet}" begin="0" end="0">${i}</c:forEach>" 
           			 class="card-img-top upper-image" id="homeImage1" alt="item">
@@ -28,7 +56,6 @@
           <div class="card-body">
             <h5 class="card-title">${item.pbrand}</h5>
             <p class="card-text">${item.pname}</p>
-            <p class="card-text">${item.pcode}</p>
             <p class="card-text">\ ${item.pprice}</p>         
             <!-- 재고계산 -->
             <c:set var="count" value="0" />
@@ -326,6 +353,50 @@
       </c:forEach>
     </div>
   </div>
+	<div class="d-flex justify-content-center col-2">
+		<div class="circle_progress_wrap navSticky">
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/up-arrow.png" class="arrow">
+		  <svg class="circle_progress" width="60" height="60" viewBox="0 0 120 120" 
+		  		 style="cursor:pointer; margin-left: 24px;" onclick="window.scrollTo(0,0);">
+		    <circle class="frame" cx="60" cy="60" r="54" stroke-width="6" />
+		    <circle class="bar" cx="60" cy="60" r="54" stroke-width="6" />
+		  </svg>
+		  <strong class="value" id="control"></strong>
+		</div>
+	</div>
+	
+	<script>     
+      var control = document.getElementById('control');
+			var bar = document.querySelector('.bar');
+			var value = document.querySelector('.value');
+			var RADIUS = 54;
+			var CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+			
+			function progress(per) {
+			  var progress = per / 100;
+			  var dashoffset = CIRCUMFERENCE * (1 - progress);
+			  
+			  value.innerHTML=per +'%';
+			  bar.style.strokeDashoffset = dashoffset;
+			}
+			
+			document.addEventListener('scroll', function(event) {
+        const scrollTop = document.documentElement.scrollTop
+        const scrollHeight = document.documentElement.scrollHeight
+        let position = Math.ceil((scrollTop / scrollHeight) * (100 * (10 / 8.9)))
+        
+        if (position > 100) position = 100
+        
+			  progress(position);
+			});
+			control.addEventListener('change', function(event){
+			  progress(event.target.valueAsNumber);
+			});
+
+			bar.style.strokeDasharray = CIRCUMFERENCE;
+			progress(0);
+			
+	</script>
 </div>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
