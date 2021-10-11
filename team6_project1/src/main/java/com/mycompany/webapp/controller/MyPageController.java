@@ -43,7 +43,7 @@ public class MyPageController {
 		logger.warn(fromtime + " "+ totime);
 		List<OrderitemJoinProductJoinOrder> list;
 		if(fromtime==null || totime==null) {
-		 list = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);	
+			list = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMid(mid);	
 		}
 		else {
 			list = orderitemService.selectOrderitemJoinProductJoinOrderinfoByMidDate(mid, fromtime, totime);
@@ -55,6 +55,8 @@ public class MyPageController {
 		
 		Member member = memberService.selectByMid(mid);
 		model.addAttribute("member", member);
+		model.addAttribute("fromtime",fromtime);
+		model.addAttribute("totime",totime);
 		
 		List<Coupon> couponlist = couponService.selectByMid(mid);
 		model.addAttribute("couponlist", couponlist);
