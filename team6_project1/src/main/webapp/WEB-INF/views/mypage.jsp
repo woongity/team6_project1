@@ -99,12 +99,13 @@
 <h5>쇼핑 내역</h5>
 <!-- 기간별 조회 -->
 <div class="d-flex justify-content-center my-3">
-	<form action="" method="post">
-		<input type="date" id="start">
+	<form action="/mypage" method="get">
+		<input type="date" id="fromtime" name="fromtime">
 		<span class="mx-2">~</span>
-		<input type="date" id="end">
+		<input type="date" id="totime" name="totime">
 		<input class="btn btn-outline-dark btn-sm" type="submit" value="조회">
 	</form>
+	<a class="btn btn-dark btn-sm mx-2" href="${pageContext.request.contextPath}/mypage">전체</a>
 </div>
 <table class="table table-striped" id="page1" style="display: block;">
   <thead class="text-center">
@@ -120,6 +121,7 @@
   <tbody>
   	<c:set var="historyCount" value="0" />
   	<c:set var="couponCount" value="0" />
+
     <!-- 쇼핑내역 정보 -->
     <c:forEach var="item" items="${orderedList}" varStatus="oistatus">
     <c:set var="historyCount" value="${historyCount + 1}" />
