@@ -20,5 +20,17 @@
 		values (#{oid}, #{pcode},
 		#{pcolor}, #{psize}, #{pquantity})
 	</insert>
-
+	<select id="selectOrderitemJoinProductJoinOrderinfoByMidDate" resultType="com.mycompany.webapp.dto.OrderitemJoinProductJoinOrder">
+      select p.pname, o.pquantity, p.pimage1, p.pbrand, p.pcolorimage, p.pcolor, p.psize, p.pcode, o.oid, o.pquantity*p.pprice as oprice, ord.ostatus, ord.otime
+      from 
+         orderitem o
+      inner join
+         product p
+        on o.pcode = p.pcode and o.pcolor=p.pcolor and o.psize = p.psize
+        inner join 
+            orderinfo ord
+        on o.oid = ord.oid
+        where ord.mid = #{mid} and to_date(otime,'YYYY-MM-DD HH24:MI:SS') between to_date(#{fromtime},'YYYY-MM-DD') and to_date(#{totime},'YYYY-MM-DD')
+        order by ord.otime desc
+   </select>
 </mapper>

@@ -22,4 +22,7 @@ public class OrderitemService {
 	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderinfoByMid(String mid) {
 		return orderitemDao.selectOrderitemJoinProductJoinOrderinfoByMid(mid);
 	}
+	public List<OrderitemJoinProductJoinOrder> selectOrderitemJoinProductJoinOrderinfoByMidDate(String mid,String fromtime,String totime) {
+		return orderitemDao.selectOrderitemJoinProductJoinOrderinfoByMidDate(mid,fromtime,totime);
+	}
 }

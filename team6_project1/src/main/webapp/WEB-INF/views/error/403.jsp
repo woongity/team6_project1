@@ -19,12 +19,12 @@
   </div>
   <div class="d-flex justify-content-center" style="margin-top: 13vh;">
   	<a href="/"><img id="errorBlackCat" style="display: block; width: 15vw;" alt="error_raccon" 
-  									 src="${pageContext.request.contextPath}/resources/images/error_raccon.jpg" onmouseover="mouseOver()"></a>
+  									 src="${pageContext.request.contextPath}/resources/images/hamster.jpg" onmouseover="mouseOver()"></a>
 		<a href="/"><img id="errorWhiteCat" style="display: none; width: 15vw;" alt="error_raccon1" 
-										 src="${pageContext.request.contextPath}/resources/images/error_raccon1.jpg" onmouseout="mouseOut()"></a>
+										 src="${pageContext.request.contextPath}/resources/images/hamster2.jpg" onmouseout="mouseOut()"></a>
   </div>
   <div class="my-5 text-center">
-		<h2>The Access is not Authorized.</h2>
+		<h2>The Access is not Allowed.</h2>
 		<h2>Please go back :)</h2>
   </div>
 </div>
