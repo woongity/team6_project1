@@ -54,16 +54,16 @@ public class OrderController {
 	@LoginChecking401
 	@RequestMapping("/orderPage")
 	public String orderPage(
-			@RequestParam(value = "orderPcode", required = true) ArrayList<String> orderPcode,
-			@RequestParam(value = "orderPimage1", required = true) ArrayList<String> orderPimage1,
-			@RequestParam(value = "orderPcolorimage", required = true) ArrayList<String> orderPcolorimage,
-			@RequestParam(value = "orderPbrand", required = true) ArrayList<String> orderPbrand,
-			@RequestParam(value = "orderPname", required = true) ArrayList<String> orderPname,
-			@RequestParam(value = "orderPcolor", required = true) ArrayList<String> orderPcolor,
-			@RequestParam(value = "orderPsize", required = true) ArrayList<String> orderPsize,
-			@RequestParam(value = "orderPprice", required = true) ArrayList<Integer> orderPprice,
-			@RequestParam(value = "orderPquantity", required = true) ArrayList<Integer> orderPquantity,
-			@RequestParam(value = "isSelected", required = true) ArrayList<Integer> isSelected, //0:선택x, 1:선택
+			@RequestParam(value = "orderPcode") ArrayList<String> orderPcode,
+			@RequestParam(value = "orderPimage1") ArrayList<String> orderPimage1,
+			@RequestParam(value = "orderPcolorimage") ArrayList<String> orderPcolorimage,
+			@RequestParam(value = "orderPbrand") ArrayList<String> orderPbrand,
+			@RequestParam(value = "orderPname") ArrayList<String> orderPname,
+			@RequestParam(value = "orderPcolor") ArrayList<String> orderPcolor,
+			@RequestParam(value = "orderPsize") ArrayList<String> orderPsize,
+			@RequestParam(value = "orderPprice") ArrayList<Integer> orderPprice,
+			@RequestParam(value = "orderPquantity") ArrayList<Integer> orderPquantity,
+			@RequestParam(value = "isSelected") ArrayList<Integer> isSelected, //0:선택x, 1:선택
 			Model model,
 			HttpServletResponse response) throws Exception {
 		logger.info("Run order/orderPage");
@@ -99,10 +99,10 @@ public class OrderController {
 	// 주문페이지에서 주문완료하기(DB 저장)
 	@LoginChecking401
 	@PostMapping("/orderComplete")
-	public String orderComplete(@RequestParam(value="pcode", required=true) ArrayList<String> pcode, 
-								@RequestParam(value="pcolor", required=true) ArrayList<String> pcolor, 
-								@RequestParam(value="psize", required=true) ArrayList<String> psize,
-								@RequestParam(value="pquantity", required=true) ArrayList<Integer> pquantity, 
+	public String orderComplete(@RequestParam(value="pcode") ArrayList<String> pcode, 
+								@RequestParam(value="pcolor") ArrayList<String> pcolor, 
+								@RequestParam(value="psize") ArrayList<String> psize,
+								@RequestParam(value="pquantity") ArrayList<Integer> pquantity, 
 								String oname,
 								String otel,
 								String oaddress,

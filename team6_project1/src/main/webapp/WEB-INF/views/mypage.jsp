@@ -336,7 +336,7 @@
 	      	<h6>${coupon.cexpiredate}</h6>
 	      </td>      
 	      <td class="text-center align-middle">
-					<h6>미사용</h6>
+	      	<h6>미사용</h6>
 	      </td>
 	    </tr>
 		</c:forEach>
