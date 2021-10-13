@@ -20,6 +20,7 @@
 		const historyBtnId = document.getElementById("historyBtn")
 		const profileBtnId = document.getElementById("profileBtn")
 		const couponBtnId = document.getElementById("couponBtn")
+
 		if (historyId.style.display == "none") {
 			historyId.style.display = "block"
 			profileId.style.display = "none"
@@ -40,6 +41,7 @@
 		const historyBtnId = document.getElementById("historyBtn")
 		const profileBtnId = document.getElementById("profileBtn")
 		const couponBtnId = document.getElementById("couponBtn")
+
 		if (profileId.style.display == "none") {
 			historyId.style.display = "none"
 			profileId.style.display = "block"
@@ -60,6 +62,7 @@
 		const historyBtnId = document.getElementById("historyBtn")
 		const profileBtnId = document.getElementById("profileBtn")
 		const couponBtnId = document.getElementById("couponBtn")
+
 		if (couponId.style.display == "none") {
 			historyId.style.display = "none"
 			profileId.style.display = "none"
